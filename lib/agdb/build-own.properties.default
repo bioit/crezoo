@@ -1,0 +1,14 @@
+# Content path to install the application
+app.path=/agdb
+app.name=agdbdevel
+app.version=1.7b
+
+# Source directory
+src.home=src/
+
+# Tomcat Installation
+catalina.home=/usr/local/jakarta-tomcat-4.1.12
+
+# Manager webapp username and password
+manager.username=tobias
+manager.password=test

@@ -1,0 +1,90 @@
+BODY
+{
+    BACKGROUND-COLOR: oldlace;
+    COLOR: oldlace;
+    FONT-FAMILY: Arial, Helvetica, Verdana;
+    FONT-SIZE: 10pt
+}
+TABLE
+{
+    COLOR: oldlace;
+    FONT-FAMILY: Arial, Helvetica, Verdana;
+    FONT-SIZE: 10pt;
+    PADDING-LEFT: 10px;
+    CELLSPACING: 3
+}
+TD
+{
+    COLOR: oldlace;
+    FONT-FAMILY: Arial, Helvetica, Verdana;
+    FONT-SIZE: 10pt;
+    FONT-WEIGHT: bold
+}
+TR
+{
+    FONT-FAMILY: Arial, Helvetica, Verdana;
+    Verdana;: 8pt
+}
+H3
+{
+    FONT-FAMILY: Arial, Helvetica,Verdana;
+    FONT-SIZE: 12pt
+}
+H1
+{
+    FONT-FAMILY: Arial, Helvetica, Verdana;
+    FONT-SIZE: 18pt;
+    FONT-WEIGHT: bolder
+}
+H2
+{
+    FONT-FAMILY: Arial, Helvetica, Verdana;
+    FONT-SIZE: 14pt;
+    FONT-WEIGHT: bolder
+}
+H4
+{
+    FONT-FAMILY: Arial, Helvetica, Verdana;
+    FONT-SIZE: 10pt;
+    FONT-WEIGHT: bolder
+}
+.OddRow
+{
+    BACKGROUND-COLOR: silver
+}
+.EvenRow
+{
+}
+.ListHead
+{
+    BACKGROUND-COLOR: steelblue;
+    COLOR: white;
+    FONT-WEIGHT: bolder
+}
+TH
+{
+    FONT-FAMILY: Arial, Helvetica, Verdana;
+    FONT-SIZE: 12px
+}
+A:link
+{
+    COLOR: saddlebrown;
+    FONT-FAMILY: Arial, Helvetica, Verdana;
+    FONT-SIZE: 10pt;
+    FONT-WEIGHT: bolder;
+    LEFT: 10pt;
+    MARGIN-LEFT: 10pt;
+    POSITION: relative;
+    TEXT-DECORATION: none
+}
+A:Visited
+{
+   COLOR: saddlebrown;
+   FONT-FAMILY: Arial, Helvetica, Verdana;
+   FONT-SIZE: 10pt;
+   FONT-WEIGHT: bolder;
+   LEFT: 10pt;
+   MARGIN-LEFT: 10pt;
+   POSITION: relative;
+   TEXT_DECORATION: none
+}

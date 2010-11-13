@@ -1,0 +1,65 @@
+BODY
+{
+    BACKGROUND-COLOR: white;
+    COLOR: white;
+    FONT-FAMILY: Verdana,Helvetica;
+    FONT-WEIGHT: bolder
+}
+TABLE
+{
+    COLOR: white;
+    FONT-FAMILY: Verdana,Helvetica;
+    PADDING-BOTTOM: 0px;
+    PADDING-LEFT: 0px;
+    PADDING-RIGHT: 0px;
+    PADDING-TOP: 0px
+}
+TD
+{
+    COLOR: white;
+    FONT-FAMILY: Verdana,Helvetica;
+    FONT-SIZE: 10pt;
+    PADDING-BOTTOM: 0px;
+    PADDING-LEFT: 0px;
+    PADDING-RIGHT: 0px;
+    PADDING-TOP: 0px
+}
+TR
+{
+    COLOR: oldlace;
+    FONT-FAMILY: Verdana,Helvetica
+}
+A
+{
+    COLOR: white;
+    FONT-FAMILY: Verdana,Helvetica;
+    TEXT-DECORATION: none
+}
+.CURRENT
+{
+    COLOR: black;
+    FONT-FAMILY: Verdana,Helvetica
+}
+.TDBorder
+{
+    BORDER-BOTTOM: aqua;
+    BORDER-LEFT: aqua;
+    BORDER-RIGHT: aqua;
+    BORDER-TOP: aqua;
+    COLOR: black;
+    FONT-FAMILY: Verdana,Helvetica
+}
+H1
+{
+    COLOR: black;
+    FONT-FAMILY: Verdana,Helvetica;
+    FONT-SIZE: 10pt;
+    FONT-WEIGHT: bolder
+}
+H2
+{
+    COLOR: darkturquoise;
+    FONT-FAMILY: Verdana,Helvetica;
+    FONT-SIZE: 10pt;
+    FONT-WEIGHT: bolder
+}

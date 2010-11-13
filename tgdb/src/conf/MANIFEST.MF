@@ -1,0 +1,2 @@
+Manifest-Version: 1.0
+Class-path: log4j-1.2.14.jar;

@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<configuration xmlns='http://java.sun.com/xml/ns/jax-rpc/ri/config'>
+	<service name='tgdbws' targetNamespace='urn:tgdbws/wsdl' typeNamespace='urn:tgdbws/types' packageName='org.tgdb.ws'>
+		<interface name='org.tgdb.ws.tgdbwsSEI' servantName='org.tgdb.ws.tgdbwsImpl'>
+		</interface>
+	</service>
+</configuration>

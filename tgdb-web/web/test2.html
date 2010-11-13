@@ -1,0 +1,504 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    
+    <title>crezoo &mdash; trangenic mice index</title>
+    <meta name="robots" content="index,follow"/>
+<meta name="description" content="crezoo &mdash; transgenic mice database"/>
+<meta name="keywords" content="crezoo, transgenic, mice, transgenic mice, tgdb, tg, cre, biological resources, cre8, mouse resources, databases"/>
+<meta name="revisit-after" content="7 days"/>
+<meta name="author" content="Michael Zouberakis"/>
+<link rel="stylesheet" type="text/css" href="css/crezoo-divs.css" />
+<link rel="stylesheet" type="text/css" href="css/crezoo-con.css" />
+<link rel="stylesheet" type="text/css" href="css/superfish.css" />
+<script type="text/javascript" src="javascripts/jquery-1.3.2.min.js"></script>
+<script type="text/javascript" src="javascripts/hoverIntent.js"></script> 
+<script type="text/javascript" src="javascripts/superfish.js"></script> 
+<script type="text/javascript" src="javascripts/supersubs.js"></script>
+	<script type="text/javascript">
+	<!--
+        jQuery.noConflict();
+
+		jQuery(document).ready(function(){
+			jQuery("ul.sf-menu").supersubs({ 
+				minWidth:    20,                                // minimum width of sub-menus in em units 
+				maxWidth:    27,                                // maximum width of sub-menus in em units 
+				extraWidth:  1                                  // extra width can ensure lines don't sometimes turn over 
+																// due to slight rounding differences and font-family 
+			}).superfish();
+
+		});
+	// -->
+    </script>
+     
+<!--[if lt IE 7.]>
+<link rel="stylesheet" type="text/css" href="css/pngfix.css" />
+<![endif]-->
+
+</head>
+<body>
+<div id="wrap">
+	<div id="panel-left">
+		<div id="logo">
+			<h1>CreZOO</h1>
+			<div id="shortcuts">
+			<a href="#">test</a>
+			<a href="#">test2</a>
+			<form method="post" action="Controller?workflow=SearchKeywordFast">
+			<span>Search</span>
+			<input type="text" name="fast_search_key" />
+			</form>
+			</div>
+		</div>
+		<div id="under_logo">
+			<div id="banner">
+			<img id="banner_image" src="images/under_logo.jpg" alt="CreZOO">
+			</div>
+		</div>
+		<div id="navigation">
+			<ul class="sf-menu">
+<li>
+<span>Server Admin</span>
+<ul>
+<li>
+<span>Projects</span>
+<ul>
+<li>
+<a target="_self" href="Controller?workflow=AdminViewProjects">View</a>
+</li>
+<li>
+<a target="_self" href="Controller?workflow=AdminCreateProject">Create</a>
+</li>
+</ul>
+</li>
+<li>
+<span>Users</span>
+<ul>
+<li>
+<a target="_self" href="Controller?workflow=AdminViewUsers">View</a>
+</li>
+<li>
+<a target="_self" href="Controller?workflow=AdminCreateUser">Create</a>
+</li>
+</ul>
+</li>
+<li>
+<span>Species</span>
+<ul>
+<li>
+<a target="_self" href="Controller?workflow=AdminViewSpecies">View</a>
+</li>
+<li>
+<a target="_self" href="Controller?workflow=AdminCreateSpecies">Create</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<span>Projects</span>
+<ul>
+<li>
+<a target="_self" href="Controller?workflow=ProjectProperties">Select project</a>
+</li>
+<li>
+<a target="_self" href="Controller?workflow=SelectSU">Select Sampling Unit</a>
+</li>
+<li>
+<a target="_self" href="Controller?workflow=ViewProjectInfo">Project info</a>
+</li>
+<li>
+<span>Roles</span>
+<ul>
+<li>
+<a target="_self" href="Controller?workflow=ViewRoles">View</a>
+</li>
+<li>
+<a target="_self" href="Controller?workflow=CreateRole">Create</a>
+</li>
+</ul>
+</li>
+<li>
+<span>Users</span>
+<ul>
+<li>
+<a target="_self" href="Controller?workflow=ViewProjectUsers">Project members</a>
+</li>
+<li>
+<a target="_self" href="Controller?workflow=AdminViewUsers">All users</a>
+</li>
+</ul>
+</li>
+<li>
+<a target="_self" href="Controller?workflow=ViewProjectStats">Statistics</a>
+</li>
+<li>
+<a target="_self" href="Controller?workflow=ViewMyAccount">My Account</a>
+</li>
+</ul>
+</li>
+<li>
+<span>Experimental setup</span>
+<ul>
+<li>
+<a target="_self" href="Controller?workflow=SamplingUnitInfo">Sampling Unit</a>
+<ul>
+<li>
+<a target="_self" href="Controller?workflow=ViewSamplingUnits">View and Edit</a>
+</li>
+<li>
+<a target="_self" href="Controller?workflow=CreateSamplingUnit">Create</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<span>Transgenic Mice</span>
+<ul>
+<li>
+<a target="_self" href="Controller?workflow=ViewModels">View</a>
+</li>
+<li>
+<a target="_self" href="Controller?workflow=CreateModel">Add</a>
+</li>
+</ul>
+</li>
+<li>
+<a target="_self" href="Controller?workflow=ViewCorrespondents">Correspondents</a>
+</li>
+<li>
+<span>Research Appplications</span>
+<ul>
+<li>
+<a target="_self" href="Controller?workflow=ViewResearchApps">View</a>
+</li>
+<li>
+<a target="_self" href="Controller?workflow=CreateResearchApp">Create</a>
+</li>
+</ul>
+</li>
+<li>
+<span>Transgenes</span>
+<ul>
+<li>
+<a target="_self" href="Controller?workflow=ViewGenes">View</a>
+</li>
+<li>
+<a target="_self" href="Controller?workflow=CreateGene">Add</a>
+</li>
+</ul>
+</li>
+<li>
+<span>File Tests</span>
+<ul>
+<li>
+<span>Test</span>
+<ul>
+<li>
+<a target="_self" href="Controller?workflow=ViewFiles">View files</a>
+</li>
+<li>
+<a target="_self" href="Controller?workflow=FileUploadTest">FileUploadTest</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<span>Search</span>
+<ul>
+<li>
+<a target="_self" href="Controller?workflow=SearchModel">Models</a>
+</li>
+<li>
+<a target="_self" href="Controller?workflow=SearchKeyword">Keywords</a>
+</li>
+</ul>
+</li>
+<li>
+<span>IMSR</span>
+<ul>
+<li>
+<a target="_self" href="Controller?workflow=IMSRFile">View IMSR File</a>
+</li>
+</ul>
+</li>
+<li>
+<span>DissUp</span>
+<ul>
+<li>
+<a target="_self" href="Controller?workflow=DisseminationUpdate">DissUp List</a>
+</li>
+</ul>
+</li>
+<li>
+<span>BackCross</span>
+<ul>
+<li>
+<a target="_self" href="Controller?workflow=BackcrossingList">BackCrossNow</a>
+</li>
+</ul>
+</li>
+<li>
+<span>[old staff]</span>
+<ul>
+<li>
+<span>Strains</span>
+<ul>
+<li>
+<a target="_self" href="Controller?workflow=ViewStrains">View Strains</a>
+</li>
+<li>
+<span>Types</span>
+<ul>
+<li>
+<a target="_self" href="Controller?workflow=ViewStrainTypes">View Types</a>
+</li>
+<li>
+<a target="_self" href="Controller?workflow=NotImplemented">Create Type</a>
+</li>
+</ul>
+</li>
+<li>
+<span>States</span>
+<ul>
+<li>
+<a target="_self" href="Controller?workflow=ViewStrainStates">View States</a>
+</li>
+<li>
+<a target="_self" href="Controller?workflow=NotImplemented">Create State</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<span>Allele Types</span>
+<ul>
+<li>
+<a target="_self" href="Controller?workflow=ViewAlleleTypes">View Allele Types</a>
+</li>
+<li>
+<a target="_self" href="Controller?workflow=CreateAlleleType">Create Allele Type</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<span>Backgrounds</span>
+<ul>
+<li>
+<a target="_self" href="Controller?workflow=ViewGeneticBackgroundValues">View</a>
+</li>
+<li>
+<a target="_self" href="Controller?workflow=CreateGeneticBackgroundValue">Add</a>
+</li>
+</ul>
+</li>
+<li>
+<span>Available Backgrounds</span>
+<ul>
+<li>
+<a target="_self" href="Controller?workflow=ViewAvailableGeneticBackgrounds">View</a>
+</li>
+<li>
+<a target="_self" href="Controller?workflow=AddAvailableGeneticBackground">Add</a>
+</li>
+</ul>
+</li>
+<li>
+<span>Repositories</span>
+<ul>
+<li>
+<a target="_self" href="Controller?workflow=ViewRepositories">View</a>
+</li>
+<li>
+<a target="_self" href="Controller?workflow=AddRepository">Add</a>
+</li>
+</ul>
+</li>
+<li>
+<a target="_self" href="Controller?workflow=FileUpload">go</a>
+</li>
+<li>
+<a target="_self" href="Controller?workflow=Logout">Logout</a>
+</li>
+</ul>
+		</div>
+	</div>
+	<div id="panel-right">
+		<div id="panel-right-top">
+</div>
+        
+        <div id="panel-right-rest">
+        <form action="Controller" method="post">
+            <span class="header_01">Transgenic Mice Index</span>
+            <table>
+                <tr>
+                    <td>
+                      <p class="navtext"><a href="Controller?workflow=ViewModels&amp;next">Next</a>
+<a href="Controller?workflow=ViewModels&amp;last">End</a>
+&nbsp;displaying 1-20 out of 134&nbsp;</p>  
+                    </td>
+                </tr>
+            </table>
+            <table class="data">
+                <tr>
+                    <th class="data" width="20%"><input type="submit" title="order by ID" name="byID" value="ID" /></th>
+                    <th class="data" width="70%"><input type="submit" title="order by line name" name="byNAME" value="Line Name" /></th>
+                    <th class="data" width="10%"><input type="submit" title="order by last update" name="byDATE" value="Last Update" /></th>
+                </tr>
+                
+                    <tr class="alternatingOne">
+                        <td width="20%">285108</td>
+                        <td width="70%"><a href="Controller?workflow=ViewModel&amp;expand_all=true&amp;name_begins=model.block&amp;eid=285108&amp;general=true" class="indexmain">MOGi-cre</a></td>
+                        <td width="10%">2010-07-06</td>
+                    </tr>
+                
+                    <tr class="alternatingTwo">
+                        <td width="20%">285109</td>
+                        <td width="70%"><a href="Controller?workflow=ViewModel&amp;expand_all=true&amp;name_begins=model.block&amp;eid=285109&amp;general=true" class="indexmain">CD11c-Cre-ER<sup>T</sup></a></td>
+                        <td width="10%">2010-07-06</td>
+                    </tr>
+                
+                    <tr class="alternatingOne">
+                        <td width="20%">285110</td>
+                        <td width="70%"><a href="Controller?workflow=ViewModel&amp;expand_all=true&amp;name_begins=model.block&amp;eid=285110&amp;general=true" class="indexmain">aAT-Cre-ER<sup>T</sup></a></td>
+                        <td width="10%">2010-07-06</td>
+                    </tr>
+                
+                    <tr class="alternatingTwo">
+                        <td width="20%">285111</td>
+                        <td width="70%"><a href="Controller?workflow=ViewModel&amp;expand_all=true&amp;name_begins=model.block&amp;eid=285111&amp;general=true" class="indexmain">RAGE%</a></td>
+                        <td width="10%">2010-07-06</td>
+                    </tr>
+                
+                    <tr class="alternatingOne">
+                        <td width="20%">285112</td>
+                        <td width="70%"><a href="Controller?workflow=ViewModel&amp;expand_all=true&amp;name_begins=model.block&amp;eid=285112&amp;general=true" class="indexmain">ST33.396</a></td>
+                        <td width="10%">2010-07-06</td>
+                    </tr>
+                
+                    <tr class="alternatingTwo">
+                        <td width="20%">285113</td>
+                        <td width="70%"><a href="Controller?workflow=ViewModel&amp;expand_all=true&amp;name_begins=model.block&amp;eid=285113&amp;general=true" class="indexmain">CD19-Cre</a></td>
+                        <td width="10%">2010-07-06</td>
+                    </tr>
+                
+                    <tr class="alternatingOne">
+                        <td width="20%">285114</td>
+                        <td width="70%"><a href="Controller?workflow=ViewModel&amp;expand_all=true&amp;name_begins=model.block&amp;eid=285114&amp;general=true" class="indexmain">PLP-Cre-ER<sup>T</sup></a></td>
+                        <td width="10%">2010-07-06</td>
+                    </tr>
+                
+                    <tr class="alternatingTwo">
+                        <td width="20%">285115</td>
+                        <td width="70%"><a href="Controller?workflow=ViewModel&amp;expand_all=true&amp;name_begins=model.block&amp;eid=285115&amp;general=true" class="indexmain">Z/EG</a></td>
+                        <td width="10%">2010-07-06</td>
+                    </tr>
+                
+                    <tr class="alternatingOne">
+                        <td width="20%">285116</td>
+                        <td width="70%"><a href="Controller?workflow=ViewModel&amp;expand_all=true&amp;name_begins=model.block&amp;eid=285116&amp;general=true" class="indexmain">Cmv-Cre</a></td>
+                        <td width="10%">2010-07-06</td>
+                    </tr>
+                
+                    <tr class="alternatingTwo">
+                        <td width="20%">285117</td>
+                        <td width="70%"><a href="Controller?workflow=ViewModel&amp;expand_all=true&amp;name_begins=model.block&amp;eid=285117&amp;general=true" class="indexmain">K14-Cre</a></td>
+                        <td width="10%">2010-07-06</td>
+                    </tr>
+                
+                    <tr class="alternatingOne">
+                        <td width="20%">285118</td>
+                        <td width="70%"><a href="Controller?workflow=ViewModel&amp;expand_all=true&amp;name_begins=model.block&amp;eid=285118&amp;general=true" class="indexmain">Mx-Cre</a></td>
+                        <td width="10%">2010-07-06</td>
+                    </tr>
+                
+                    <tr class="alternatingTwo">
+                        <td width="20%">285119</td>
+                        <td width="70%"><a href="Controller?workflow=ViewModel&amp;expand_all=true&amp;name_begins=model.block&amp;eid=285119&amp;general=true" class="indexmain">LysM-Cre<sup>K/I</sup></a></td>
+                        <td width="10%">2010-07-06</td>
+                    </tr>
+                
+                    <tr class="alternatingOne">
+                        <td width="20%">285120</td>
+                        <td width="70%"><a href="Controller?workflow=ViewModel&amp;expand_all=true&amp;name_begins=model.block&amp;eid=285120&amp;general=true" class="indexmain">CD11b-Cre</a></td>
+                        <td width="10%">2010-07-06</td>
+                    </tr>
+                
+                    <tr class="alternatingTwo">
+                        <td width="20%">285121</td>
+                        <td width="70%"><a href="Controller?workflow=ViewModel&amp;expand_all=true&amp;name_begins=model.block&amp;eid=285121&amp;general=true" class="indexmain">MOG-Cre</a></td>
+                        <td width="10%">2010-07-06</td>
+                    </tr>
+                
+                    <tr class="alternatingOne">
+                        <td width="20%">285122</td>
+                        <td width="70%"><a href="Controller?workflow=ViewModel&amp;expand_all=true&amp;name_begins=model.block&amp;eid=285122&amp;general=true" class="indexmain">MBP-Cre</a></td>
+                        <td width="10%">2010-07-06</td>
+                    </tr>
+                
+                    <tr class="alternatingTwo">
+                        <td width="20%">285123</td>
+                        <td width="70%"><a href="Controller?workflow=ViewModel&amp;expand_all=true&amp;name_begins=model.block&amp;eid=285123&amp;general=true" class="indexmain">Collagen VI-Cre</a></td>
+                        <td width="10%">2010-07-06</td>
+                    </tr>
+                
+                    <tr class="alternatingOne">
+                        <td width="20%">285124</td>
+                        <td width="70%"><a href="Controller?workflow=ViewModel&amp;expand_all=true&amp;name_begins=model.block&amp;eid=285124&amp;general=true" class="indexmain">GFAP-CrePR</a></td>
+                        <td width="10%">2010-07-06</td>
+                    </tr>
+                
+                    <tr class="alternatingTwo">
+                        <td width="20%">285125</td>
+                        <td width="70%"><a href="Controller?workflow=ViewModel&amp;expand_all=true&amp;name_begins=model.block&amp;eid=285125&amp;general=true" class="indexmain">Actin-rtTA</a></td>
+                        <td width="10%">2010-07-06</td>
+                    </tr>
+                
+                    <tr class="alternatingOne">
+                        <td width="20%">285126</td>
+                        <td width="70%"><a href="Controller?workflow=ViewModel&amp;expand_all=true&amp;name_begins=model.block&amp;eid=285126&amp;general=true" class="indexmain">WAP-Cre</a></td>
+                        <td width="10%">2010-07-06</td>
+                    </tr>
+                
+                    <tr class="alternatingTwo">
+                        <td width="20%">285127</td>
+                        <td width="70%"><a href="Controller?workflow=ViewModel&amp;expand_all=true&amp;name_begins=model.block&amp;eid=285127&amp;general=true" class="indexmain">CC10-rtTA</a></td>
+                        <td width="10%">2010-07-06</td>
+                    </tr>
+                
+            </table>
+            <table>
+                <tr>
+                    <td>
+                      <p class="navtext"><a href="Controller?workflow=ViewModels&amp;next">Next</a>
+<a href="Controller?workflow=ViewModels&amp;last">End</a>
+&nbsp;</p>  
+                    </td>
+                </tr>
+            </table>
+            
+            <table>
+            <tr valign="bottom">
+                <td>
+				narrow index by <b>transgene:</b> &nbsp;<select name="gaid" onchange="this.form.submit()"><option value="*">*</option><option value="325080">n/a</option><option value="325083">Act</option><option value="325131">ACTA1</option><option value="325072">ACTB</option><option value="325113">Alb</option><option value="325094">Alb1</option><option value="325088">AMH</option><option value="325152">BK5 (Bovine)</option><option value="325121">CAG</option><option value="325100">Camk2a</option><option value="325073">Cd19</option><option value="325099">CD4</option><option value="325092">Cebpb</option><option value="325120">Cga</option><option value="325127">Chx10</option><option value="325143">Ckm</option><option value="325075">CMV</option><option value="325140">Col1a1</option><option value="325111">Col2a1</option><option value="325081">Col6a1</option><option value="325086">Cr2</option><option value="325091">CRP</option><option value="325141">Dspp</option><option value="325106">EIIa</option><option value="325132">Eno2</option><option value="325098">Fabp1</option><option value="325126">Fabp4</option><option value="325146">Foxa3</option><option value="325087">Foxp3</option><option value="325150">Gabra6</option><option value="325142">Gcg</option><option value="325093">Gfap</option><option value="325082">GFAP</option><option value="325114">GZMB</option><option value="325105">hCMV</option><option value="325123">Hoxb7</option><option value="325102">Hoxd11</option><option value="325147">Ins</option><option value="325112">Ins2</option><option value="325079">ITGAM</option><option value="325069">Itgax</option><option value="325076">KRT14</option><option value="325128">Krt15</option><option value="325145">KRT5</option><option value="325115">Lck</option><option value="325078">Lyz2</option><option value="325110">MMTV</option><option value="325068">Mog</option><option value="325089">Mpz</option><option value="325138">Msx2</option><option value="325077">Mx1</option><option value="325129">Myh6</option><option value="325139">Nefh</option><option value="325101">Nes</option><option value="325130">Neurog3</option><option value="325148">NEUROG3</option><option value="325149">Pax2</option><option value="325151">Pax4</option><option value="325096">Pax6</option><option value="325119">Pcp2</option><option value="325144">Pdx1</option><option value="325074">Plp1</option><option value="325133">Pomc1</option><option value="325107">Prm</option><option value="325116">Prnp</option><option value="325137">Prph</option><option value="325134">PTH</option><option value="325153">Rarb</option><option value="325118">Rbp3</option><option value="325103">rtetR</option><option value="325085">Scgb1a1</option><option value="325070">SERPINA1</option><option value="325136">SFTPC</option><option value="325097">Slc5a2</option><option value="325125">Sox2</option><option value="325109">Sycp1</option><option value="325117">Syn1</option><option value="325124">Tagln</option><option value="325071">Tek</option><option value="325090">tetO</option><option value="325135">Thy1</option><option value="325095">Tie1</option><option value="325104">Ttr</option><option value="325122">Vil</option><option value="325084">Wap</option><option value="325108">Zp3</option></select>
+                &nbsp;and/or&nbsp;<b>researcher:</b> &nbsp;<select name="participantname" onchange="this.form.submit()"><option value="*">*</option><option value="Michael Z">Michael Z</option></select></td>
+            </tr>
+        </table>
+       </form>
+        </div>
+</div>
+	<div id="clear-foot">&nbsp;</div>
+</div>
+<div id="foot">
+<p>&copy;&nbsp;<a href="http://www.fleming.gr" target="_blank" title="fleming.gr">&nbsp;fleming&nbsp;</a>2009</p>
+</div>
+
+</body>
+</html>

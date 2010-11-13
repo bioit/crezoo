@@ -1,0 +1,110 @@
+kopia av mail skickat till Ingrid 2000-07-04 av TOBJ
+
+Hej!
+
+Här kommer en kort lathund för hur man använder GQL. GQL är ett "språk"
+som jag och Anders hittat på som ligger väldigt nära SQL, men som ändå 
+bäddar in begrepp som sampling unit, genotyper, phenotyper och individ 
+data på en hög nivå.
+
+GQL används för att filtrera ut den mängd individer som skall ingå då man 
+exporterar en fil för analys (output-fil). All GQL-kod översätts till ett SQL-villkor 
+som måste vara uppfyllt för alla individer som ingår i outputfilen. Fyra olika 
+typer av kommandon finns, S, I, P och G-kommadon. Jag beskriver de olika
+kommandona nedan. För att en individ skall väljas ut till output-filen måste 
+alltså GQL-villkoret evalueras till sant för individen. Detta byter att det enklaste 
+filtret man kan skriva som väljer ut samtliga individer i projectet kan se ut så här:
+1=1
+Eftersom detta alltid är sant kommer samtliga individer med. Endast 
+kommandon som börjar med någon av bokstäverna S, I, G och P översätts.
+Detta betyder att alla standard SQL-kommandon som to_date, between, 
+to_number, to_char, like, substr, upper e.t.c. samt alla logiska operatorer kan 
+användas. Nedan följer en genomgång av de olika GQL-kommandona och 
+några exempel.
+
+S-kommandon:
+S står för engelska set ( det vill säga sätta). Detta kommando kan användas för 
+att direkt specificera en submängd som skall ingå. S-kommandot har följande 
+syntax:
+S.sampling_unit[.Grouping_name[.group_name]]
+Det som här anges innom [] är valfritt.
+Exempel 1
+För att att välja ut samtliga individer i gruppen F2 som ingår i grupperingen 
+GENERATIONS i samplingunit HUMAN001 samt samtliga individer i 
+samplingunit HUMAN002 kan följande kod användas: 
+S.HUMAN001.GENERATIONS.F2 OR S.HUMAN002
+
+I-kommandon:
+I har betydelsen individual och är till för att sätta villkor på individens attribut.
+Följande alternativ finns:
+I.Identity, I.Alias, I.Father, I.Mother, I.Birth_date samt I.Sex. Samtliga returnerar 
+en sträng förutom I.Birth_date som returnerar ett datum. 
+Exempel 2
+För att begränsa mängden av individer från exempel 1 till de som har ett alias 
+som börjar på 'alias1' och som är födda efter 20 april 1995 kan följande kod 
+användas:
+(S.HUMAN001.GENERATIONS.F2 OR S.HUMAN002) AND 
+I.Alias like('alias1%') AND 
+I.Birth_date > to_date('1996-04-20', 'YYYY-MM-DD')
+Här är kommandot like ett oracle-kommando för att jämföra strängar. För att 
+jämföra datum måste man konvertera en sträng till ett datum. Oracle 
+kommandot to_date åstadkommer just detta. För att to_date skall fungera korrekt 
+måste man ange en format-sträng som beskriver datumet. Det gör det andra 
+argumentet till funktionen. På samma sätt kan man använda de andra attributen 
+hos I-kommandot. Tänk på att alla strängar i oracle måste omslutas med enkelt 
+citationstecken! 
+För att välja ut de individider som är hanar skriver man således I.Sex = 'M'. 
+
+G-kommandon:
+G står för genotype och tillåter användaren att sätta villkor på genotyp data. Följande 
+attribut finns: 
+G.Marker_Name.A1	Allel 1 för Marker_Name
+G.Marker_Name.A2	Allel 2 för Marker_Name
+G.Marker_Name.R1	Rådata 1 för Marker_Name
+G.Marker_Name.R2	Rådata 2 för Marker_Name
+Samtliga attribut returnerar en sträng.
+Exempel 3
+Följande GQL-kod väljer ut samtliga individer i projektet som har olika värden på allel 1
+och allel 2 för markören MA0202 ( kallas det inte för heterozygonyta?)
+G.MA0202.A1 != G.MA0202.A2
+(Oracle tolkar både  != och <> som skiljt från.)
+För att filtrera på rådata bör man tänka på att rådata är lagrat som en sträng. Vill man 
+tolka det som siffror bör man konvertera resultatet till ett nummer med oracle-funktionen 
+to_number (t.e.x. to_number(G.MA0202.R1)).
+
+P-kommandon:
+P är som G-kommandot fast för phenotype. Följande attribute finns:
+P.Var_Name.Value	Variablevärde för variabeln Var_Name. 
+			Returnerar en sträng om variabeln är av typen Enumeration.
+			Returnerar ett tal om den är av typen Number.
+P.Var_Name.Date	Returner det datum då variabeln Var_Name uppmättes.
+Exempel 4
+För att välja ut de individer med blå ögonfärg kan följande uttryck användas:
+P.EYE_COLOR.Value = 'Blue'
+
+Stored procedures:
+Eftersom GQL har full tillgång till procedurer som lagrats i databasen, finns inga 
+begränsningar i GQL som inte finns i SQL. Vi har bland annat gjort några procedurer
+för att sätta kriterier för en individs föräldrars attribut.
+Till exempel kan följande uttryck användas för att välja ut de individer där mamma
+och pappa har samma ögonfärg.
+P_Value(I.IID , 'F', 'EYE_COLOR') = P_Value(I.IID , 'M', 'EYE_COLOR')
+Strängarna 'F' och 'M' kan här ersättas med en godtycklig kombiniation av 'F' och 'M' för att på
+så vis stega sig uppåt i föräldra kedjan. Detta innebär dock en kraftigt ökad komplexitet vilket 
+får till följd att databasfrågan blir långsammare.
+Några av dessa procedurer kommer betraktas som standard i GQL och så småningom 
+integreras med språket. Således kommer man senare att kunna skriva följande uttryck istället:
+P.F.EYE_COLOR.Value = P.M.EYE_COLOR.Value. 
+Förutom proceduren P_Value finns G_A1 samt G_A2. Dessa väljer ut allel 1 respektive allel 2
+för en individs far, farfar, mor, morfar etc. Syntaxen är följande:
+G_A1(I.IID, M/F-combination, Marker_Name)
+Tänk på att M/F-combinatioin och Marker_Name måste inneslutas av enkla citationstecken!
+
+
+Hoppas det här kan vara till någon hjälp!
+Har du några undringar så hör gärna av dig!
+
+Med vänliga hälsningar
+Tomas
+
+

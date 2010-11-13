@@ -1,0 +1,898 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workflows action-prefix="org.tgdb.webapp.action." default-workflow="boot">
+
+    <workflow name="ExpModelInfo">
+        <state name="info" viewURI="views/model/ExpModelInfo.jsp"/>
+    </workflow>
+    <workflow name="ViewModels">
+        <state name="viewModelsPre" preaction="model.GetModelsAction"/>
+        <state name="view" viewURI="views/model/ExpModelsView.jsp"/>
+        <state name="post" action="model.ModelsPostAction"/>
+        <state workflow="ViewModels"/>
+    </workflow>
+    <workflow name="RemoveGenotypingFile">
+        <state name="removeGenotypingFile" preaction="model.RemoveGenotypingFileAction" viewURI="views/model/ExpModelView.jsp"/>
+    </workflow>
+    <workflow name="RemoveHandlingFile">
+        <state name="removeHandlingFile" preaction="model.RemoveHandlingFileAction" viewURI="views/model/ExpModelView.jsp"/>
+    </workflow>
+    <workflow name="AddGenotypingFile">
+        <state name="addGenotypingFile" preaction="FileUploadPreAction" viewURI="views/FileUpload.jsp" action="model.UploadGenotypingAction"/>
+        <state workflow="ViewModel"/>
+    </workflow>
+    <workflow name="AddHandlingFile">
+        <state name="addHandlingFile" preaction="FileUploadPreAction" viewURI="views/FileUpload.jsp" action="model.UploadHandlingAction"/>
+        <state workflow="ViewModel"/>
+    </workflow>
+    <workflow name="EditModel">
+        <state name="editModel" preaction="model.GetSimpleModelAction" viewURI="views/model/ExpModelEditView.jsp" action="model.SaveModelAction"/>
+        <state workflow="ViewModel"/>
+    </workflow>
+    <workflow name="RemoveModel">
+        <state name="removeModel" preaction="model.RemoveModelAction" viewURI="views/model/ExpModelsView.jsp"/>
+    </workflow>
+    <workflow name="CreateModel">
+        <state name="createModel" preaction="model.CreateModelAction" viewURI="views/model/ExpModelCreateView.jsp" action="model.SaveCreateModelAction"/>
+        <state workflow="ViewModels"/>
+    </workflow>
+    <workflow name="ViewModel">
+        <state name="viewModel" preaction="model.GetModelAction" viewURI="views/model/ExpModelView.jsp"/>
+    </workflow>
+    <workflow name="ViewModelDirect">
+        <state name="ViewModelDirect" preaction="model.GetModelAction" viewURI="views/model/ExpModelViewDirect.jsp"/>
+    </workflow>
+    <workflow name="GenModFileUpload">
+        <state name="genModFileUpload" viewURI="views/FileUploadExtended.jsp" action="model.GenModFileUploadAction"/>
+        <state workflow="ViewGenMod"/>
+    </workflow>
+    <workflow name="EditGenModFile">
+        <state name="editGenModFile" preaction="model.GetFileInfoAction" viewURI="views/FileEditNoRemoveView.jsp" action="model.SaveFileReferenceAction"/>
+        <state workflow="ViewGenMod"/>
+    </workflow>
+
+    <workflow name="AssignGeneModel">
+        <state name="assign" preaction="model.AssignGenePreAction" viewURI="views/model/GeneAssignment.jsp" action="model.AssignGeneAction"/>
+        <state workflow="ViewModel"/>
+    </workflow>
+    <workflow name="UnAssignGeneModel">
+        <state name="unassign" preaction="model.UnAssignGeneAction"/> <!--  viewURI="views/model/ExpModelView.jsp" -->
+        <state workflow="ViewModel"/>
+    </workflow>
+
+
+    <!-- Genetic Background Related Worklows -->
+
+    <workflow name="CreateGeneticBackground">
+        <state name="CreateGeneticBackground" preaction="model.CreateGeneticBackgroundPreAction" viewURI="views/model/CreateGeneticBackground.jsp" action="model.CreateGeneticBackgroundAction"/>
+        <state workflow="ViewModel"/>
+    </workflow>
+
+
+    <workflow name="EditGeneticBackground">
+        <state name="EditGeneticBackground" preaction="model.EditGeneticBackgroundPreAction" viewURI="views/model/EditGeneticBackground.jsp" action="model.EditGeneticBackgroundAction"/>
+        <state workflow="ViewModel"/>
+    </workflow>
+
+    <!-- Genetic Background Values Related Worklows -->
+
+    <workflow name="CreateGeneticBackgroundValue">
+        <state name="CreateGeneticBackgroundValue" viewURI="views/model/CreateGeneticBackgroundValue.jsp" action="model.CreateGeneticBackgroundValueAction"/>
+        <state workflow="ViewGeneticBackgroundValues"/>
+    </workflow>
+
+    <workflow name="CreateGeneticBackgroundValueWhileAddingGeneticBackgroundInfo">
+        <state name="CreateGeneticBackgroundValueWhileAddingGeneticBackgroundInfo" viewURI="views/model/CreateGeneticBackgroundValue.jsp" action="model.CreateGeneticBackgroundValueAction"/>
+        <state workflow="CreateGeneticBackground"/>
+    </workflow>
+
+    <workflow name="EditGeneticBackgroundValue">
+        <state name="EditGeneticBackgroundValue" preaction="model.EditGeneticBackgroundValuePreAction" viewURI="views/model/EditGeneticBackgroundValue.jsp" action="model.CreateGeneticBackgroundValueAction"/>
+        <state workflow="ViewGeneticBackgroundValues"/>
+    </workflow>
+
+    <workflow name="ViewGeneticBackgroundValues">
+        <state name="ViewGeneticBackgroundValues" preaction="model.ViewGeneticBackgroundValuesPreAction" viewURI="views/model/ViewGeneticBackgroundValues.jsp"/>
+    </workflow>
+
+    <!-- Availability Related Workflows -->
+
+    <workflow name="AssignAvailability">
+        <state name="AssignAvailability" preaction="model.AssignAvailabilityPreAction" viewURI="views/model/AssignAvailability.jsp" action="model.AssignAvailabilityAction"/>
+        <state workflow="ViewModel"/>
+    </workflow>
+
+    <workflow name="UnAssignAvailability">
+        <state name="UnAssignAvailability" preaction="model.UnAssignAvailabilityAction"/>
+        <state workflow="ViewModel"/>
+    </workflow>
+
+    <workflow name="ViewRepositories">
+        <state name="ViewRepositories" preaction="model.ViewRepositoriesAction" viewURI="views/model/ViewRepositories.jsp"/>
+    </workflow>
+
+    <workflow name="AddRepository">
+        <state name="AddRepository" viewURI="views/model/AddRepository.jsp" action="model.AddRepositoryAction"/>
+        <state workflow="ViewRepositories"/>
+    </workflow>
+
+    <workflow name="AddRepositoryWhileAddingAvgenBackInfo">
+        <state name="AddRepositoryWhileAddingAvgenBackInfo" viewURI="views/model/AddRepository.jsp" action="model.AddRepositoryAction"/>
+        <state workflow="AssignAvailability"/>
+    </workflow>
+
+    <workflow name="EditRepository">
+        <state name="EditRepository" preaction="model.EditRepositoryPreAction" viewURI="views/model/EditRepository.jsp" action="model.EditRepositoryAction"/>
+        <state workflow="ViewRepositories"/>
+    </workflow>
+
+    <workflow name="RemoveRepository">
+        <state name="RemoveRepository" preaction="model.RemoveRepositoryAction" viewURI="views/model/ViewRepositories.jsp"/>
+    </workflow>
+
+    <workflow name="ViewAvailableGeneticBackgrounds">
+        <state name="ViewAvailableGeneticBackgrounds" preaction="model.ViewAvailableGeneticBackgroundsAction" viewURI="views/model/ViewAvailableGeneticBackgrounds.jsp"/>
+    </workflow>
+
+    <workflow name="AddAvailableGeneticBackground">
+        <state name="AddAvailableGeneticBackground" viewURI="views/model/AddAvailableGeneticBackground.jsp" action="model.AddAvailableGeneticBackgroundAction"/>
+        <state workflow="ViewAvailableGeneticBackgrounds"/>
+    </workflow>
+
+    <workflow name="AddAvailableGeneticBackgroundWhileAddingAvgenBackInfo">
+        <state name="AddAvailableGeneticBackgroundWhileAddingAvgenBackInfo" viewURI="views/model/AddAvailableGeneticBackground.jsp" action="model.AddAvailableGeneticBackgroundAction"/>
+        <state workflow="AssignAvailability"/>
+    </workflow>
+
+    <workflow name="EditAvailableGeneticBackground">
+        <state name="EditAvailableGeneticBackground" preaction="model.EditAvailableGeneticBackgroundPreAction" viewURI="views/model/EditAvailableGeneticBackground.jsp" action="model.EditAvailableGeneticBackgroundAction"/>
+        <state workflow="ViewAvailableGeneticBackgrounds"/>
+    </workflow>
+
+    <workflow name="RemoveAvailableGeneticBackground">
+        <state name="RemoveAvailableGeneticBackground" preaction="model.RemoveAvailableGeneticBackgroundAction" viewURI="views/model/ViewAvailableGeneticBackgrounds.jsp"/>
+    </workflow>
+
+    <!-- Strains section -->
+
+    <workflow name="ViewStrainType">
+        <state name="viewStrainType" preaction="availability.GetStrainTypeAction" viewURI="views/availability/ViewStrainType.jsp"/>
+    </workflow>
+    <workflow name="CreateStrainType">
+        <state name="createStrainType" viewURI="views/availability/CreateStrainType.jsp" action="availability.SaveStrainTypeAction"/>
+        <state workflow="ViewStrainTypes"/>
+    </workflow>
+    <workflow name="EditStrainType">
+        <state name="editStrainType" preaction="availability.GetStrainTypeAction" viewURI="views/availability/EditStrainType.jsp" action="availability.SaveStrainTypeAction"/>
+        <state workflow="ViewStrainType"/>
+    </workflow>
+    <workflow name="DeleteStrainType">
+        <state name="deleteStrainType" preaction="availability.DeleteStrainTypeAction"/>
+        <state workflow="ViewStrainTypes"/>
+    </workflow>
+    <workflow name="ViewStrainTypes">
+        <state name="view" preaction="model.GetStrainTypesAction" viewURI="views/availability/ViewStrainTypes.jsp"/>
+    </workflow>
+
+    <workflow name="ViewStrainState">
+        <state name="viewStrainState" preaction="availability.GetStrainStateAction" viewURI="views/availability/ViewStrainState.jsp"/>
+    </workflow>
+    <workflow name="CreateStrainState">
+        <state name="createStrainState" viewURI="views/availability/CreateStrainState.jsp" action="availability.SaveStrainStateAction"/>
+        <state workflow="ViewStrainStates"/>
+    </workflow>
+    <workflow name="EditStrainState">
+        <state name="editStrainState" preaction="availability.GetStrainStateAction" viewURI="views/availability/EditStrainState.jsp" action="availability.SaveStrainStateAction"/>
+        <state workflow="ViewStrainState"/>
+    </workflow>
+    <workflow name="DeleteStrainState">
+        <state name="deleteStrainState" preaction="availability.DeleteStrainStateAction"/>
+        <state workflow="ViewStrainStates"/>
+    </workflow>
+    <workflow name="ViewStrainStates">
+        <state name="view" preaction="model.GetStrainStatesAction" viewURI="views/availability/ViewStrainStates.jsp"/>
+    </workflow>
+
+    <workflow name="ViewStrains">
+        <state name="view" preaction="model.GetStrainsAction" viewURI="views/strain/ViewStrains.jsp"/>
+    </workflow>
+    <workflow name="ViewStrain">
+        <state name="view" preaction="model.GetStrainAction" viewURI="views/strain/ViewStrain.jsp"/>
+    </workflow>
+    <workflow name="_CreateStrain">
+        <state name="add" viewURI="views/strain/CreateStrain.jsp" action="model.SaveStrainAction"/>
+        <state workflow="ViewStrains"/>
+    </workflow>
+    <workflow name="_EditStrain">
+        <state name="view" preaction="model.GetStrainAction" viewURI="views/strain/EditStrain.jsp" action="model.SaveStrainAction"/>
+        <state workflow="ViewStrain"/>
+    </workflow>
+    <workflow name="DeleteStrain">
+        <state name="deleteStrain" preaction="strain.DeleteStrainAction"/>
+        <state workflow="ViewStrains"/>
+    </workflow>
+
+    <workflow name="AssignStrain">
+        <state name="assign" preaction="model.AssignStrainPreAction" viewURI="views/model/StrainAssign.jsp" action="model.SaveStrainAction"/>
+        <state workflow="ViewModel"/>
+    </workflow>
+    <workflow name="UnassignStrain">
+        <state name="unassign" preaction="model.UnassignStrainAction"/>
+        <state workflow="ViewModel"/>
+    </workflow>
+    <workflow name="CreateStrain">
+        <state name="add" viewURI="views/model/StrainCreate.jsp" action="model.SaveStrainAction"/>
+        <state workflow="AssignStrain"/>
+    </workflow>
+    <workflow name="EditStrain">
+        <state name="view" preaction="model.GetStrainAction" viewURI="views/strain/EditStrain.jsp" action="model.SaveStrainAction"/>
+        <state workflow="ViewModel"/>
+    </workflow>
+    <workflow name="AddStrainLink">
+        <state name="add" viewURI="views/model/StrainLinkCreate.jsp" action="model.SaveStrainLinkAction"/>
+        <state workflow="EditStrain"/>
+    </workflow>
+    <workflow name="DeleteStrainLink">
+        <state name="delete" preaction="model.DeleteStrainLinkAction"/>
+        <state workflow="EditStrain"/>
+    </workflow>
+    <workflow name="AddStrainAndType">
+        <state name="view" preaction="model.AddStrainAndTypePreAction" viewURI="views/model/AddStrainAndType.jsp" action="model.AddStrainAndTypeAction"/>
+        <state workflow="EditStrain"/>
+    </workflow>
+
+    <workflow name="ViewAlleleTypes">
+        <state name="view" preaction="allele.GetMutationTypesAction" viewURI="views/allele/AlleleTypesView.jsp"/>
+        <!--state workflow="ViewModel"/-->
+    </workflow>
+    <workflow name="CreateAlleleType">
+        <state name="create" viewURI="views/allele/AlleleTypeCreateView.jsp" action="allele.SaveMutationTypeAction"/>
+        <state workflow="ViewAlleleTypes"/>
+    </workflow>
+    <workflow name="EditAlleleType">
+        <state name="edit" preaction="allele.GetMutationTypePreAction" viewURI="views/allele/AlleleTypeEditView.jsp" action="allele.SaveMutationTypeAction"/>
+        <state workflow="ViewAlleleTypes"/>
+    </workflow>
+    <workflow name="DeleteAlleleType">
+        <state name="create" preaction="allele.DeleteMutationTypeAction"/>
+        <state workflow="ViewAlleleTypes"/>
+    </workflow>
+
+
+    <workflow name="RemoveTypeFromStrain">
+        <state name="view" preaction="model.RemoveStrainTypeAction"/>
+        <state workflow="EditStrain"/>
+    </workflow>
+
+    <workflow name="RemoveStateFromStrain">
+        <state name="view" preaction="model.RemoveStrainStateAction"/>
+        <state workflow="EditStrain"/>
+    </workflow>
+
+    <workflow name="AssignStrainAllele">
+        <state name="create" preaction="allele.CreateStrainAllelePreAction" viewURI="views/allele/StrainAlleleAssign.jsp" action="allele.CreateStrainAlleleAction"/>
+        <state workflow="ViewModel"/>
+    </workflow>
+
+    <workflow name="CreateStrainAllele">
+        <state name="createStrainAllele" preaction="allele.CreateStrainAllelePreAction" viewURI="views/allele/StrainAlleleCreate.jsp" action="allele.CreateStrainAlleleAction"/>
+        <state workflow="AssignStrainAllele"/>
+    </workflow>
+
+    <workflow name="RemoveStrainAllele">
+        <state name="RemoveStrainAllele" preaction="allele.RemoveStrainAlleleAction"/>
+        <state workflow="ViewModel"/>
+    </workflow>
+
+    <workflow name="ViewStrainAlleles">
+        <state name="viewStrainAlleles" preaction="allele.GetStrainAllelesAction" viewURI="views/allele/ViewStrainAlleles.jsp"/>
+    </workflow>
+    <workflow name="ViewStrainAllele">
+        <state name="viewStrainAllele" preaction="allele.GetStrainAlleleSimpleAction" viewURI="views/allele/ViewStrainAllele.jsp"/>
+    </workflow>
+    <workflow name="_EditStrainAllele">
+        <state name="_editStrainAllele" preaction="allele.GetStrainAlleleSimpleAction" viewURI="views/allele/EditStrainAlleleSimple.jsp" action="allele.SaveStrainAlleleSimpleAction"/>
+        <state workflow="ViewStrainAllele"/>
+    </workflow>
+    <workflow name="_CreateStrainAllele">
+        <state name="_createStrainAllele" viewURI="views/allele/StrainAlleleCreate.jsp" action="allele.CreateStrainAlleleAction"/>
+        <state workflow="ViewStrainAlleles"/>
+    </workflow>
+    <workflow name="DeleteStrainAllele">
+        <state name="deleteStrainAllele" preaction="allele.DeleteStrainAlleleAction"/>
+        <state workflow="ViewStrainAlleles"/>
+    </workflow>
+    <workflow name="EditStrainAllele">
+        <state name="create" preaction="allele.GetStrainAlleleAction" viewURI="views/allele/StrainAlleleEdit.jsp" action="allele.SaveStrainAlleleAction"/>
+        <state workflow="ViewModel"/>
+    </workflow>
+    <workflow name="AddGeneToAllele">
+        <state name="addgenetoallele" preaction="allele.AddGenePreAction" viewURI="views/allele/AddGene.jsp" action="allele.AddGeneAction"/>
+        <state workflow="EditStrainAllele"/>
+    </workflow>
+    <workflow name="CreatePromoter">
+        <state name="addgenetoallele" preaction="model.CreateGeneFromModelAction" viewURI="views/allele/CreatePromoter.jsp" action="gene.SaveGeneAction"/>
+        <state workflow="AddGeneToAllele"/>
+    </workflow>
+    <workflow name="ViewPromoter">
+        <state name="view" preaction="allele.GetGeneAction" viewURI="views/allele/ViewPromoter.jsp"/>
+    </workflow>
+    <workflow name="EditPromoter">
+        <state name="view" preaction="gene.GetGeneSimpleAction" viewURI="views/allele/EditPromoter.jsp" action="gene.SaveGeneAction"/>
+        <state workflow="ViewModel"/>
+    </workflow>
+    <workflow name="RemoveGeneFromAllele">
+        <state name="removegenefromallele" preaction="allele.RemoveGeneAction"/>
+        <state workflow="EditStrainAllele"/>
+    </workflow>
+    <workflow name="AddMutationTypeToAllele">
+        <state name="create" preaction="model.AddMutationTypePreAction" viewURI="views/model/AddMutationType.jsp" action="model.AddMutationTypeAction"/>
+        <state workflow="EditStrainAllele"/>
+    </workflow>
+
+    <workflow name="RemoveMutationTypeFromAllele">
+        <state name="remove" preaction="model.RemoveMutationTypeAction"/>
+        <state workflow="EditStrainAllele"/>
+    </workflow>
+
+
+
+
+
+    <workflow name="CreateModelLinkReference">
+        <state name="createModelLinkReference" preaction="resource.GetCategoriesAction" viewURI="views/reference/LinkCreateView.jsp" action="model.SaveLinkReferenceAction"/>
+        <state workflow="ViewModel"/>
+    </workflow>
+    <workflow name="CreateModelFileReference">
+        <state name="createModelFileReference" viewURI="views/reference/FileUploadView.jsp" action="model.UploadFileReferenceAction"/>
+        <state workflow="ViewModel"/>
+    </workflow>
+    <workflow name="EditModelLinkReference">
+        <state name="editModelLinkReference" preaction="model.GetModelLinkReferenceAction" viewURI="views/reference/LinkEditView.jsp" action="model.SaveLinkReferenceAction"/>
+        <state workflow="ViewModel"/>
+    </workflow>
+    <workflow name="EditModelFileReference">
+        <state name="editModelFileReference" preaction="model.GetModelFileReferenceAction" viewURI="views/reference/FileEditView.jsp" action="model.SaveFileReferenceAction"/>
+        <state workflow="ViewModel"/>
+    </workflow>
+    <workflow name="RemoveModelReference">
+        <state name="parameters" preaction="model.RemoveReferencePreAction"/>
+        <!--state name="confirm" viewURI="views/misc/confirm.jsp" action="ConfirmAction"/-->
+        <state name="removeModelReference" preaction="model.RemoveReferenceAction"/>
+        <state workflow="ViewModel"/>
+    </workflow>
+
+    <workflow name="CheckSamplingUnit">
+        <state name="checkSamplingUnit" preaction="samplingunit.CheckSUAction" viewURI="views/samplingunit/CheckSUView.jsp"/>
+    </workflow>
+    <workflow name="ViewSamplingUnit">
+        <state name="viewSamplingUnit" preaction="samplingunit.GetSingleSUAction" viewURI="views/samplingunit/SamplingUnitView.jsp"/>
+    </workflow>
+    <workflow name="CreateSamplingUnit">
+        <state name="createSamplingUnit" preaction="samplingunit.CreateSamplingUnitAction" viewURI="views/samplingunit/SamplingUnitCreateView.jsp" action="samplingunit.SaveSUAction"/>
+        <state workflow="ViewSamplingUnits"/>
+    </workflow>
+    <workflow name="ViewSamplingUnits">
+        <state name="viewSamplingUnits" preaction="samplingunit.GetSUFullAction" action="samplingunit.SUPostAction" viewURI="views/samplingunit/SamplingUnitsView.jsp"/>
+        <state workflow="ViewSamplingUnits"/>
+    </workflow>
+    <workflow name="EditSamplingUnit">
+        <state name="editSamplingUnit" preaction="samplingunit.GetSingleSUAction" viewURI="views/samplingunit/SamplingUnitEditView.jsp" action="samplingunit.SaveSUAction"/>
+        <state workflow="ViewSamplingUnit"/>
+    </workflow>
+    <workflow name="RemoveSamplingUnit">
+        <state name="removeSamplingUnit" preaction="samplingunit.RemoveSamplingUnitAction" viewURI="views/samplingunit/SamplingUnitsView.jsp"/>
+    </workflow>
+
+    <workflow name="SamplingUnitInfo">
+        <state name="info" viewURI="views/samplingunit/SamplingUnitInfo.jsp"/>
+    </workflow>
+    <workflow name="ProjectProperties">
+        <state name="set" preaction="project.GetProjectPropertiesAction" viewURI="views/project/setProjectView.jsp" action="project.ProjectPropertiesAction"/>
+        <!--<state name="setsu" preaction="project.GetSUAction" viewURI="views/project/setSamplingUnitView.jsp" action="project.SamplingunitPropertiesAction"/>-->
+        <state name="blank" viewURI="views/start.jsp"/>
+    </workflow>
+
+    <workflow name="SelectSU">
+        <state name="setsu" preaction="project.GetSUAction" viewURI="views/project/setSamplingUnitView.jsp" action="project.SamplingunitPropertiesAction"/>
+        <state name="blank" viewURI="views/start.jsp"/>
+    </workflow>
+    <workflow name="begin">
+        <!--state name="begin" preaction="project.BeginAction" viewURI="tgdb.jsp"/-->
+        <state name="begin" preaction="project.BeginAction"/>
+        <state workflow="ViewModels"/>
+    </workflow>
+    <workflow name="boot">
+        <state name="boot" preaction="project.BeginAction"/>
+        <state workflow="ViewModels"/>
+    </workflow>
+    <workflow name="Login">
+        <state name="login" viewURI="views/misc/Login.jsp" action="project.BeginAction"/>
+        <state workflow="ViewModels"/>
+    </workflow>
+    <workflow name="Logout">
+        <state name="logout" preaction="LogoutAction"/>
+        <state workflow="ViewModels"/>
+    </workflow>
+    <workflow name="reboot">
+        <state name="reboot" preaction="LogoutAction"/>
+        <state workflow="boot"/>
+    </workflow>
+
+    <workflow name="CloseBrowser">
+        <state name="CloseBrowser" preaction="LogoutAction" viewURI="CloseWindow.jsp"/>
+    </workflow>
+
+    <!-- Roles -->
+
+    <workflow name="ViewRoles">
+        <state name="ViewRoles" preaction="project.GetRolesAction" viewURI="views/project/RolesView.jsp"/>
+    </workflow>
+    <workflow name="EditRole">
+        <state name="ViewRoles" preaction="project.GetRoleAction" viewURI="views/project/EditRole.jsp" action="project.SaveRoleAction"/>
+        <state workflow="EditRole"/>
+    </workflow>
+    <workflow name="RemoveRole">
+        <state name="confirm" preaction="project.PreRemoveRoleAction" viewURI="views/misc/confirm.jsp" action="ConfirmAction"/>
+        <state name="remove" preaction="project.RemoveRoleAction" viewURI="blank.html"/>
+    </workflow>
+    <workflow name="CreateRole">
+        <state name="create" preaction="project.CreateRoleAction" viewURI="views/project/CreateRoleView.jsp" action="project.SaveRoleAction"/>
+        <state workflow="ViewRoles"/>
+    </workflow>
+
+
+
+
+    <workflow name="ViewProjectStats">
+        <state name="ViewStats" preaction="project.GetProjectStatisticsAction" viewURI="views/project/ProjectStatistics.jsp"/>
+    </workflow>
+    <workflow name="ViewProjectInfo">
+        <state name="viewProjectInfo" preaction="project.GetProjectInfoAction" viewURI="views/project/ProjectInfo.jsp"/>
+    </workflow>
+
+    <workflow name="EditProject">
+        <state name="editProject" preaction="project.GetProjectInfoAction" viewURI="views/project/ProjectEditView.jsp" action="project.SaveProjectAction"/>
+        <state workflow="ViewProjectInfo"/>
+    </workflow>
+    <workflow name="ProjectAssignSpecies">
+        <state name="add" preaction="admin.AssignSpeciesPreAction" viewURI="views/admin/AdminAssignSpecies.jsp" action="admin.AssignSpeciesAction"/>
+        <state workflow="ViewProjectInfo"/>
+    </workflow>
+    <workflow name="ProjectAssignUser">
+        <state name="add" preaction="admin.AssignUserPreAction" viewURI="views/admin/AdminAssignUser.jsp" action="admin.AssignUserAction"/>
+        <state workflow="ViewProjectInfo"/>
+    </workflow>
+    <workflow name="ProjectUnAssignUser">
+        <state name="remove" preaction="admin.UnAssignUserPreAction" viewURI="views/misc/confirm.jsp" action="admin.UnAssignUserAction"/>
+        <state workflow="ViewProjectInfo"/>
+    </workflow>
+    <workflow name="ProjectUnAssignSpecies">
+        <state name="projectUnAssignSpecies" preaction="project.ProjectUnAssignSpeciesAction" viewURI="views/project/ProjectInfo.jsp"/>
+    </workflow>
+
+    <workflow name="ViewMyAccount">
+        <state name="myaccount" viewURI="views/project/MyAccount.jsp" action="project.SaveMyAccountAction"/>
+        <state workflow="Login"/>
+    </workflow>
+
+    <!-- User handling -->
+    <workflow name="ViewCorrespondents">
+        <state name="viewCorrespondents" preaction="model.GetCorrespondentsAction" viewURI="views/model/CorrespondentsView.jsp"/>
+    </workflow>
+    <workflow name="CreateCorrespondent">
+        <state name="createCorrespondent" viewURI="views/model/CreateCorrespondentView.jsp" action="model.CreateCorrespondentAction"/>
+        <state workflow="CreateModel"/>
+    </workflow>
+    <workflow name="_CreateCorrespondent">
+        <state name="_createCorrespondent" viewURI="views/model/CreateCorrespondentView.jsp" action="model.CreateCorrespondentAction"/>
+        <state workflow="EditModel"/>
+    </workflow>
+    <workflow name="__CreateCorrespondent">
+        <state name="createCorrespondent" viewURI="views/model/CreateCorrespondentView.jsp" action="model.CreateCorrespondentAction"/>
+        <state workflow="ViewCorrespondents"/>
+    </workflow>
+    <workflow name="EditCorrespondent">
+        <state name="editCorrespondent" preaction="model.GetCorrespondentAction" viewURI="views/model/EditCorrespondentView.jsp" action="model.CreateCorrespondentAction"/>
+        <state workflow="ViewCorrespondents"/>
+    </workflow>
+    <workflow name="CreateUser">
+        <state name="createUser" preaction="project.GetProjectUserAdminAction" viewURI="views/project/UserCreateView.jsp" action="project.SaveUserAction"/>
+        <state name="add" preaction="admin.AssignUserPreAction" viewURI="views/admin/AdminAssignSingleUser.jsp" action="admin.AssignUserAction"/>
+        <state workflow="ViewProjectUsers"/>
+    </workflow>
+    <workflow name="EditUser">
+        <state name="editUser" preaction="project.GetProjectUserAdminAction" viewURI="views/project/UserEditView.jsp" action="project.SaveUserAction"/>
+        <state workflow="ViewUser"/>
+    </workflow>
+    <workflow name="ViewUser">
+        <state name="viewUser" preaction="project.GetProjectUserAction" viewURI="views/project/UserView.jsp"/>
+    </workflow>
+    <!-- View users for a project -->
+    <workflow name="ViewProjectUsers">
+        <state name="view" preaction="project.GetProjectUsersAction" viewURI="views/project/ProjectUsers.jsp"/>
+    </workflow>
+    <workflow name="AssignUser">
+        <state name="add" preaction="admin.AssignUserPreAction" viewURI="views/admin/AdminAssignUser.jsp" action="admin.AssignUserAction"/>
+        <state workflow="ViewProjectUsers"/>
+    </workflow>
+
+
+    <!-- Workflows for admin -->
+
+    <workflow name="AdminCreateUser">
+        <state name="createUser" preaction="admin.GetProjectUserDbAdminAction" viewURI="views/project/UserCreateView.jsp" action="admin.SaveUserAction"/>
+        <state workflow="AdminViewUsers"/>
+    </workflow>
+    <workflow name="AdminEditUser">
+        <state name="editUser" preaction="admin.GetProjectUserDbAdminAction" viewURI="views/admin/UserEditView.jsp" action="admin.SaveUserAction"/>
+        <state workflow="AdminViewUser"/>
+    </workflow>
+    <workflow name="AdminViewUser">
+        <state name="viewUser" preaction="project.GetProjectUserAction" viewURI="views/admin/UserView.jsp"/>
+    </workflow>
+    <workflow name="AdminViewUsers">
+        <state name="view" preaction="admin.GetUsersAction" viewURI="views/admin/Users.jsp"/>
+    </workflow>
+
+    <!-- Resources section -->
+
+    <workflow name="AdminCreateResourceCategory">
+        <state name="adminCreateResourceCategory" preaction="admin.CreateResourceCategoryAction" viewURI="views/admin/AdminResourceCategoryCreateView.jsp" action="admin.SaveResourceCategoryAction"/>
+        <state workflow="AdminViewProject"/>
+    </workflow>
+    <workflow name="AdminEditResourceCategory">
+        <state name="adminEditResourceCategory" preaction="admin.GetResourceCategoryAction" viewURI="views/admin/AdminEditResourceCategory.jsp" action="admin.SaveResourceCategoryAction"/>
+        <state workflow="AdminViewProject"/>
+    </workflow>
+    <workflow name="AdminRemoveResourceCategory">
+        <state name="adminRemoveResourceCategory" preaction="admin.RemoveResourceCategoryAction" viewURI="views/admin/AdminViewProject.jsp"/>
+    </workflow>
+
+
+    <workflow name="EditResourceFile">
+        <state name="editResourceFile" preaction="GetResourceAction" viewURI="views/ResourceFileEditView.jsp" action="SaveResourceAction"/>
+        <state workflow="back"/>
+    </workflow>
+    <workflow name="EditResourceLink">
+        <state name="editProjectResourceLink" preaction="GetResourceAction" viewURI="views/ResourceLinkEditView.jsp" action="SaveResourceAction"/>
+        <state workflow="back"/>
+    </workflow>
+
+    <workflow name="RemoveResource">
+        <state name="removeResource" preaction="RemoveResourceAction"/>
+        <state workflow="back"/>
+    </workflow>
+
+
+
+
+
+
+    <workflow name="CreateProjectLinkResource">
+        <state name="createProjectLinkResource" viewURI="views/LinkCreateView.jsp" action="project.CreateProjectLinkResourceAction"/>
+        <state workflow="ViewProjectInfo"/>
+    </workflow>
+    <workflow name="CreateProjectFileResource">
+        <state name="createProjectFileResource" viewURI="views/ResourceFileUpload.jsp" action="project.UploadProjectFileResourceAction"/>
+        <state workflow="ViewProjectInfo"/>
+    </workflow>
+    <workflow name="EditProjectResourceFile">
+        <state name="editProjectResourceFile" preaction="GetResourceAction" viewURI="views/ResourceFileEditView.jsp" action="SaveResourceAction"/>
+        <state workflow="ViewProjectInfo"/>
+    </workflow>
+    <workflow name="EditProjectResourceLink">
+        <state name="editProjectResourceLink" preaction="GetResourceAction" viewURI="views/ResourceLinkEditView.jsp" action="SaveResourceAction"/>
+        <state workflow="ViewProjectInfo"/>
+    </workflow>
+    <workflow name="RemoveProjectResource">
+        <state name="removeProjectResource" preaction="project.RemoveProjectResourceAction" viewURI="views/project/ProjectInfo.jsp"/>
+    </workflow>
+
+    <!-- Workflows for creating resources -->
+
+    <workflow name="AddLinkResourceSU">
+        <state name="storeSuid" preaction="resource.CreateResourceSUPreAction" />
+        <state name="createLinkResource" preaction="resource.GetCategoriesAction" viewURI="views/resource/LinkCreateView.jsp" action="resource.CreateResourceSUAction"/>
+        <state workflow="back"/>
+    </workflow>
+    <workflow name="AddFileResourceSU">
+        <state name="storeSuid" preaction="resource.CreateResourceSUPreAction" />
+        <state name="createLinkResource" preaction="resource.GetCategoriesAction" viewURI="views/resource/ResourceFileUpload.jsp" action="resource.UploadSUFileResourceAction"/>
+        <state workflow="back"/>
+    </workflow>
+    <workflow name="CreateModelLinkResource">
+        <state name="createModelLinkResource" preaction="resource.GetCategoriesAction" viewURI="views/resource/LinkCreateView.jsp" action="resource.SaveModelLinkResourceAction"/>
+        <state workflow="ViewModel"/>
+    </workflow>
+    <workflow name="CreateModelFileResource">
+        <state name="createModelFileResource" preaction="resource.GetCategoriesAction" viewURI="views/resource/ResourceFileUpload.jsp" action="resource.UploadModelFileResourceAction"/>
+        <state workflow="ViewModel"/>
+    </workflow>
+
+
+
+
+
+    <!-- Projects -->
+    <workflow name="AdminViewProjects">
+        <state name="view" preaction="admin.GetProjectsAction" viewURI="views/admin/AdminViewProjects.jsp"/>
+    </workflow>
+    <workflow name="AdminViewProject">
+        <state name="view" preaction="admin.GetProjectAction" viewURI="views/admin/AdminViewProject.jsp"/>
+        <state workflow="AdminViewProjects"/>
+    </workflow>
+    <workflow name="AdminEditProject">
+        <state name="view" preaction="admin.GetProjectAction" viewURI="views/admin/AdminEditProject.jsp" action="admin.SaveProjectAction"/>
+        <state workflow="AdminViewProject"/>
+    </workflow>
+    <workflow name="AdminCreateProject">
+        <state name="view" viewURI="views/admin/AdminCreateProject.jsp" action="admin.SaveProjectAction"/>
+        <state workflow="AdminViewProjects"/>
+    </workflow>
+    <workflow name="AdminUnAssignSpecies">
+        <state name="adminUnAssignSpecies" preaction="admin.UnAssignSpeciesAction" viewURI="views/admin/AdminViewProject.jsp"/>
+    </workflow>
+    <workflow name="AdminUnAssignSU">
+        <state name="adminUnAssignSU" preaction="admin.UnAssignSUAction" viewURI="views/admin/AdminViewProject.jsp"/>
+    </workflow>
+
+
+    <!-- Roles -->
+    <workflow name="AdminCreateRole">
+        <state name="create" preaction="project.CreateRoleAction" viewURI="views/project/CreateRoleView.jsp" action="project.SaveRoleAction"/>
+        <state workflow="AdminViewProject"/>
+    </workflow>
+    <workflow name="AdminRemoveRole">
+        <state name="confirm" preaction="project.PreRemoveRoleAction" viewURI="views/misc/confirm.jsp" action="ConfirmAction"/>
+        <state name="remove" preaction="project.RemoveRoleAction" viewURI="blank.html"/>
+    </workflow>
+
+    <!-- Users -->
+    <workflow name="AdminAssignUser">
+        <state name="add" preaction="admin.AssignUserPreAction" viewURI="views/admin/AdminAssignUser.jsp" action="admin.AssignUserAction"/>
+        <state workflow="AdminViewProject"/>
+    </workflow>
+    <workflow name="AdminUnAssignUser">
+        <state name="remove" preaction="admin.UnAssignUserPreAction" viewURI="views/misc/confirm.jsp" action="admin.UnAssignUserAction"/>
+        <state workflow="AdminViewProject"/>
+    </workflow>
+
+    <!-- SamplingUnits -->
+    <workflow name="AdminCreateSamplingUnit">
+        <state name="createSamplingUnit" preaction="samplingunit.CreateSamplingUnitAction" viewURI="views/samplingunit/SamplingUnitCreateView.jsp" action="samplingunit.SaveSUAction"/>
+        <state workflow="AdminViewProject"/>
+    </workflow>
+
+    <!-- Species -->
+    <workflow name="AdminAssignSpecies">
+        <state name="add" preaction="admin.AssignSpeciesPreAction" viewURI="views/admin/AdminAssignSpecies.jsp" action="admin.AssignSpeciesAction"/>
+        <state workflow="AdminViewProject"/>
+    </workflow>
+    <workflow name="AdminViewSpecies">
+        <state name="add" preaction="admin.GetSpeciesAction" viewURI="views/admin/AdminViewSpecies.jsp"/>
+        <state workflow="AdminViewSpecies"/>
+    </workflow>
+    <workflow name="AdminSpeciesDetails">
+        <state name="add" preaction="admin.GetSpeciesDetailsAction" viewURI="views/admin/AdminSpeciesDetails.jsp"/>
+        <state workflow="AdminViewSpecies"/>
+    </workflow>
+    <workflow name="AdminEditSpecies">
+        <state name="edit" preaction="admin.GetSpeciesDetailsAction" viewURI="views/admin/AdminEditSpecies.jsp" action="admin.SaveSpeciesAction"/>
+        <state workflow="AdminSpeciesDetails"/>
+    </workflow>
+    <workflow name="AdminCreateSpecies">
+        <state name="create" viewURI="views/admin/AdminCreateSpecies.jsp" action="admin.SaveSpeciesAction"/>
+        <state workflow="AdminViewSpecies"/>
+    </workflow>
+    <workflow name="AdminRemoveSpecies">
+        <state name="remove" preaction="admin.RemoveSpeciesPreAction" viewURI="views/misc/confirm.jsp" action="admin.RemoveSpeciesAction"/>
+        <state workflow="AdminViewSpecies"/>
+    </workflow>
+
+
+
+    <!-- File handling -->
+
+    <workflow name="FileUploadTest">
+        <state name="view" viewURI="views/FileUpload.jsp" action="GetFileUploadAction"/>
+    </workflow>
+    <workflow name="ViewFiles">
+        <state name="view" preaction="GetFilesAction" viewURI="views/FilesView.jsp"/>
+    </workflow>
+    <workflow name="ViewFile">
+        <state name="view" preaction="GetFileAction" viewURI="views/FileViewNew.jsp"/>
+    </workflow>
+
+
+
+    <workflow name="DeleteFile">
+        <state name="confirm" preaction="PreConfirmRemoveAction" viewURI="views/misc/confirm.jsp" action="RemoveFileAction"/>
+        <state workflow="ViewFiles"/>
+    </workflow>
+
+    <workflow name="NotImplemented">
+        <state name="notImplemented" viewURI="views/misc/notimplemented.jsp"/>
+    </workflow>
+    <workflow name="KnownBugs">
+        <state name="bugs" viewURI="views/misc/knownbugs.jsp"/>
+    </workflow>
+
+    <!-- Searching -->
+    <workflow name="SearchModel">
+        <state name="search" preaction="search.SearchModelPreAction" viewURI="views/search/SearchModels.jsp" action="search.SearchModelAction"/>
+        <state name="res" viewURI="views/search/SearchResult.jsp"/>
+    </workflow>
+    <workflow name="SearchKeyword">
+        <state name="search" viewURI="views/search/SearchKeyword.jsp" action="search.SearchKeywordAction"/>
+        <state name="res" viewURI="views/search/SearchResultKeyword.jsp"/>
+    </workflow>
+    <workflow name="SearchKeywordFast">
+        <state name="search" action="search.SearchKeywordFastAction"/>
+        <state name="res" viewURI="views/search/SearchResultKeyword.jsp"/>
+    </workflow>
+
+    <!-- Genes -->
+    <workflow name="ViewGenes">
+        <state name="view" preaction="gene.GetGenesAction" viewURI="views/gene/ViewGenes.jsp"/>
+        <state workflow="ViewGenes"/>
+    </workflow>
+    <workflow name="ViewGene">
+        <state name="view" preaction="gene.GetGeneAction" viewURI="views/gene/ViewGene.jsp"/>
+    </workflow>
+    <workflow name="ViewGeneDirect">
+        <state name="ViewGeneDirect" preaction="gene.GetGeneAction" viewURI="views/gene/ViewGeneDirect.jsp"/>
+    </workflow>
+    <workflow name="EditGene">
+        <state name="view" preaction="gene.GetGeneAction" viewURI="views/gene/EditGene.jsp" action="gene.SaveGeneAction"/>
+        <state workflow="ViewGene"/>
+    </workflow>
+    <workflow name="CreateGene">
+        <state name="view" preaction="model.CreateGeneFromModelAction" viewURI="views/gene/CreateGene.jsp" action="gene.SaveGeneAction"/>
+        <state workflow="ViewGenes"/>
+    </workflow>
+    <workflow name="CreateGeneFromModel">
+        <state name="view" preaction="model.CreateGeneFromModelAction" viewURI="views/gene/CreateGene.jsp" action="gene.SaveGeneAction"/>
+        <state workflow="AssignGeneModel"/>
+    </workflow>
+    <!--workflow name="RemoveGene">
+        <state name="view" preaction="gene.PreConfirmRemoveAction" viewURI="views/misc/confirm.jsp" action="gene.RemoveGeneAction"/>
+        <state workflow="ViewGenes"/>
+    </workflow-->
+    <!--workflow name="RemoveGeneFromModel"-->
+    <workflow name="RemoveGene">
+        <state name="view" action="gene.RemoveGeneAction"/>
+        <state workflow="ViewModel"/>
+    </workflow>
+    <!--expressed genes-->
+    <workflow name="CreateExpressedGene">
+        <state name="view" preaction="model.CreateGeneFromModelAction" viewURI="views/gene/CreateExpressedGene.jsp" action="gene.SaveGeneAction"/>
+        <state workflow="AssignExpressedGene"/>
+    </workflow>
+    <workflow name="AssignExpressedGene">
+        <state name="assign" preaction="model.AssignExpressedGenePreAction" viewURI="views/model/ExpressedGeneAssignment.jsp" action="model.AssignGeneAction"/>
+        <state workflow="ViewModel"/>
+    </workflow>
+    <workflow name="ViewExpressedGene">
+        <state name="view" preaction="allele.GetGeneAction" viewURI="views/gene/ViewExpressedGene.jsp"/>
+    </workflow>
+    <workflow name="EditExpressedGene">
+        <state name="view" preaction="gene.GetGeneSimpleAction" viewURI="views/gene/EditExpressedGene.jsp" action="gene.SaveGeneAction"/>
+        <state workflow="ViewModel"/>
+
+    </workflow>
+    <!--workflow name="UnAssignGeneModel">
+        <state name="unassign" preaction="model.UnAssignGeneAction"/>
+        <state workflow="ViewModel"/>
+    </workflow-->
+
+    <!-- Edit Recombination Efficiency Only-->
+    <workflow name="EditRecombinationEfficiency">
+        <state name="editRecombinationEfficiencyModel" preaction="model.GetSimpleModelAction" viewURI="views/model/RecombinationEfficiencyEditView.jsp" action="model.SaveRecombinationEfficiencyAction"/>
+        <state workflow="ViewModel"/>
+    </workflow>
+
+    <!-- Edit Author's Comments Only-->
+    <workflow name="EditAuthorsComments">
+        <state name="editAuthorsCommentModel" preaction="model.GetSimpleModelAction" viewURI="views/model/AuthorsCommentEditView.jsp" action="model.SaveAuthorsCommentAction"/>
+        <state workflow="ViewModel"/>
+    </workflow>
+
+    <!-- Integration & Copy -->
+    <workflow name="CreateIntegrationCopy">
+        <state name="view" viewURI="views/integrationcopy/CreateIntegrationCopy.jsp" action="integrationcopy.SaveIntegrationCopyAction"/>
+        <state workflow="ViewModel"/>
+    </workflow>
+
+    <workflow name="RemoveIntegrationCopy">
+        <state name="removeIntegrationCopy" preaction="integrationcopy.RemoveIntegrationCopyAction"/>
+        <state workflow="ViewModel"/>
+    </workflow>
+
+    <workflow name="EditIntegrationCopy">
+        <state name="editModel" preaction="integrationcopy.GetIntegrationCopyAction" viewURI="views/integrationcopy/IntegrationCopyEditView.jsp" action="integrationcopy.SaveIntegrationCopyAction"/>
+        <state workflow="ViewModel"/>
+    </workflow>
+
+    <!-- Expression Model -->
+    <workflow name="CreateExpressionModel">
+        <state name="view" viewURI="views/expression/CreateExpressionModel.jsp" action="expression.SaveExpressionModelAction"/>
+        <state workflow="ViewModel"/>
+    </workflow>
+
+    <workflow name="RemoveExpressionModel">
+        <state name="removeExpressionModel" preaction="expression.RemoveExpressionModelAction"/>
+        <state workflow="ViewModel"/>
+    </workflow>
+
+    <workflow name="EditExpressionModel">
+        <state name="view" preaction="expression.GetExpressionModelAction" viewURI="views/expression/EditExpressionModel.jsp"/>
+    </workflow>
+    <workflow name="AddOntologyToExpressionModel">
+        <state name="add" preaction="expression.AddOntologyToExpressionModelAction"/>
+        <state workflow="EditExpressionModel"/>
+    </workflow>
+    <workflow name="DeleteOntologyFromExpressionModel">
+        <state name="add" preaction="expression.DeleteOntologyFromExpressionModelAction"/>
+        <state workflow="EditExpressionModel"/>
+    </workflow>
+
+    <workflow name="SaveEditedExpressionModel">
+        <state name="view" preaction="expression.SaveExpressionModelAction"/>
+        <state workflow="ViewModel"/>
+    </workflow>
+
+    <workflow name="RemoveFile">
+        <state name="removeFile" preaction="resource.RemoveFileAction"/>
+        <state workflow="EditExpressionModel"/>
+    </workflow>
+
+    <workflow name="ViewResearchApps">
+        <state name="view" preaction="model.GetResearchAppTypesAction" viewURI="views/model/ResearchAppsView.jsp" />
+    </workflow>
+    <workflow name="ViewResearchApp">
+        <state name="detail" preaction="model.GetResearchAppAction" viewURI="views/model/ResearchAppDetail.jsp" />
+    </workflow>
+    <workflow name="CreateResearchApp">
+        <state name="create" viewURI="views/model/ResearchAppCreate.jsp" action="model.SaveResearchAppAction"/>
+        <state workflow="ViewResearchApps"/>
+    </workflow>
+    <workflow name="EditResearchApp">
+        <state name="editrapp" preaction="model.GetResearchAppAction" viewURI="views/model/ResearchAppEdit.jsp" action="model.SaveResearchAppAction"/>
+        <state workflow="ViewResearchApps"/>
+    </workflow>
+    <workflow name="RemoveResearchApp">
+        <state name="remove" preaction="model.RemoveResearchAppAction"/>
+        <state workflow="ViewResearchApps"/>
+    </workflow>
+
+    <!--Help Frame Section-->
+    <workflow name="ContactInfo">
+        <state name="viewContact" viewURI="views/misc/contact.jsp"/>
+    </workflow>
+
+    <!--Generate IMSR File-->
+    <workflow name="IMSRFile">
+        <state name="IMSRFilePre" preaction="model.GetModelsForIMSRAction"/>
+        <state name="view" viewURI="views/IMSRFileView.jsp"/>
+    </workflow>
+
+    <!--Get All Mice That Need Dissemination Level Update-->
+    <workflow name="DisseminationUpdate">
+        <state name="DissUpdatePre" preaction="admin.GetListDissUpdateAction"/>
+        <state name="viewDissUpdate" viewURI="views/admin/AdminListDissUpdate.jsp"/>
+        <state name="postDissUpdate" action="model.ModelsPostAction"/>
+        <state workflow="DisseminationUpdate"/>
+    </workflow>
+
+    <!--Generate Backcrossing List-->
+    <workflow name="BackcrossingList">
+        <state name="BackcrossingListPre" preaction="backcrossingcollector.GetListOfBackcrossesAction"/>
+        <state name="view" viewURI="views/backcrossingcollector/ListOfBackcrosses.jsp"/>
+    </workflow>
+
+    <!--file upload workflows-->
+    <workflow name="FileUpload">
+        <state name="view" preaction="fileimport.GetFileUploadPreAction" viewURI="views/import/FileUpload.jsp" action="fileimport.GetFileUploadAction"/>
+        <state workflow="ViewModels"/>
+    </workflow>
+</workflows>

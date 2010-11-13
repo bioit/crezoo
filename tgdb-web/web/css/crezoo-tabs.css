@@ -1,0 +1,172 @@
+@charset "utf-8";
+
+table.blockmenu {
+	display: block;
+	width: 100%;
+	/*background-color: #cc0;*/
+	background: none;
+	color: #333;
+	font-weight: normal;
+	text-decoration: none;
+	font-family: sans-serif;
+	font-size: 14px;
+	padding: 0;
+	margin: 0;
+	border:none
+}
+
+table.blockmenu tr {
+	padding: 0;
+	margin: 0;
+	border: none
+}
+
+table.blockmenu td.blockmenucell a, table.blockmenu td.blockmenucell a:visited {
+	width: 100%;
+	background: none;
+	color: #333;
+	font-weight: bold;
+	text-decoration: none;
+	text-transform: uppercase;
+	font-family: sans-serif;
+	font-size: 16px;
+	text-align: left;
+	padding: 0;
+	margin-right:5px;
+	border: none;
+	border-bottom: 3px solid #17576f;
+	cursor: pointer;
+}
+
+table.blockmenu td.blockmenucellhit span, table.blockmenu td.blockmenucell a:hover {
+	/*width: 100%;*/
+	background: none;
+	color: #333;
+	font-weight: bold;
+	text-decoration: none;
+	text-transform: uppercase;
+	font-family: sans-serif;
+	font-size: 16px;
+	text-align: left;
+	padding: 0;
+	margin-right:5px;
+	border: none;
+	border-bottom: 3px solid #cf0d0d;
+	cursor: pointer;
+}
+
+table.blockmenu td.blockmenucellhit {
+	/*background-color: #cf0d0d;*/
+	/*padding-top: 3px*/
+}
+
+table.block3 {
+	width: 100%;
+	margin-top:10px;
+}
+
+table.block3 th.block {
+	width: 			100%;
+	color:			#DB4105;
+	font:			16px Georgia,"Times New Roman",Times,serif;
+	font-weight:	normal;
+
+}
+
+/* jQuery Tabs
+----------------------------------*/
+.ui-tabs { padding: .2em; zoom: 1; }
+.ui-tabs .ui-tabs-nav { list-style: none; position: relative; padding: .2em .2em 0; }
+.ui-tabs .ui-tabs-nav li { position: relative; float: left; border-bottom-width: 0 !important; margin: 0 .2em -1px 0; padding: 0; }
+.ui-tabs .ui-tabs-nav li a { float: left; text-decoration: none; padding: .5em 1em; }
+.ui-tabs .ui-tabs-nav li.ui-tabs-selected { padding-bottom: 1px; border-bottom-width: 0; }
+.ui-tabs .ui-tabs-nav li.ui-tabs-selected a, .ui-tabs .ui-tabs-nav li.ui-state-disabled a, .ui-tabs .ui-tabs-nav li.ui-state-processing a { cursor: text; }
+.ui-tabs .ui-tabs-nav li a, .ui-tabs.ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-selected a { cursor: pointer; } /* first selector in group seems obsolete, but required to overcome bug in Opera applying cursor: text overall if defined elsewhere... */
+.ui-tabs .ui-tabs-panel { padding: 1em 1.4em; display: block; border-width: 0; background: none; }
+.ui-tabs .ui-tabs-hide { display: none !important; }
+
+#tabs {
+	margin:			0;
+	margin-left:            -.2em;
+	padding:		0;
+	border:			none;
+}
+
+.ui-tabs .ui-tabs-nav {
+	margin-bottom:          3.15em;
+}
+
+.ui-state-default {
+	border: 		none;
+	border-top:		4px solid #F1EDD5;
+	background:             #DDDDA6;
+}
+
+.ui-state-default , .ui-state-default a, .ui-state-default  a:visited {
+	color:			#33332d;
+	font:			14px Georgia,"Times New Roman",Times,serif;
+	font-weight:            normal;
+}
+
+.ui-state-default  a:hover {
+	color:			#DB4105;
+	font:			14px Georgia,"Times New Roman",Times,serif;
+	font-weight:            normal;
+}
+
+.ui-state-active {
+	border: 		none;
+	border-top:		4px solid #F1EDD5;
+	background:             #F1F1CD;
+}
+
+.ui-state-active , .ui-state-active  a, .ui-state-active  a:visited {
+	color:			#DB4105;
+	font:			16px Georgia,"Times New Roman",Times,serif;
+	font-weight:            normal;
+}
+
+.ui-state-active  a:hover {
+	color:			#33332d;
+	font:			16px Georgia,"Times New Roman",Times,serif;
+	font-weight:            normal;
+}
+
+.ui-tabs .ui-tabs-panel  {
+	margin-left:            .2em;
+	border:			none;
+	background:             #F1F1CD;
+}
+
+.subsection {
+	/*background:		#E6E6BA;*/
+	background:		#DDDDA6;
+	margin: 		10px 0;
+}
+
+.subsection span {
+	display:		block;
+	background:		#F1F1CD;
+	color:			#DB4105;
+	font:			16px Georgia,"Times New Roman",Times,serif;
+	font-weight:            normal;
+	padding:		5px 0;
+}
+
+.subsection th.data {
+	color:			#fff;
+	text-transform:         uppercase;
+	text-align:		left;
+}
+
+.subsection a, .subsection a:visited {
+	color:			#DB4105;
+	font-weight:            normal;
+	text-decoration:        none;
+}
+
+.subsection a:hover {
+	color:			#33332d;
+	font-weight:            normal;
+	text-decoration:        none;
+}

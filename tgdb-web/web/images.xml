@@ -1,0 +1,77 @@
+<images path="images/icons">
+
+<image name="info" src="information.png" title="Information"/>
+<image name="info_24" src="information_24.png" title="Information"/>
+
+<image name="history" src="history.png" title="History"/>
+<image name="assign" src="assign.png" title="Assign"/>
+<image name="assign_24" src="assign_24.png" title="Assign"/>
+
+<image name="nav_first" src="navigate_beginning.png" title="Begining"/>
+<image name="nav_end" src="navigate_end.png" title="End"/>
+<image name="nav_prev" src="navigate_left.png" title="Previous"/>
+<image name="nav_next" src="navigate_right.png" title="Next"/>
+
+<image name="nav_open" src="navigate_open.png" title="Open"/>
+<image name="nav_close" src="navigate_close.png" title="Close"/>
+
+<image name="nav_open_24" src="navigate_open_24.png" title="Open"/>
+<image name="nav_close_24" src="navigate_close_24.png" title="Close"/>
+
+<image name="nav_right_green" src="nav_right_green.png" title="Next"/>
+
+<image name="back2models" src="nav_left_blue_24.png" title="Back to Mutants List"/>
+
+<image name="littlebackbutton" src="nav_left_blue_16.png" title="Little back button"/>
+<image name="littlediskette" src="disk_blue.png" title="Little disk button"/>
+<image name="littlecancel" src="cancel.png" title="Little cancel"/>
+
+<!--link to other on-line dbs icons-->
+<image name="linkimsr" src="link-logo-imsr.jpg" title="Visit IMSR"/>
+<image name="linkmgi" src="link-logo-mgi.jpg" title="Visit MGI"/>
+<image name="linkemma" src="link-logo-emma.jpg" title="Visit EMMA"/>
+<image name="linkeu" src="link-logo-eu.jpg" title="Visit the EU"/>
+
+
+
+<image name="edit" src="edit.png" title="Edit"/>
+<image name="view" src="view.png" title="View"/>
+
+<image name="error" src="error.png" title="Error"/>
+<image name="error32" src="error32.png" title="Error"/>
+
+
+<image name="warning" src="warning.png" title="Warning"/>
+<image name="warning32" src="warning32.png" title="Warning"/>
+
+
+<image name="add" src="add2.png" title="Add"/>
+<image name="add_24" src="add2_24.png" title="Add"/>
+<image name="delete" src="delete2.png" title="Remove"/>
+<image name="delete_24" src="delete2_24.png" title="Remove"/>
+<image name="delete_32" src="delete2_32.png" title="Remove"/>
+<image name="unassign" src="unassign.png" title="Unassign"/>
+
+<image name="bookmark_add" src="bookmark_add.png" title="Add bookmark"/>
+<image name="bookmark_del" src="bookmark_del.png" title="Remove bookmark"/>
+
+<image name="document_add" src="document_add.png" title="Add document"/>
+<image name="document_delete" src="document_delete.png" title="Remove document"/>
+
+<image name="folder_add" src="folder_add.png" title="Add folder"/>
+<image name="folder_delete" src="folder_delete.png" title="Remove folder"/>
+<image name="folder" src="folder.png" title="Folder"/>
+
+<image name="logo" src=""/>
+
+<image name="find" src="find.png"/>
+<image name="jump" src="nav_up_right_blue.png"/>
+
+<image name="document_view" src="document_view.png"/>
+<image name="import" src="import1.png"/>
+<image name="export" src="export1.png"/>
+<image name="alleles" src="alleles.png"/>
+<image name="check" src="check2.png"/>
+<image name="members" src="selection_view.png"/>
+
+</images>

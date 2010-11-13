@@ -1,0 +1,52 @@
+TODO 1.7
+***********
+
+Mappings is not implemented in the new import system!
+
+Display session status in file view. In a table instead of the debug messages today?
+
+Add search fields in "view and edit" page
+
+Message in import system. 
+More informational text. Better time-information. Not a clear separation of HTML and DB. 
+
+Hide comments if status = CHECKED
+
+
+Status bar: 
+V	Upload 	V	Properties 	..	Check 	-	Import
+
+Merge "files" and "Edit" into one page for "View and Edit import files"
+
+Abort an import process??
+
+Deleting large sampling units, projects takes too long time for the browser.
+Index...
+
+
+TODO 1.8
+************
+
+History Manager
+Log tables should be used then deleting data
+
+Export System (BLOB)
+
+New Export File Types
+
+Export marker / Chromosome information.
+
+Export groups/groupings?
+
+* Configuration application (web)
+	edit the settings in the web.xml file. (db connection,...)
+
+
+Log function (table?)
+
+
+DONE
+*******
+
+warning if individual is removed.
+

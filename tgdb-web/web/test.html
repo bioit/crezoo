@@ -1,0 +1,149 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+
+    <title>crezoo &mdash; edit specificity</title>
+    <meta name="robots" content="index,follow"/>
+<meta name="description" content="crezoo &mdash; transgenic mice database"/>
+<meta name="keywords" content="crezoo, transgenic, mice, transgenic mice, tgdb, tg, cre, biological resources, cre8, mouse resources, databases"/>
+<meta name="revisit-after" content="7 days"/>
+<meta name="author" content="Michael Zouberakis"/>
+<link rel="stylesheet" type="text/css" href="nav.css" />
+<link rel="stylesheet" type="text/css" href="css/crezoo-divs.css" />
+<link rel="stylesheet" type="text/css" href="css/crezoo-con.css" />
+<link rel="stylesheet" type="text/css" href="jquery.treeview.css" />
+<link rel="stylesheet" type="text/css" href="css/jquery.autocomplete.css" />
+<script type="text/javascript" src="javascripts/jquery-1.3.2.min.js"></script>
+<script type="text/javascript" src="javascripts/jquery.autocomplete.pack.js"></script>
+<!--[if lt IE 7.]>
+<link rel="stylesheet" type="text/css" href="css/pngfix.css" />
+<![endif]-->
+
+    <link rel="stylesheet" type="text/css" href="css/crezoo-tabs.css" />
+	<script type="text/javascript">
+        //this function will clear only the default text of input field
+        function clearText(thefield) {
+            if (thefield.defaultValue == thefield.value)
+                thefield.value = ""
+        }
+        $(document).ready(function() {
+            // get the input field
+            var input = $('input#hitme');
+
+			$('#hitme').keyup(function(event) {
+				//$('input#sexy').replaceWith('<input type="hidden" id="sexy" value="'+this.value+'" />');
+				//alert(this.value);
+			});
+
+            input.autocomplete('olsajax?uri=http://www.ebi.ac.uk/ontology-lookup/ajax.view?q=termautocomplete', {
+                delay: 400,
+				extraParams: {
+					termname: function() { return $("input#hitme").val(); },
+					ontologyname: "EMAP"
+				},
+                minChars: 3,
+                matchSubset: 1,
+                matchContains: 1,
+                parse: parseXML,
+				width: 400,
+				scrollHeight: 900,
+				scroll: false,
+				max: 1000,
+                formatItem: formatItem,
+                formatResult: formatResult
+            }).result(function(event, item) {
+				$('input#sexy').replaceWith('<input type="hidden" id="sexy" value="'+item.value+'" />');
+				//log(item.value);
+				//$('input#hitme').flushCache();
+                //window.location.href = item.value
+            });
+
+			function log(message) {
+				$("<div/>").text(message).prependTo("#log");
+				//$("#log").attr("scrollTop", 0);
+			}
+
+            // this function will parse xml and return as a array of string
+            function parseXML(xml) {
+                var results = [];
+                $(xml).find('item').each(function() {
+                    var text = $.trim($(this).find('name').text());
+                    var value = $.trim($(this).find('value').text());
+                    results[results.length] = { 'data': { text: text, value: value },
+                        'result': text, 'value': value
+                    };
+                });
+                return results;
+            };
+
+            function formatItem(data) {
+                return " [" + data.value + "] " + data.text;
+            };
+
+            function formatResult(data) {
+                return " [" + data.value + "] " + data.text;
+            };
+        });
+    </script>
+</head>
+<body>
+<div id="wrap">
+	<div id="panel-left">
+		<div id="logo"><img src="images/logo-01.png" alt="crezoo &mdash; transgenic mice database" /></div>
+		<div id="log" style="height: 200px; width: 300px; overflow: auto;" class="ui-widget-content"></div>
+	</div>
+	<div id="panel-right">
+		<div id="panel-right-top">
+<form method="post" action="Controller?workflow=SearchKeywordFast">
+<span>Search</span>
+<input id="hitme" />
+<input type="hidden" id="sexy" />
+</form>
+</div>
+
+        <div id="panel-right-rest">
+        <form action="Controller?workflow=SaveEditedExpressionModel" method="post" enctype="multipart/form-data">
+            <span class="header_01">Edit Specificity</span>
+        <input type="hidden" name="exid" value='11'/>
+        <table width="100%">
+            <tr>
+                <td><b>Expression Model Anatomy</b></td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" name="exanatomy" size="55" maxlength="500" value='123'/>
+                </td>
+            </tr>
+            <tr>
+                <td><b>Expression Model Comment</b></td>
+            </tr>
+            <tr>
+                <td>
+                    <textarea cols="55" rows="4" name="excomm">12312321</textarea>
+                </td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td>
+                    <p class="navtext">
+                        <input type="submit" name="upload" value="Save" title="Save" onclick="validate();return returnVal;"/>
+                        <input type="submit" name="back" value="Back" title="Back"/>
+                    </p>
+                </td>
+            </tr>
+        </table>
+        </form>
+        </div>
+        </div>
+	<div id="clear-foot">&nbsp;</div>
+</div>
+<div id="foot">
+<p>&copy;&nbsp;<a href="http://www.fleming.gr" target="_blank" title="fleming.gr">&nbsp;fleming&nbsp;</a>2009</p>
+</div>
+
+</body>
+</html> 

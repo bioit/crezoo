@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sun-web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Application Server 8.1 Servlet 2.4//EN" "http://www.sun.com/software/appserver/dtds/sun-web-app_2_4-1.dtd">
+<sun-web-app>
+  <context-root>/tgdb-web</context-root>
+  <servlet>
+    <servlet-name>WSServlet_tgdbws</servlet-name>
+    <webservice-endpoint>
+      <port-component-name>tgdbws</port-component-name>
+      <endpoint-address-uri>tgdbws</endpoint-address-uri>
+    </webservice-endpoint>
+  </servlet>
+  <ejb-ref>
+    <ejb-ref-name>ejb/CreZOOUserBean</ejb-ref-name>
+    <jndi-name>ejb/CreZOOUserBean</jndi-name>
+  </ejb-ref>
+  <ejb-ref>
+    <ejb-ref-name>ejb/CreZOOProjectBean</ejb-ref-name>
+    <jndi-name>ejb/CreZOOProjectBean</jndi-name>
+  </ejb-ref>
+  <ejb-ref>
+    <ejb-ref-name>ejb/CreZOORoleBean</ejb-ref-name>
+    <jndi-name>ejb/CreZOORoleBean</jndi-name>
+  </ejb-ref>
+  <ejb-ref>
+    <ejb-ref-name>ejb/CreZOOProjectManagerBean</ejb-ref-name>
+    <jndi-name>ejb/CreZOOProjectManagerBean</jndi-name>
+  </ejb-ref>
+  <ejb-ref>
+    <ejb-ref-name>ejb/CreZOOPrivilegeBean</ejb-ref-name>
+    <jndi-name>ejb/CreZOOPrivilegeBean</jndi-name>
+  </ejb-ref>
+  <ejb-ref>
+    <ejb-ref-name>ejb/CreZOOSecurityPrincipleBean</ejb-ref-name>
+    <jndi-name>ejb/CreZOOSecurityPrincipleBean</jndi-name>
+  </ejb-ref>
+  <ejb-ref>
+    <ejb-ref-name>ejb/CreZOOSamplingUnitBean</ejb-ref-name>
+    <jndi-name>ejb/CreZOOSamplingUnitBean</jndi-name>
+  </ejb-ref>
+  <ejb-ref>
+    <ejb-ref-name>ejb/CreZOOSpeciesBean</ejb-ref-name>
+    <jndi-name>ejb/CreZOOSpeciesBean</jndi-name>
+  </ejb-ref>
+  <ejb-ref>
+    <ejb-ref-name>ejb/CreZOOStrainBean</ejb-ref-name>
+    <jndi-name>ejb/CreZOOStrainBean</jndi-name>
+  </ejb-ref>
+  <ejb-ref>
+    <ejb-ref-name>ejb/CreZOOResearchApplicationBean</ejb-ref-name>
+    <jndi-name>ejb/CreZOOResearchApplicationBean</jndi-name>
+  </ejb-ref>
+  <ejb-ref>
+    <ejb-ref-name>ejb/CreZOOSamplingUnitManagerBean</ejb-ref-name>
+    <jndi-name>ejb/CreZOOSamplingUnitManagerBean</jndi-name>
+  </ejb-ref>
+  <ejb-ref>
+    <ejb-ref-name>ejb/CreZOOFileBean</ejb-ref-name>
+    <jndi-name>ejb/CreZOOFileBean</jndi-name>
+  </ejb-ref>
+  <ejb-ref>
+    <ejb-ref-name>ejb/CreZOOModelManagerBean</ejb-ref-name>
+    <jndi-name>ejb/CreZOOModelManagerBean</jndi-name>
+  </ejb-ref>
+  <parameter-encoding default-charset="UTF-8"/>
+</sun-web-app>

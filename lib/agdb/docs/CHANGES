@@ -1,0 +1,31 @@
+Changes to the project between releases
+
+1.7
+
+
+
+1.7 Beta
+
+Result module is added. 
+
+New import system for background importing of large files. Imported files are stored in BLOB in the database. 
+Changes in db (tables and views): IMPORT_SESSION,IMPORT_SESSION_MSG,IMPORT_SESSION_LOG,IMPORT_FILE,IMPORT_FILE_MSG,IMPORT_FILE_LOG,V_IMPORT_SESSION_1,V_IMPORT_SESSION_2,V_IMPORT_FILES_1,V_IMPORT_FILES_2,V_IMPORT_FILES_3
+Db changes in "development.sql"
+
+Added alias in output format during inheritance check.
+This changed view v_genotypes_6 and some of the code in the servlet viewGeno.
+
+New import system
+
+Hide disabled users
+ 
+1.6
+
+Ported to Tomcat
+Ported to Oracle 9i
+
+1.5
+Developed by Prevas
+
+1.4
+Developed by Prevas

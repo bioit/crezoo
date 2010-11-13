@@ -1,0 +1,73 @@
+BODY
+{
+    BACKGROUND-COLOR: lightgoldenrodyellow;
+    FONT-FAMILY: Verdana;
+    FONT-SIZE: 10pt;
+    MARGIN: 0px;
+    PADDING-BOTTOM: 0px;
+    PADDING-LEFT: 0px;
+    PADDING-RIGHT: 0px;
+    PADDING-TOP: 0px
+}
+TABLE
+{
+    FONT-FAMILY: Verdana;
+    FONT-SIZE: 8pt;
+    MARGIN: 0px;
+    PADDING-BOTTOM: 0px;
+    PADDING-LEFT: 0px;
+    PADDING-RIGHT: 0px;
+    PADDING-TOP: 0px;
+    CELLSPACING: 3
+}
+TD
+{
+    FONT-FAMILY: Verdana;
+    FONT-SIZE: 8pt
+}
+TR
+{
+    FONT-FAMILY: Verdana;
+    FONT-SIZE: 8pt
+}
+H3
+{
+    FONT-FAMILY: Verdana;
+    FONT-SIZE: 12pt
+}
+H1
+{
+    FONT-FAMILY: Verdana;
+    FONT-SIZE: 18pt;
+    FONT-WEIGHT: bolder
+}
+H2
+{
+    FONT-FAMILY: Verdana;
+    FONT-SIZE: 14pt;
+    FONT-WEIGHT: bolder
+}
+H4
+{
+    FONT-FAMILY: Verdana;
+    FONT-SIZE: 10pt;
+    FONT-WEIGHT: bolder
+}
+.OddRow
+{
+    BACKGROUND-COLOR: silver
+}
+.EvenRow
+{
+}
+.ListHead
+{
+    BACKGROUND-COLOR: steelblue;
+    COLOR: white;
+    FONT-WEIGHT: bolder
+}
+TH
+{
+    FONT-FAMILY: Verdana;
+    FONT-SIZE: 12px
+}

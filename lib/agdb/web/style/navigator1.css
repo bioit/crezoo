@@ -1,0 +1,60 @@
+BODY
+{
+    COLOR: white;
+    FONT-FAMILY: Verdana;
+    FONT-SIZE: x-small;
+    FONT-WEIGHT: bolder
+}
+TABLE
+{
+    COLOR: white;
+    FONT-FAMILY: Verdana
+}
+TD
+{
+    COLOR: white;
+    FONT-FAMILY: Verdana;
+    FONT-SIZE: 10pt;
+    TEXT-ALIGN: center
+}
+TR
+{
+    COLOR: white;
+    FONT-FAMILY: Verdana
+}
+A
+{
+    COLOR: white;
+    FONT-FAMILY: Verdana;
+    FONT-WEIGHT: bolder
+}
+A:active
+{
+    COLOR: white;
+    FONT-FAMILY: Verdana
+}
+A:link
+{
+    COLOR: white;
+    FONT-FAMILY: Verdana
+}
+A:visited
+{
+    COLOR: white;
+    FONT-FAMILY: Verdana
+}
+.CURRENT
+{
+    BACKGROUND-COLOR: lightgoldenrodyellow;
+    COLOR: black;
+    FONT-FAMILY: Verdana
+}
+.TDBorder
+{
+    BORDER-BOTTOM: aqua;
+    BORDER-LEFT: aqua;
+    BORDER-RIGHT: aqua;
+    BORDER-TOP: aqua;
+    COLOR: black;
+    FONT-FAMILY: Verdana
+}

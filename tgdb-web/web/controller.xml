@@ -1,0 +1,4 @@
+<controller>
+    <workflow-manager class="org.tgdb.frame.advanced.AdvancedWorkflowManager"/>
+    <login class="org.tgdb.TgDbLogin"/>
+</controller>

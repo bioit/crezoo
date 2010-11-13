@@ -1,0 +1,620 @@
+<STYLE type="text/css">
+/* General style */
+body {
+    background-color: #F7F7F7;
+    color: #000000;
+    font-family: Verdana, Helvetica, Arial, sans-serif;   
+}
+
+/* Navigation text style (displaying x out of y...) */
+p.navtext {
+    font-size: 10px;
+    /*text-align: center;*/
+    font-weight: bold;
+}
+
+/*--action link--*/
+a.actionlink{
+    color: #336699;
+    text-decoration: none;
+    /*font-weight: bold;*/
+}
+
+a.actionlink:hover{
+    color: #336699;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/*tab view menu*/
+
+a.zoublink1{
+	color: #000000;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+a.zoublink2{
+	color: #999999;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+table.dropmenus{
+    padding: 0px 0px 0px 0px;
+}
+
+a.blockmenulink{
+    color: #336699;
+    font-family: Times new roman;
+    font-size: 18px;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 3px 5px 4px 5px;
+}
+
+a.blockmenulink:hover{
+    color: #F7F7F7;
+    background-color: #336699;
+    font-family: Times new roman;
+    font-size: 18px;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 3px 5px 4px 5px;
+}
+
+table.blockmenu {
+	/*width: 100%;*/
+	border-top: 2px solid #000000;
+	border-right: 2px solid #000000;
+	border-bottom: 0px solid #000000;
+	border-left: 0px solid #000000;
+        background-color: #F7F7F7;
+}
+
+td.blockmenucell {
+        font-family: Times new roman;
+        font-size: 18px;
+	border-top: 0px solid #000000;
+	border-right: 0px solid #000000;
+	border-bottom: 0px solid #000000;
+	border-left: 2px solid #000000;
+        background-color: #F7F7F7;
+        padding: 0px;
+}
+
+td.blockmenucellhit {
+        font-family: Times new roman;
+        font-size: 18px;
+	border-top: 0px solid #000000;
+	border-right: 0px solid #000000;
+	border-bottom: 0px solid #000000;
+	border-left: 2px solid #000000;
+        background-color: #000000;
+        color: #FFFFFF;
+        font-weight: bold;
+        padding: 2px 5px 4px 5px;
+}
+
+table.block2 {
+	width: 100%;
+	border-top: 5px solid #000000;
+	border-right: 0px solid #000000;
+	border-bottom: 0px solid #000000;
+	border-left: 0px solid #000000;
+        background-color: #FFFFFF;
+}
+
+td.zoubtd{
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-bottom-style: solid;
+	border-top-color: #CCCCCC;
+	border-right-style: none;
+	border-left-style: none;
+	font-size: 12px;
+	text-align: center;
+	font-weight: bold;
+	border-bottom-width: 1px;
+	border-bottom-color: #CCCCCC;
+	height: 30px;
+	/*background-color: #CCCCCC;*/
+	background-image: url('images/th_gradient.png');
+}
+
+td.zoubtd2{
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-bottom-style: none;
+	border-top-color: #CCCCCC;
+	border-right-style: none;
+	border-left-style: none;
+	font-size: 12px;
+	text-align: center;
+	font-weight: bold;
+}
+
+td.zoubgaps{
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-right-color: #CCCCCC;
+	border-bottom-color: #CCCCCC;
+	border-left-color: #CCCCCC;
+        background-color: #FFFFFF;
+}
+
+/*end of tab like menu*/
+
+a {
+    color: #000000;
+    text-decoration: underline;
+}
+
+a.tgdblink {
+	color: #ffffff;
+	text-decoration: none;
+}
+
+a.indexmain {
+	color: #000000;
+	text-decoration:none;
+	font-weight:bold;
+}
+
+/* Disclamer on login page */
+#small {
+    font-size: 8px;
+    text-align: center;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+#ruler {
+    width: 100%;    
+}
+
+#ruler100 {
+    width: 100px;    
+}
+
+#ruler200 {
+    width: 200px;    
+}
+
+#bodyChromo {
+    color: #000000; 
+    font-family: Verdana, Helvetica, Arial, sans-serif; 
+    background-image: url('images/chromosome.jpg');
+    background-repeat: no-repeat;
+    background-position: bottom right; 
+}
+
+td.head {
+    text-align: left;
+    font-size: 18px;
+    font-weight: bold; 
+    font-family: Times New Roman;
+    padding: 0px 10px 0px 0px;
+} 
+
+h1 {
+    font-size: 21px;
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+}
+
+h2 {
+    font-size: 18px;
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+}
+
+h3 {
+    font-size: 15px;
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+}
+
+p {
+    font-size: 13px;
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+}
+
+table.info {
+    width: 80%;
+}
+
+th.info {}
+tr.info {}
+td.info {}
+
+img {
+    border: 0;
+    padding: 0px 0px 0px 0px;
+    margin: 0px;
+}
+
+
+#logo {
+    background-image: url('images/logo.jpg');
+    width: 150px;
+    height: 150px;
+    background-repeat: no-repeat;
+}
+
+/* Window settings */
+
+table.window {
+    width: 100%;
+    border: 0px solid #CCCCCC;
+    text-align: left;
+    border-spacing: 0px;
+    vertical-align: top;
+}
+
+th.window {
+    text-align: left;
+    font-size: 11px;
+    border-collapse: collapse;
+
+    color: #FFFFFF;
+    background-color: #3776AE;
+    border-width: 0px;
+    background-repeat: repeat-x;
+}
+
+
+
+
+
+
+
+
+
+
+table.block {   
+    /*width: 80%;*/
+    width: 100%;
+    border: 1px solid #CCCCCC;
+}
+
+table.block3 {
+    width: 100%;
+    border: 0px solid #FFFFFF;
+}
+
+table.login {
+    border: 1px solid #CCCCCC;
+}
+
+table.centered {
+    margin-left: auto;
+    margin-right: auto;
+    margin: auto;   
+}
+
+#centered {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	margin: auto;
+}
+
+caption.block {
+    caption-side: top;
+}
+
+p.toolbar {
+}
+
+/* 
+    Menu setting is the litle menu toolbar visible in windows
+*/
+
+th.menu {
+    background-image: url('images/menu_gradient.png');
+    background-repeat: repeat-y;
+    border: 0px solid #CCCCCC;
+    text-align: center;
+    font-size: 15px;
+    border-collapse: collapse;
+    width: 20px;
+}
+
+th.block {
+    font-family: Times New Roman;
+    font-size: 16px;
+    text-align: left;
+    font-weight: bold;
+    color: #336699;
+    background-color: #FFFFFF
+    border-top: 0px solid #000000;
+    border-right: 0px solid #000000;
+    border-bottom: 2px solid #336699;
+    border-left: 0px solid #000000;
+    border-collapse: collapse;
+    padding: 2px 0px 0px 0px;
+}
+
+th.block a{
+    text-decoration: none;
+}
+
+
+tr.block {
+    text-align: left;
+    border-spacing: 10px;
+    vertical-align: top;
+}
+
+td.block {
+    text-align: left;
+    border-spacing: 10px;
+    vertical-align: top;
+}
+
+ul, li, td, th{
+    font-family: Verdana, Helvetica, Arial, sans-serif; 
+    font-size: 11px;
+}
+
+#tableSize40 {
+    width: 40%;
+}
+
+#tableSize60 {
+    width: 60%;
+}
+
+#tableSize80 {
+    width: 80%;
+}
+
+#tableSize100 {
+    width: 100%;
+}
+
+th {
+   font-weight: bold; 
+}
+
+/* End General style */
+
+/* Form styles */
+
+
+#button {
+    width: auto;
+    border: 3px double #999999;
+    border-top-color: #CCCCCC;
+    border-left-color: #CCCCCC;
+    padding: 0.15em;
+    background-color: #EEEEEE;
+    background-image: url('images/buttons/button_shade.gif');
+    background-repeat: repeat-x;
+    color: #333333;
+    font-size: 10px;
+    font-weight: bold;
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+}
+
+
+#button:active
+{
+    border: 3px double #CCCCCC;
+    border-top-color: #999999;
+    border-left-color: #999999;
+}
+
+#button:hover
+{
+    color: #000000;
+}
+
+#buttonclean {
+    width: auto;
+    color: #336699;
+    text-decoration: none;
+    border: none;
+    background-color: transparent;
+    margin: 0px;
+    padding: 0px;
+    cursor: pointer;
+    cursor: hand;
+    padding: 0px 0px 4px 0px;
+}
+
+#buttonclean:hover {
+    width: auto;
+    color: #336699;
+    text-decoration: none;
+    border: none;
+    background-color: transparent;
+    font-weight: bold;
+    margin: 0px;
+    padding: 0px;
+    cursor: pointer;
+    cursor: hand;
+    padding: 0px 0px 4px 0px;
+}
+
+#buttonclean2 {
+    width: auto;
+    color: #FFFFFF;
+    text-decoration: none;
+    border: none;
+    background-color: transparent;
+    font-weight: bold;
+    margin: 0px;
+    padding: 0px;
+    cursor: pointer;
+    cursor: hand;
+    /*padding: 0px 0px 4px 0px;*/
+}
+
+#buttonclean2:hover {
+    width: auto;
+    color: #FFFFFF;
+    text-decoration: none;
+    border: none;
+    background-color: transparent;
+    font-weight: bold;
+    margin: 0px;
+    padding: 0px;
+    cursor: pointer;
+    cursor: hand;
+    /*padding: 0px 0px 4px 0px;*/
+}
+
+textarea {
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+    font-size: 11px;
+}
+
+select { 
+    width: 120px;
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+    font-size: 11px;
+}
+
+#select150 { 
+    width: 150px;
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+    font-size: 11px;
+}
+
+input {
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+    font-size: 11px;
+}
+
+
+/* ---------- END FORMS STYLE ----------- */
+  
+
+/* Style of data table class */
+
+table.data{
+    text-align: left;
+    color: #000000;
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #CCCCCC;
+    border-collapse: collapse;
+    /*width: 80%;*/
+    width: 100%;
+}
+
+tr.data{
+    caption-side: top;
+}
+
+tr.alternatingOne{
+    background-color: #FFFFFF;
+    vertical-align: top;
+}
+
+tr.alternatingTwo{
+    background-color: #F1F1F1;
+    vertical-align: top;
+}
+
+th.data{
+    background-color: #F1F1F1;
+    color: #888888;
+    border-width: 2px;
+}
+th.data_old_01{
+    color: #FFFFFF;
+    background-color: #3776AE;
+    border-width: 2px;
+    background-repeat: repeat-x;
+}
+
+th.data2{
+    color: #CCCCCC;
+    background-color: #000000;
+    border-width: 2px;
+    background-repeat: repeat-x;
+}
+
+td.data{
+    text-align: top;
+}
+
+th.block_data{
+    color: #000000;
+    background-color: #BBD2F3;
+    border-width: 2px;
+    background-repeat: repeat-x;
+}
+
+table.block_data{
+    text-align: left;
+    color: #000000;
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+    border-style: none;
+    border-width: 0px;
+    border-color: #CCCCCC;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+
+
+/*---------- End data table --------------*/
+/* Style of default table (no css at all) */
+
+table.default, th.default, tr.default, td.default{}
+/* --------- End default style -----------*/
+
+
+div.box {
+    position: absolute;
+    top: 10px;
+    left: 500px;
+    width: 300px;
+    padding: 10px;
+}
+
+/* Layer containers... */
+#ind_container {
+    position: relative;
+    height: 150px;
+    z-index: 100;
+}
+
+#container {
+    position: relative;
+    z-index: 100;
+}
+
+/* Include id's for all your layers here, with commas between. */
+#lyr1, #lyr2, #lyr3 { 
+    position: absolute;
+    visibility: hidden;
+    left: 0;
+    top: 0;
+    z-index: 1;
+}
+
+#dhtmltooltip{
+    position: absolute;
+    width: 150px;
+    border: 1px solid black;
+    padding: 2px;
+    background-color: #E9E9E9;
+    visibility: hidden;
+    z-index: 100;
+    /*Remove below line to remove shadow. Below line should always appear last within this CSS*/
+    filter: progid:DXImageTransform.Microsoft.Shadow(color=gray,direction=135);
+}
+
+
+</style>

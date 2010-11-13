@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menus target="_self">
+    
+    <!--admin menu header-->
+    <menu name="Admin" admin="true">
+        <menu-item name="Projects">
+            <menu-item name="View" workflow="AdminViewProjects"/>
+            <menu-item name="Create" workflow="AdminCreateProject"/>
+        </menu-item>
+        <menu-item name="Users">
+            <menu-item name="View" workflow="AdminViewUsers"/>
+            <menu-item name="Create" workflow="AdminCreateUser"/>
+        </menu-item>
+        <menu-item name="Species">
+            <menu-item name="View" workflow="AdminViewSpecies"/>
+            <menu-item name="Create" workflow="AdminCreateSpecies"/>            
+        </menu-item>
+        <!--projects header-->
+        <menu-item name="Projects" priv="DEV">
+        <!--<menu name="Projects" priv="PROJECT_ADM">-->
+            <menu-item name="Select project" workflow="ProjectProperties"/>
+            <menu-item name="Select Sampling Unit" workflow="SelectSU"/>
+            <menu-item name="Project info" workflow="ViewProjectInfo"/>
+            <menu-item name="Roles" priv="PROJECT_ADM">
+                <menu-item name="View" workflow="ViewRoles"/>
+                <menu-item name="Create" workflow="CreateRole"/>
+            </menu-item>
+            <menu-item name="Users" priv="PROJECT_ADM">
+                <menu-item name="Project members" workflow="ViewProjectUsers"/>
+                <menu-item name="All users" workflow="AdminViewUsers"/>
+            </menu-item>
+            <menu-item name="Statistics" priv="DEV" workflow="ViewProjectStats"/>
+            <!--menu-item name="My Account" priv="DEV" workflow="ViewMyAccount"/-->
+        </menu-item>
+        <!--experimental setup header-->
+        <menu-item name="Experimental setup" priv="DEV">
+            <menu-item name="Sampling Unit" priv="SU_R" workflow="SamplingUnitInfo">
+                <menu-item name="View and Edit" alt-name="View" priv="SU_W" alt-priv="SU_R" workflow="ViewSamplingUnits"/>
+                <menu-item name="Create" priv="SU_W" workflow="CreateSamplingUnit"/>
+            </menu-item>
+        </menu-item>
+        <!--file tests header-->
+        <menu-item name="File Tests" priv="DEV">
+			<menu-item name="Import EXCEL" priv="DEV" workflow="FileUpload"/>
+            <menu-item name="Test">
+                <menu-item name="View files" workflow="ViewFiles"/>
+                <menu-item name="FileUploadTest" workflow="FileUploadTest"/>
+            </menu-item>
+        </menu-item>
+		<!--research application-->
+		<menu-item name="Research Appplications" priv="DEV">
+				<menu-item name="View" workflow="ViewResearchApps"/>
+				<menu-item name="Create" workflow="CreateResearchApp" priv="PROJECT_ADM"/>
+		</menu-item>
+    </menu>
+    
+	<menu name="Curation" priv="DEV">
+		<menu-item name="Correspondents" priv="PROJECT_ADM">
+                       <menu-item name="View" workflow="ViewCorrespondents"/>
+                        <menu-item name="Create" workflow="__CreateCorrespondent"/>
+                </menu-item>
+		<menu-item name="Strain Types" priv="PROJECT_ADM">
+			<menu-item name="View" workflow="ViewStrainTypes"/>
+			<menu-item name="Create" priv="DEV" workflow="CreateStrainType"/>
+		</menu-item>
+		<menu-item name="Strain States" priv="PROJECT_ADM">
+			<menu-item name="View" workflow="ViewStrainStates"/>
+			<menu-item name="Create" priv="DEV" workflow="CreateStrainState"/>
+		</menu-item>
+        
+        <menu-item name="Allele Types" priv="DEV">
+            <menu-item name="View" workflow="ViewAlleleTypes"/>
+            <menu-item name="Create" workflow="CreateAlleleType"/>
+        </menu-item>
+		
+		<menu-item name="Backgrounds" priv="PROJECT_ADM">
+            <menu-item name="View" workflow="ViewGeneticBackgroundValues"/>
+            <menu-item name="Add" workflow="CreateGeneticBackgroundValue"/>
+		</menu-item>
+
+		<menu-item name="Available Backgrounds" priv="PROJECT_ADM">
+				<menu-item name="View" workflow="ViewAvailableGeneticBackgrounds"/>
+				<menu-item name="Add" workflow="AddAvailableGeneticBackground"/>
+		</menu-item>
+			
+		<menu-item name="Repositories" priv="PROJECT_ADM">
+				<menu-item name="View" workflow="ViewRepositories"/>
+				<menu-item name="Add" workflow="AddRepository"/>
+		</menu-item>
+    </menu>
+	
+	<menu name="Mice" priv="MODEL_W">
+            <menu-item name="View" alt-name="View" priv="MODEL_R" alt-priv="MODEL_R" workflow="ViewModels"/>
+            <menu-item name="Add" priv="MODEL_W" workflow="CreateModel"/>
+    </menu>
+	<menu name="Strains" priv="MODEL_W">
+            <menu-item name="View" workflow="ViewStrains"/>
+            <menu-item name="Add" workflow="_CreateStrain"/>
+	</menu>
+        <menu name="Alleles" priv="MODEL_W">
+            <menu-item name="View" workflow="ViewStrainAlleles"/>
+            <menu-item name="Add" workflow="_CreateStrainAllele"/>
+	</menu>
+    <menu name="Transgenes" priv="MODEL_W">
+            <menu-item name="View" workflow="ViewGenes"/>
+            <menu-item name="Add" workflow="CreateGene" priv="MODEL_W"/>
+    </menu>
+    
+    
+    <!--public user menu-->
+	<menu name="Mice" priv="MODEL_PUB" workflow="ViewModels"/>
+	<menu name="Strains" priv="MODEL_PUB" workflow="ViewStrains"/>
+        <menu name="Alleles" priv="MODEL_PUB" workflow="ViewStrainAlleles"/>
+	<menu name="Transgenes" priv="MODEL_PUB" workflow="ViewGenes" />
+    
+    <!--search header-->
+    <!--menu name="Search" priv="DEV">
+        <menu-item name="Models" workflow="SearchModel" priv="PROJECT_ADM"/>
+        <menu-item name="Keywords" workflow="SearchKeyword"/>
+    </menu-->
+    
+    <!--IMSR header-->
+    <!--menu name="IMSR" priv="DEV">
+        <menu-item name="View IMSR File" workflow="IMSRFile"/>
+    </menu-->
+    
+    <!--dissemination update header-->
+    <!--menu name="DissUp" priv="DEV">
+        <menu-item name="DissUp List" workflow="DisseminationUpdate"/>
+    </menu-->
+    
+    <!--mutant backcrossing list-->
+    <!--menu name="BackCross" priv="DEV">
+        <menu-item name="BackCrossNow" workflow="BackcrossingList"/>
+    </menu-->
+    
+    <!--menu name="Login" priv="MODEL_PUB" workflow="Login"/>
+    <menu name="Logout" priv="MODEL_W" workflow="Logout"/-->
+</menus>

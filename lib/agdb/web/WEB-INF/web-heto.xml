@@ -1,0 +1,760 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!DOCTYPE web-app 
+    PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN" 
+    "http://java.sun.com/dtd/web-app_2_3.dtd">
+
+<web-app>
+
+
+    <!-- General description of your web application -->
+
+    <display-name>Arexis Genetic Database Tool</display-name>
+    <description>
+      This is version 1.7 of aGDB
+    </description>
+
+
+    <!-- Context initialization parameters that define shared
+         String constants used within your application, which
+         can be customized by the system administrator who is
+         installing your application.  The values actually
+         assigned to these parameters can be retrieved in a
+         servlet or JSP page by calling:
+
+             String value =
+               getServletContext().getInitParameter("name");
+
+         where "name" matches the <param-name> element of
+         one of these initialization parameters.
+
+         You can define any number of context initialization
+         parameters, including zero.
+    -->
+
+    <context-param>
+      <param-name>webmaster</param-name>
+      <param-value>tobias.hermansson@arexis.com</param-value>
+      <description>
+        The EMAIL address of the administrator to whom questions
+        and comments about this application should be addressed.
+      </description>
+    </context-param>
+
+    <context-param>
+      <param-name>dburl</param-name>
+      <param-value>jdbc:oracle:thin:@192.168.1.32:1521:agdbtest</param-value>
+      <description>
+        The jdbc driver for oracle.
+      </description>
+    </context-param>
+
+    <context-param>
+      <param-name>uid</param-name>
+      <param-value>gdbadm</param-value>
+      <description>
+        Userid for the database connection
+      </description>
+    </context-param>
+    
+    <context-param>
+      <param-name>pwd</param-name>
+      <param-value>gdbadm</param-value>
+      <description>
+        The password for the database connection.
+      </description>
+    </context-param>
+
+    <context-param>
+      <param-name>superuid</param-name>
+      <param-value>system</param-value>
+      <description>
+        The superuser name
+      </description>
+    </context-param>
+
+    <context-param>
+      <param-name>superpwd</param-name>
+      <param-value>manager</param-value>
+      <description>
+        The superuser password.
+      </description>
+    </context-param>
+
+    <context-param>
+      <param-name>redirectPath</param-name>
+      <param-value>https://192.168.1.34:8443/agdb/</param-value>
+      <description>
+        The redirection value
+      </description>
+    </context-param>
+    
+    <context-param>
+      <param-name>nullReplacement</param-name>
+      <param-value> </param-value>
+      <description>
+        Replace values instead of null.
+      </description>
+    </context-param>
+
+    <context-param>
+      <param-name>version</param-name>
+      <param-value>1.7</param-value>
+      <description>
+        Replace values instead of null.
+      </description>
+    </context-param>
+    
+    <context-param>
+      <param-name>zone</param-name>
+      <param-value></param-value>
+      <description>
+        The zone for the Servlets. With new Tomcat installation 
+        this value could be empty.
+        The old JServ installation the vale was "dbtool/"
+      </description>
+    </context-param>
+    
+    <context-param>
+      <param-name>rootPath</param-name>
+      <param-value>https://192.168.1.34:8443/agdb/</param-value>
+      <description>
+        Replace values instead of null.
+      </description>
+    </context-param>
+    
+    <context-param>
+      <param-name>upFilePath</param-name>
+      <param-value>/home/heto/tmpcvs/agdb/build/WEB-INF/data/uploads</param-value>
+      <description>
+        Replace values instead of null.
+        old=/arexis/uploads
+      </description>
+    </context-param>
+    
+    <context-param>
+      <param-name>fileGeneratePath</param-name>
+      <param-value>/home/heto/tmpcvs/agdb/build/WEB-INF/data/downloads</param-value>
+      <description>
+        Replace values instead of null.
+        old=/arexis/downloads
+      </description>
+    </context-param>
+    
+    <context-param>
+      <param-name>dateFormat</param-name>
+      <param-value>YYYY-MM-DD HH24:MI</param-value>
+      <description>
+        Replace values instead of null.
+      </description>
+    </context-param>
+    
+    <context-param>
+      <param-name>maxRows</param-name>
+      <param-value>50</param-value>
+      <description>
+        Replace values instead of null.
+      </description>
+    </context-param>
+    
+    <context-param>
+      <param-name>maxDeviations</param-name>
+      <param-value>100</param-value>
+      <description>
+        Replace values instead of null.
+      </description>
+    </context-param>
+    
+    <context-param>
+      <param-name>loginPath</param-name>
+      <param-value>https://192.168.1.34:8443/agdb/login.jsp</param-value>
+      <description>
+        Replace values instead of null.
+      </description>
+    </context-param>
+
+    <context-param>
+      <param-name>logfile</param-name>
+      <param-value>/home/heto/tmpcvs/agdb/build/WEB-INF/data/agdb.log</param-value>
+      <description>
+        The path to the logfile
+      </description>
+    </context-param>
+
+
+
+
+
+
+
+    <!-- Servlet definitions for the servlets that make up
+         your web application, including initialization
+         parameters.  With Tomcat, you can also send requests
+         to servlets not listed here with a request like this:
+
+           http://localhost:8080/{context-path}/servlet/{classname}
+
+         but this usage is not guaranteed to be portable.  It also
+         makes relative references to images and other resources
+         required by your servlet more complicated, so defining
+         all of your servlets (and defining a mapping to them with
+         a servlet-mapping element) is recommended.
+
+         Servlet initialization parameters can be retrieved in a
+         servlet or JSP page by calling:
+
+             String value =
+               getServletConfig().getInitParameter("name");
+
+         where "name" matches the <param-name> element of
+         one of these initialization parameters.
+
+         You can define any number of servlets, including zero.
+    -->
+
+   
+    <servlet>
+      <servlet-name>Test</servlet-name>
+      <description>
+	This is a test
+      </description>
+      <servlet-class>se.arexis.agdb.servlet.Test</servlet-class>
+    </servlet>
+    
+
+    <servlet>
+      <servlet-name>loginError</servlet-name>
+      <description>jjj</description>
+      <servlet-class>se.arexis.agdb.servlet.loginError</servlet-class>
+    </servlet>
+    
+
+    <servlet>
+      <servlet-name>loginAction</servlet-name>
+      <description>Handles login procedure</description>
+      <servlet-class>se.arexis.agdb.servlet.loginAction</servlet-class>
+    </servlet>
+    
+    <servlet>
+      <servlet-name>adminMain</servlet-name>
+      <description></description>
+      <servlet-class>se.arexis.agdb.servlet.adminMain</servlet-class>
+    </servlet>
+    
+    <servlet>
+      <servlet-name>adminMenu</servlet-name>
+      <description></description>
+      <servlet-class>se.arexis.agdb.servlet.adminMenu</servlet-class>
+    </servlet>
+    
+    <servlet>
+      <servlet-name>adminProj</servlet-name>
+      <description></description>
+      <servlet-class>se.arexis.agdb.servlet.adminProj</servlet-class>
+    </servlet>
+    
+    <servlet>
+      <servlet-name>adminUser</servlet-name>
+      <description></description>
+      <servlet-class>se.arexis.agdb.servlet.adminUser</servlet-class>
+    </servlet>
+    
+    <servlet>
+      <servlet-name>adminSpecies</servlet-name>
+      <description></description>
+      <servlet-class>se.arexis.agdb.servlet.adminSpecies</servlet-class>
+    </servlet>
+    
+    <servlet>
+      <servlet-name>adminLMark</servlet-name>
+      <description></description>
+      <servlet-class>se.arexis.agdb.servlet.adminLMark</servlet-class>
+    </servlet>
+
+    <servlet>
+      <servlet-name>logout</servlet-name>
+      <description></description>
+      <servlet-class>se.arexis.agdb.servlet.logout</servlet-class>
+    </servlet>
+    
+    <servlet>
+      <servlet-name>mainPage</servlet-name>
+      <description></description>
+      <servlet-class>se.arexis.agdb.servlet.mainPage</servlet-class>
+    </servlet>
+    
+    <servlet>
+      <servlet-name>projMenu</servlet-name>
+      <description></description>
+      <servlet-class>se.arexis.agdb.servlet.projMenu</servlet-class>
+    </servlet>
+    
+    <servlet>
+      <servlet-name>navigator</servlet-name>
+      <description></description>
+      <servlet-class>se.arexis.agdb.servlet.navigator</servlet-class>
+    </servlet>
+    
+    <servlet>
+      <servlet-name>viewProj</servlet-name>
+      <description></description>
+      <servlet-class>se.arexis.agdb.servlet.viewProj</servlet-class>
+    </servlet>
+    
+    <servlet>
+      <servlet-name>indMenu</servlet-name>
+      <description></description>
+      <servlet-class>se.arexis.agdb.servlet.indMenu</servlet-class>
+    </servlet>
+    
+    <servlet>
+      <servlet-name>viewInd</servlet-name>
+      <description></description>
+      <servlet-class>se.arexis.agdb.servlet.viewInd</servlet-class>
+    </servlet>
+    
+   
+    <servlet>
+      <servlet-name>anaMenu</servlet-name>
+      <description>
+      </description>
+      <servlet-class>se.arexis.agdb.servlet.anaMenu</servlet-class>
+    </servlet>
+    <servlet>
+      <servlet-name>genoMenu</servlet-name>
+      <description>
+      </description>
+      <servlet-class>se.arexis.agdb.servlet.genoMenu</servlet-class>
+    </servlet>
+    <servlet>
+      <servlet-name>impInd</servlet-name>
+      <description>
+      </description>
+      <servlet-class>se.arexis.agdb.servlet.impInd</servlet-class>
+    </servlet>
+    <servlet>
+      <servlet-name>impSamples</servlet-name>
+      <description>
+      </description>
+      <servlet-class>se.arexis.agdb.servlet.impSamples</servlet-class>
+    </servlet>
+    <servlet>
+      <servlet-name>impUVar</servlet-name>
+      <description>
+      </description>
+      <servlet-class>se.arexis.agdb.servlet.impUVar</servlet-class>
+    </servlet>
+    <servlet>
+      <servlet-name>impUVarSet</servlet-name>
+      <description>
+      </description>
+      <servlet-class>se.arexis.agdb.servlet.impUVarSet</servlet-class>
+    </servlet>
+    <servlet>
+      <servlet-name>impVar</servlet-name>
+      <description>
+      </description>
+      <servlet-class>se.arexis.agdb.servlet.impVar</servlet-class>
+    </servlet>
+    <servlet>
+      <servlet-name>impVarSet</servlet-name>
+      <description>
+      </description>
+      <servlet-class>se.arexis.agdb.servlet.impVarSet</servlet-class>
+    </servlet>
+    <servlet>
+      <servlet-name>membership</servlet-name>
+      <description>
+      </description>
+      <servlet-class>se.arexis.agdb.servlet.membership</servlet-class>
+    </servlet>
+    
+    <servlet>
+      <servlet-name>phenMenu</servlet-name>
+      <description>
+      </description>
+      <servlet-class>se.arexis.agdb.servlet.phenMenu</servlet-class>
+    </servlet>
+    <servlet>
+      <servlet-name>redirectClass</servlet-name>
+      <description>
+      </description>
+      <servlet-class>se.arexis.agdb.servlet.redirectClass</servlet-class>
+    </servlet>
+    <servlet>
+      <servlet-name>startCrimap</servlet-name>
+      <description>
+      </description>
+      <servlet-class>se.arexis.agdb.servlet.startCrimap</servlet-class>
+    </servlet>
+    <servlet>
+      <servlet-name>startLinkage</servlet-name>
+      <description>
+      </description>
+      <servlet-class>se.arexis.agdb.servlet.startLinkage</servlet-class>
+    </servlet>
+    <servlet>
+      <servlet-name>startMapMaker</servlet-name>
+      <description>
+      </description>
+      <servlet-class>se.arexis.agdb.servlet.startMapMaker</servlet-class>
+    </servlet>
+    <servlet>
+      <servlet-name>startTabDel</servlet-name>
+      <description>
+      </description>
+      <servlet-class>se.arexis.agdb.servlet.startTabDel</servlet-class>
+    </servlet>
+    
+    <servlet>
+      <servlet-name>viewFile</servlet-name>
+      <description>
+      </description>
+      <servlet-class>se.arexis.agdb.servlet.viewFile</servlet-class>
+    </servlet>
+    <servlet>
+      <servlet-name>viewFilt</servlet-name>
+      <description>
+      </description>
+      <servlet-class>se.arexis.agdb.servlet.viewFilt</servlet-class>
+    </servlet>
+    <servlet>
+      <servlet-name>viewGeno</servlet-name>
+      <description>
+      </description>
+      <servlet-class>se.arexis.agdb.servlet.viewGeno</servlet-class>
+    </servlet>
+    <servlet>
+      <servlet-name>viewGroup</servlet-name>
+      <description>
+      </description>
+      <servlet-class>se.arexis.agdb.servlet.viewGroup</servlet-class>
+    </servlet>
+    <servlet>
+      <servlet-name>viewGrouping</servlet-name>
+      <description>
+      </description>
+      <servlet-class>se.arexis.agdb.servlet.viewGrouping</servlet-class>
+    </servlet>
+    
+    <servlet>
+      <servlet-name>viewMark</servlet-name>
+      <description>
+      </description>
+      <servlet-class>se.arexis.agdb.servlet.viewMark</servlet-class>
+    </servlet>
+    <servlet>
+      <servlet-name>viewMarkSet</servlet-name>
+      <description>
+      </description>
+      <servlet-class>se.arexis.agdb.servlet.viewMarkSet</servlet-class>
+    </servlet>
+    <servlet>
+      <servlet-name>viewPheno</servlet-name>
+      <description>
+      </description>
+      <servlet-class>se.arexis.agdb.servlet.viewPheno</servlet-class>
+    </servlet>
+    <servlet>
+      <servlet-name>viewSU</servlet-name>
+      <description>
+      </description>
+      <servlet-class>se.arexis.agdb.servlet.viewSU</servlet-class>
+    </servlet>
+    <servlet>
+      <servlet-name>viewSamples</servlet-name>
+      <description>
+      </description>
+      <servlet-class>se.arexis.agdb.servlet.viewSamples</servlet-class>
+    </servlet>
+    <servlet>
+      <servlet-name>viewUMark</servlet-name>
+      <description>
+      </description>
+      <servlet-class>se.arexis.agdb.servlet.viewUMark</servlet-class>
+    </servlet>
+    <servlet>
+      <servlet-name>viewUMarkSet</servlet-name>
+      <description>
+      </description>
+      <servlet-class>se.arexis.agdb.servlet.viewUMarkSet</servlet-class>
+    </servlet>
+    <servlet>
+      <servlet-name>viewUVar</servlet-name>
+      <description>
+      </description>
+      <servlet-class>se.arexis.agdb.servlet.viewUVar</servlet-class>
+    </servlet>
+    <servlet>
+      <servlet-name>viewUVarSet</servlet-name>
+      <description>
+      </description>
+      <servlet-class>se.arexis.agdb.servlet.viewUVarSet</servlet-class>
+    </servlet>
+    <servlet>
+      <servlet-name>viewVar</servlet-name>
+      <description>
+      </description>
+      <servlet-class>se.arexis.agdb.servlet.viewVar</servlet-class>
+    </servlet>
+    <servlet>
+      <servlet-name>viewVarSet</servlet-name>
+      <description>
+      </description>
+      <servlet-class>se.arexis.agdb.servlet.viewVarSet</servlet-class>
+    </servlet>
+
+    <servlet>
+      <servlet-name>importFile</servlet-name>
+      <description>
+      </description>
+      <servlet-class>se.arexis.agdb.servlet.importFile</servlet-class>
+    </servlet>
+
+    <!-- Define mappings that are used by the servlet container to
+         translate a particular request URI (context-relative) to a
+         particular servlet.  The examples below correspond to the
+         servlet descriptions above.  Thus, a request URI like:
+
+           http://localhost:8080/{contextpath}/graph
+
+         will be mapped to the "graph" servlet, while a request like:
+
+           http://localhost:8080/{contextpath}/saveCustomer.do
+
+         will be mapped to the "controller" servlet.
+
+         You may define any number of servlet mappings, including zero.
+         It is also legal to define more than one mapping for the same
+         servlet, if you wish to.
+    -->
+
+    <servlet-mapping>
+      <servlet-name>Test</servlet-name>
+      <url-pattern>/Test</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+      <servlet-name>loginError</servlet-name>
+      <url-pattern>/loginError</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+      <servlet-name>loginAction</servlet-name>
+      <url-pattern>/loginAction</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+      <servlet-name>adminMain</servlet-name>
+      <url-pattern>/adminMain</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+      <servlet-name>adminMenu</servlet-name>
+      <url-pattern>/adminMenu</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+      <servlet-name>adminProj</servlet-name>
+      <url-pattern>/adminProj/*</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+      <servlet-name>adminUser</servlet-name>
+      <url-pattern>/adminUser/*</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+      <servlet-name>adminSpecies</servlet-name>
+      <url-pattern>/adminSpecies/*</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+      <servlet-name>adminLMark</servlet-name>
+      <url-pattern>/adminLMark/*</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+      <servlet-name>logout</servlet-name>
+      <url-pattern>/logout/*</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+      <servlet-name>mainPage</servlet-name>
+      <url-pattern>/mainPage/*</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+      <servlet-name>projMenu</servlet-name>
+      <url-pattern>/projMenu/*</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+      <servlet-name>navigator</servlet-name>
+      <url-pattern>/navigator/*</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+      <servlet-name>viewProj</servlet-name>
+      <url-pattern>/viewProj/*</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+      <servlet-name>indMenu</servlet-name>
+      <url-pattern>/indMenu/*</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+      <servlet-name>viewInd</servlet-name>
+      <url-pattern>/viewInd/*</url-pattern>
+    </servlet-mapping>
+    
+    
+    
+    <servlet-mapping>
+      <servlet-name>anaMenu</servlet-name>
+      <url-pattern>/anaMenu/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+      <servlet-name>genoMenu</servlet-name>
+      <url-pattern>/genoMenu/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+      <servlet-name>impInd</servlet-name>
+      <url-pattern>/impInd/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+      <servlet-name>impSamples</servlet-name>
+      <url-pattern>/impSamples/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+      <servlet-name>impUVar</servlet-name>
+      <url-pattern>/impUVar/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+      <servlet-name>impUVarSet</servlet-name>
+      <url-pattern>/impUVarSet/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+      <servlet-name>impVar</servlet-name>
+      <url-pattern>/impVar/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+      <servlet-name>impVarSet</servlet-name>
+      <url-pattern>/impVarSet/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+      <servlet-name>membership</servlet-name>
+      <url-pattern>/membership/*</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+      <servlet-name>phenMenu</servlet-name>
+      <url-pattern>/phenMenu/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+      <servlet-name>redirectClass</servlet-name>
+      <url-pattern>/redirectClass/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+      <servlet-name>startCrimap</servlet-name>
+      <url-pattern>/startCrimap/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+      <servlet-name>startLinkage</servlet-name>
+      <url-pattern>/startLinkage/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+      <servlet-name>startMapMaker</servlet-name>
+      <url-pattern>/startMapMaker/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+      <servlet-name>startTabDel</servlet-name>
+      <url-pattern>/startTabDel/*</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+      <servlet-name>viewFile</servlet-name>
+      <url-pattern>/viewFile/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+      <servlet-name>viewFilt</servlet-name>
+      <url-pattern>/viewFilt/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+      <servlet-name>viewGeno</servlet-name>
+      <url-pattern>/viewGeno/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+      <servlet-name>viewGroup</servlet-name>
+      <url-pattern>/viewGroup/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+      <servlet-name>viewGrouping</servlet-name>
+      <url-pattern>/viewGrouping/*</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+      <servlet-name>viewMark</servlet-name>
+      <url-pattern>/viewMark/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+      <servlet-name>viewMarkSet</servlet-name>
+      <url-pattern>/viewMarkSet/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+      <servlet-name>viewPheno</servlet-name>
+      <url-pattern>/viewPheno/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+      <servlet-name>viewSU</servlet-name>
+      <url-pattern>/viewSU/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+      <servlet-name>viewSamples</servlet-name>
+      <url-pattern>/viewSamples/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+      <servlet-name>viewUMark</servlet-name>
+      <url-pattern>/viewUMark/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+      <servlet-name>viewUMarkSet</servlet-name>
+      <url-pattern>/viewUMarkSet/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+      <servlet-name>viewUVar</servlet-name>
+      <url-pattern>/viewUVar/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+      <servlet-name>viewUVarSet</servlet-name>
+      <url-pattern>/viewUVarSet/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+      <servlet-name>viewVar</servlet-name>
+      <url-pattern>/viewVar/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+      <servlet-name>viewVarSet</servlet-name>
+      <url-pattern>/viewVarSet/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+      <servlet-name>importFile</servlet-name>
+      <url-pattern>/importFile/*</url-pattern>
+    </servlet-mapping>
+
+    <!-- Define the default session timeout for your application,
+         in minutes.  From a servlet or JSP page, you can modify
+         the timeout for a particular session dynamically by using
+         HttpSession.getMaxInactiveInterval(). -->
+
+    <session-config>
+      <session-timeout>30</session-timeout>    <!-- 30 minutes -->
+    </session-config>
+    
+    <welcome-file-list>
+        <welcome-file>login.jsp</welcome-file>
+    </welcome-file-list>
+
+
+</web-app>

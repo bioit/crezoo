@@ -1,0 +1,75 @@
+BODY
+{
+    BACKGROUND-COLOR: oldlace;
+    FONT-FAMILY: Arial, Helvetica, Verdana;
+    FONT-SIZE: 10pt
+}
+TABLE
+{
+    FONT-FAMILY: Arial, Helvetica, Verdana;
+    FONT-SIZE: 10pt;
+    CELLSPACING: 3
+}
+TD
+{
+    FONT-FAMILY: Arial, Helvetica, Verdana;
+    FONT-SIZE: 10pt
+}
+TR
+{
+    FONT-FAMILY: Arial, Helvetica, Verdana;
+    FONT-SIZE: 9pt
+}
+H3
+{
+    FONT-FAMILY: Arial, Helvetica, Verdana;
+    FONT-SIZE: 12pt
+}
+H1
+{
+    FONT-FAMILY: Arial, Helvetica, Verdana;
+    FONT-SIZE: 18pt;
+    FONT-WEIGHT: bolder
+}
+H2
+{
+    FONT-FAMILY: Arial, Helvetica, Verdana;
+    FONT-SIZE: 14pt;
+    FONT-WEIGHT: bolder
+}
+H4
+{
+    FONT-FAMILY: Arial, Helvetica, Verdana;
+    FONT-SIZE: 10pt;
+    FONT-WEIGHT: bolder
+}
+TH
+{
+    FONT-FAMILY: Arial, Helvetica Verdana;
+    FONT-SIZE: 12px
+}
+A
+{
+    COLOR: oldlace;
+    FONT-FAMILY: Arial, Helvetica, Verdana;
+    FONT-SIZE: 10pt;
+    TEXT-DECORATION: none
+}
+INPUT
+{
+    FONT-FAMILY: Arial, Helvetica, Verdana;
+    FONT-SIZE: 9pt;
+    FONT-WEIGHT: normal
+}
+SELECT
+{
+    FONT-FAMILY: Arial, Helvetica, Verdana;
+    FONT-SIZE: 9pt;
+    FONT-WEIGHT: normal
+}
+OPTION
+{
+    FONT-FAMILY: Arial, Helvetica, Verdana;
+    FONT-SIZE: 9pt;
+    FONT-WEIGHT: normal
+}

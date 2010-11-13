@@ -1,0 +1,147 @@
+@charset "utf-8";
+
+form {
+	background: none;
+	width: 100%;
+}
+
+form table {
+	width: 100%;
+}
+
+span.header_01 {
+	display: block;
+	color: #DB4105;
+	font: normal normal normal 26px/normal Georgia, 'Times New Roman', Times, serif;
+	margin: 20px 0px;
+}
+
+table.data {
+	width: 100%;
+	background: none;
+	color: #333;
+	font-weight: normal;
+	text-decoration: none;
+	font-family: sans-serif;
+	font-size: 14px;
+	padding: 0;
+	margin: 0;
+}
+
+table.block_data {
+	/*background-color: #000;*/
+	/*display: block;*/
+	width: 100%
+}
+
+table.block_data  tr {
+	width: 100%;
+}
+
+table.data td {
+	padding: 3px 0;
+}
+
+th.data span {
+	display: 	block;
+}
+
+table.data th.data input {
+	width: 		100%;
+}
+
+th.data span, table.data th.data input {
+	text-align: left;
+	color:		#DB4105;
+	font:		18px Georgia,"Times New Roman",Times,serif;
+	background:	#fff;
+	padding:	5px;
+	border: 	none;
+	border-top:	4px solid #F1EDD5;
+	cursor: 	pointer;
+}
+
+table.data th.data input:hover {
+	width: 		100%;
+	text-align: left;
+	color:		#fff;
+	font:		18px Georgia,"Times New Roman",Times,serif;
+	background:	#DB4105;
+	padding:	5px;
+	border: 	none;
+	border-top:	4px solid #F1EDD5;
+	cursor: 	pointer;
+}
+
+table.data a, table.data a:visited, a.data_link, a.data_link:visited, td.block a, td.block a:visited , table.block3 a, table.block3 a:visited, tr.alternatingOne a, tr.alternatingOne a:visited, tr.alternatingTwo a, tr.alternatingTwo a:visited{
+	background: 		none;
+	color:				#33332d;
+	font:				14px Georgia,"Times New Roman",Times,serif;
+	font-weight: 		normal;
+	text-decoration: 	none;
+}
+
+table.data a:hover, a.data_link:hover, td.block a:hover, table.block3 a:hover ,tr.alternatingOne a:hover, tr.alternatingTwo a:hover {
+	background: 		none;
+	color:				#DB4105;
+	font:				14px Georgia,"Times New Roman",Times,serif;
+	font-weight: 		normal;
+	text-decoration: 	none;
+}
+
+p.navtext {
+	background: none;
+	color: #33332d;
+	font-family: sans-serif;
+	font-size: 10px;
+	text-align: left;
+	text-transform: uppercase;
+	line-height: 20px;
+	padding: 0;
+	margin: 3px 0;
+	border: none;
+	/*width: 100%;*/
+  	height: 20px;
+}
+
+p.navtext a, p.navtext a:visited, p.navtext input, a.navtext, a.navtext:visited, tr.alternatingOne a.navtext, tr.alternatingOne a.navtext:visited, tr.alternatingTwo a.navtext, tr.alternatingTwo a.navtext:visited {
+	background: none;
+	height: 100%;
+	color: #DB4105;
+	font-weight: normal;
+	text-decoration: none;
+	text-transform: uppercase;
+	font-family: sans-serif;
+	font-size: 10px;
+	padding: 0 auto;
+	margin: 0;
+	border: none;
+	cursor: pointer;
+}
+
+p.navtext a:hover, p.navtext input:hover, a.navtext:hover, tr.alternatingOne a.navtext:hover, tr.alternatingTwo a.navtext:hover {
+	background: none;
+	height: 100%;
+	color: #33332d;
+	font-weight: normal;
+	text-decoration: none;
+	text-transform: uppercase;
+	font-family: sans-serif;
+	font-size: 10px;
+	padding: 0 auto;
+	margin: 0;
+	border: none;
+	cursor: pointer;
+} 
+
+tr.alternatingOne {
+	background:	#F1F1CD;
+}
+
+tr.alternatingTwo {
+	background:	#E6E6BA;
+}
+
+tr.alternatingOne td, tr.alternatingTwo td {
+	padding: 5px;
+}

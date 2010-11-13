@@ -1,0 +1,15 @@
+* html ul#primary-nav li a:hover {
+  background:none; 
+  filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/menu-back.png',sizingMethod='scale'); 
+}
+
+* html ul#secondary-nav li a:hover {
+  background:none; 
+  filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/menu-back.png',sizingMethod='scale'); 
+}
+
+* html div#quick, * html div#log-io {
+  /*background: none;
+  filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/search-form.png',sizingMethod='scale'); */
+  behavior: url(css/iepngfix.htc)
+}
