@@ -30,20 +30,20 @@ public class AddRepositoryAction extends TgDbAction {
     
     public boolean performAction(HttpServletRequest request, ServletContext context) throws ApplicationException {
         try {
-            TgDbCaller caller = (TgDbCaller)request.getSession().getAttribute("caller");
-            Workflow wf = (Workflow)request.getAttribute("workflow");
+            TgDbCaller _caller = (TgDbCaller)request.getSession().getAttribute("caller");
+//            Workflow wf = (Workflow)request.getAttribute("workflow");
             
             //if repository creation was triggered by av.gen.back. assignment from model view
             //we need the following if statement+the passed attribute.
-            if (request.getParameter("eid")!=null){
-                wf.setAttribute("eid", request.getParameter("eid"));
-            }
+//            if (request.getParameter("eid")!=null){
+//                wf.setAttribute("eid", request.getParameter("eid"));
+//            }
             
             String reponame = request.getParameter("reponame");
             int hasdb = Integer.parseInt(request.getParameter("hasdb"));
             String mouseurl = request.getParameter("mouseurl");
             String repourl = request.getParameter("repourl");
-            modelManager.addRepository(reponame, hasdb, mouseurl, repourl, caller);
+            modelManager.addRepository(reponame, hasdb, mouseurl, repourl, _caller);
             
             return true;
         } catch (ApplicationException e) {

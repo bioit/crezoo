@@ -56,6 +56,8 @@ public class PanelLeft extends HttpServlet {
             out.println("<div id=\"logo\">");
             out.println("<h1>CreZOO</h1>");
             out.println("<div id=\"shortcuts\">");
+            out.println("<a href=\"Controller?workflow=Home\">Home</a>");
+            out.println("<a href=\"Controller?workflow=About\">About</a>");
             if(caller != null && !caller.getUsr().equalsIgnoreCase("public")) {
                 out.println("<a href=\"Controller?workflow=Logout\">Logout " + caller.getUsr() + "</a>");
                 out.println("<a href=\"Controller?workflow=ViewMyAccount\">Account</a>");

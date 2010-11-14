@@ -11,7 +11,7 @@ public class ExpressionModelDTO implements Serializable {
     private int exid;
     private String exanatomy, excomm;
     private Collection exfiles;
-    private String exfilestable;
+    private String exfilestable, emap_terms, ma_terms;
     
     public ExpressionModelDTO(ExpressionModelRemote expression) {
         try {
@@ -25,15 +25,15 @@ public class ExpressionModelDTO implements Serializable {
             
             //check if have any element in the collection
             if (tmp!=0){
-                exfilestable = "<table><tr>";
+                exfilestable = "<table>";
                 //iterate through the collection of expression files
                 Iterator tmpIter = exfiles.iterator();
                 while(tmpIter.hasNext()){
                     FileRemote file = (FileRemote)tmpIter.next();
                     //exfilestable = exfilestable+"<td><img src=Controller?workflow=ViewFile&fileid="+file.getFileId()+"></td>";
-                    exfilestable = exfilestable+"<td><img src=\"ImageServlet?fileid="+file.getFileId()+"\" alt=\"\" /></td>";
+                    exfilestable = exfilestable+"<tr><td><img src=\"ImageServlet?fileid="+file.getFileId()+"\" alt=\"\" /></td></tr>";
                 }
-                exfilestable = exfilestable+"</tr></table>";
+                exfilestable = exfilestable+"</table>";
                 
             }
             
@@ -58,6 +58,34 @@ public class ExpressionModelDTO implements Serializable {
     
     public Collection getExfiles(){
         return exfiles;
+    }
+
+    /**
+     * @return the emap_terms
+     */
+    public String getEmap_terms() {
+        return emap_terms;
+    }
+
+    /**
+     * @param emap_terms the emap_terms to set
+     */
+    public void setEmap_terms(String emap_terms) {
+        this.emap_terms = emap_terms;
+    }
+
+    /**
+     * @return the ma_terms
+     */
+    public String getMa_terms() {
+        return ma_terms;
+    }
+
+    /**
+     * @param ma_terms the ma_terms to set
+     */
+    public void setMa_terms(String ma_terms) {
+        this.ma_terms = ma_terms;
     }
     
     public String getExfiletable(){

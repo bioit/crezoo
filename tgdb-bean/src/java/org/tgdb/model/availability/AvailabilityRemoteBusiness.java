@@ -10,6 +10,10 @@ public interface AvailabilityRemoteBusiness {
 
     void setEid(int eid) throws java.rmi.RemoteException;
 
+    int getStrainid() throws java.rmi.RemoteException;
+
+    void setStrainid(int strainid) throws java.rmi.RemoteException;
+
     int getRid() throws java.rmi.RemoteException;
 
     void setRid(int rid) throws java.rmi.RemoteException;
@@ -23,6 +27,8 @@ public interface AvailabilityRemoteBusiness {
     org.tgdb.model.repositories.RepositoriesRemote getRepository() throws java.rmi.RemoteException;
 
     org.tgdb.model.availablegeneticbackgrounds.AvailableGeneticBackgroundRemote getAvailableGeneticBackground() throws java.rmi.RemoteException;
+
+    String getStrainDesignation() throws java.rmi.RemoteException;
 
     java.lang.String getRepositoryName() throws java.rmi.RemoteException;
 

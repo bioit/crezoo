@@ -18,6 +18,8 @@ public interface StrainRemoteHome extends EJBHome {
 
     Collection findByModel(int model, TgDbCaller caller) throws javax.ejb.FinderException, java.rmi.RemoteException;
 
+    Collection findConnectedToModels(TgDbCaller caller) throws javax.ejb.FinderException, java.rmi.RemoteException;
+
     Collection findUnassigned(int model, TgDbCaller caller) throws javax.ejb.FinderException, java.rmi.RemoteException;
     
 //    Collection findByMgiid(String mgiid, TgDbCaller caller) throws javax.ejb.FinderException, java.rmi.RemoteException;

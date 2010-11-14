@@ -43,5 +43,7 @@ public interface StrainRemoteBusiness
     Collection getStrain_links() throws java.rmi.RemoteException;
 
     String getStrain_links_string() throws java.rmi.RemoteException;
+
+    int getModels() throws java.rmi.RemoteException;
     
 }

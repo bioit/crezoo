@@ -109,6 +109,10 @@ public interface ModelManagerRemoteBusiness {
 
     java.util.Collection getStrains(TgDbCaller caller) throws ApplicationException, java.rmi.RemoteException;
 
+    java.util.Collection getStrainsConnectedToModels(TgDbCaller caller) throws ApplicationException, java.rmi.RemoteException;
+
+    java.util.Collection getStrainsConnectedToModel(int eid, TgDbCaller caller) throws ApplicationException, java.rmi.RemoteException;
+
     org.tgdb.model.modelmanager.StrainDTO getStrain(int strainid, TgDbCaller caller, String superscript) throws ApplicationException, java.rmi.RemoteException;
 
     java.util.Collection getStrainTypes(TgDbCaller caller) throws ApplicationException, java.rmi.RemoteException;
@@ -225,9 +229,9 @@ public interface ModelManagerRemoteBusiness {
 
     java.util.Collection getAvailabilityForModel(int eid) throws ApplicationException, java.rmi.RemoteException;
 
-    void addAvailabilityToModel(int eid, int rid, int aid, int stateid, int typeid) throws ApplicationException, java.rmi.RemoteException;
+    void addAvailabilityToModel(int eid, int rid, int aid, int stateid, int typeid, int strainid) throws ApplicationException, java.rmi.RemoteException;
     
-    void removeAvailabilityFromModel(int eid, int rid, int aid, int stateid, int typeid, org.tgdb.TgDbCaller caller) throws ApplicationException, java.rmi.RemoteException;
+    void removeAvailabilityFromModel(int eid, int rid, int aid, int stateid, int typeid, int strainid, org.tgdb.TgDbCaller caller) throws ApplicationException, java.rmi.RemoteException;
     
     org.tgdb.model.modelmanager.RepositoriesDTO returnRepositoryById(int rid) throws ApplicationException, java.rmi.RemoteException;
     

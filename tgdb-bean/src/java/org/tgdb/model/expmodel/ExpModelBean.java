@@ -523,6 +523,11 @@ public class ExpModelBean extends ExpObj implements javax.ejb.EntityBean, org.tg
         tmp = fdm.getValue("mutationtypes");
         if (tmp!=null && !tmp.equals("") && !tmp.equals("*"))
             mutationtypes = new Integer(tmp).intValue();
+
+        int strain = 0;
+        tmp = fdm.getValue("strain");
+        if (tmp!=null && !tmp.equals("") && tmp.compareTo("*")!=0)
+            strain = new Integer(tmp).intValue();
         
         String orderby ="";
         tmp = fdm.getValue("ordertype");
@@ -560,6 +565,11 @@ public class ExpModelBean extends ExpObj implements javax.ejb.EntityBean, org.tg
             if (mutationtypes!=0)
             {
                 sql += " and m.eid in (select eid from model where strain in (select strainid from strain where strainid in (select strainid from strain_allele where id in (select strainallele from r_mutation_type_strain_allele where mutationtype in (select id from mutation_type where id=?))))) ";
+            }
+
+            if (strain!=0)
+            {
+                sql += " and m.eid in (select model from r_model_strain where strain=? ) ";
             }
             
             if(!disslevel.equals("")){
@@ -610,6 +620,8 @@ public class ExpModelBean extends ExpObj implements javax.ejb.EntityBean, org.tg
                 ps.setString(i++, participant);
             if (mutationtypes!=0)
                 ps.setInt(i++, mutationtypes);
+            if (strain!=0)
+                ps.setInt(i++, strain);
             
             result = ps.executeQuery();
             

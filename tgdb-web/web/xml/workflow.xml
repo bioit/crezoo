@@ -4,6 +4,12 @@
     <workflow name="ExpModelInfo">
         <state name="info" viewURI="views/model/ExpModelInfo.jsp"/>
     </workflow>
+    <workflow name="Home">
+        <state name="home" viewURI="views/misc/Home.jsp"/>
+    </workflow>
+    <workflow name="About">
+        <state name="about" viewURI="views/misc/About.jsp"/>
+    </workflow>
     <workflow name="ViewModels">
         <state name="viewModelsPre" preaction="model.GetModelsAction"/>
         <state name="view" viewURI="views/model/ExpModelsView.jsp"/>
@@ -403,7 +409,7 @@
     </workflow>
     <workflow name="boot">
         <state name="boot" preaction="project.BeginAction"/>
-        <state workflow="ViewModels"/>
+        <state workflow="Home"/>
     </workflow>
     <workflow name="Login">
         <state name="login" viewURI="views/misc/Login.jsp" action="project.BeginAction"/>

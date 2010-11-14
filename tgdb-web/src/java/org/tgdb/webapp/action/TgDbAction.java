@@ -104,7 +104,7 @@ public abstract class TgDbAction extends Action {
     
     public boolean exists(String value) {
         
-        if(value != null && value.length() > 0)
+        if(value != null && value.length() > 0 && !value.equalsIgnoreCase("null"))
             return true;
         else
             return false;

@@ -9,7 +9,7 @@ import java.util.Iterator;
 
 public class StrainDTO implements Serializable, Comparable {
     
-    private int strainid;
+    private int strainid, models;
     
     private String designation, designation_ss, strain_links_string, strainTypeName, strainStateNames;
     
@@ -24,6 +24,8 @@ public class StrainDTO implements Serializable, Comparable {
             designation_ss = designation_ss.replaceAll("&lt;","<sup>").replaceAll("&gt;","</sup>");
 
             strain_links_string = strain.getStrain_links_string();
+
+            models = strain.getModels();
             
             Collection types = strain.getTypes();
             
@@ -86,7 +88,9 @@ public class StrainDTO implements Serializable, Comparable {
         return designation_ss;
     }
 
-    
+    public int getModels() {
+        return models;
+    }
     
     public String getStrainTypeNames(){
         return strainTypeName;

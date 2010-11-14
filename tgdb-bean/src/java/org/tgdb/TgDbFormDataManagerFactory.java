@@ -388,6 +388,7 @@ public class TgDbFormDataManagerFactory extends AbstractFormDataManagerFactory {
             formDataManager.putDefault("mutationtypes","");
             formDataManager.putDefault("ordertype","");
             formDataManager.putDefault("disslevel","");
+            formDataManager.putDefault("strain","");
         }
         
         else if (name == PHENOTREE) {

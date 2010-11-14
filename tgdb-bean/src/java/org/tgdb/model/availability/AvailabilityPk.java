@@ -9,6 +9,7 @@ public class AvailabilityPk implements Serializable {
     private Integer aid;
     private Integer stateid;
     private Integer typeid;
+    private Integer strainid;
     
     
     /** Creates a new instance of AvailabilityPk */
@@ -16,12 +17,13 @@ public class AvailabilityPk implements Serializable {
     }
     
     /** Creates a new instance of AvailabilityPk */
-    public AvailabilityPk(int eid, int rid, int aid, int stateid, int typeid) {
+    public AvailabilityPk(int eid, int rid, int aid, int stateid, int typeid, int strainid) {
         this.eid = new Integer(eid);
         this.rid = new Integer(rid);
         this.aid = new Integer(aid);
         this.stateid = new Integer(stateid);
         this.typeid = new Integer(typeid);
+        this.strainid = new Integer(strainid);
     }
     
     /**
@@ -35,7 +37,8 @@ public class AvailabilityPk implements Serializable {
                 pk.getEid().equals(eid) &&
                 pk.getAid().equals(aid) &&
                 pk.getStateid().equals(stateid) &&
-                pk.getTypeid().equals(typeid))
+                pk.getTypeid().equals(typeid) &&
+                pk.getStrainid().equals(strainid))
             return true;
         else 
             return false;
@@ -48,7 +51,7 @@ public class AvailabilityPk implements Serializable {
     public int hashCode()
     {
         String txt = new String();
-        txt += eid +" "+ rid +" "+ aid +" "+ stateid +" "+ typeid;
+        txt += eid +" "+ rid +" "+ aid +" "+ stateid +" "+ typeid +" "+ strainid;
         return txt.hashCode();
     }
 
@@ -90,6 +93,10 @@ public class AvailabilityPk implements Serializable {
      */
     public Integer getTypeid() {
         return typeid;
+    }
+
+    public Integer getStrainid() {
+        return strainid;
     }
     
 }

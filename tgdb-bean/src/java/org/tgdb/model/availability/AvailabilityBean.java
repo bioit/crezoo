@@ -12,6 +12,8 @@ import org.tgdb.model.strain.state.StrainStateRemote;
 import org.tgdb.model.strain.state.StrainStateRemoteHome;
 import org.tgdb.model.strain.type.StrainTypeRemote;
 import org.tgdb.model.strain.type.StrainTypeRemoteHome;
+import org.tgdb.model.strain.strain.StrainRemote;
+import org.tgdb.model.strain.strain.StrainRemoteHome;
 
 import org.tgdb.project.AbstractTgDbBean;
 import org.tgdb.project.project.ProjectRemoteHome;
@@ -30,7 +32,7 @@ import javax.ejb.ObjectNotFoundException;
 public class AvailabilityBean extends AbstractTgDbBean implements EntityBean, AvailabilityRemoteBusiness {
     private EntityContext context;
     
-    private int eid, rid, aid, stateid, typeid;
+    private int eid, rid, aid, stateid, typeid, strainid;
     
     private boolean dirty;
     private UserRemoteHome userHome;
@@ -40,6 +42,7 @@ public class AvailabilityBean extends AbstractTgDbBean implements EntityBean, Av
     private StrainStateRemoteHome stateHome;
     private StrainTypeRemoteHome typeHome;
     private ProjectRemoteHome projectHome;
+    private StrainRemoteHome strainHome;
     
     //ejb infrastructure methods
     //<editor-fold>
@@ -55,6 +58,7 @@ public class AvailabilityBean extends AbstractTgDbBean implements EntityBean, Av
         avgenbackHome = (AvailableGeneticBackgroundRemoteHome)locator.getHome(ServiceLocator.Services.AVAILABLE_GENETIC_BACKGROUNDS);
         stateHome = (StrainStateRemoteHome)locator.getHome(ServiceLocator.Services.STRAIN_STATE);
         typeHome = (StrainTypeRemoteHome)locator.getHome(ServiceLocator.Services.STRAIN_TYPE);
+        strainHome = (StrainRemoteHome)locator.getHome(ServiceLocator.Services.STRAIN);
     }
     
     /**
@@ -81,12 +85,13 @@ public class AvailabilityBean extends AbstractTgDbBean implements EntityBean, Av
         ResultSet result = null;
         try
         {
-            ps = conn.prepareStatement("delete from r_model_repositories_avgenback where eid = ? and rid=? and aid=? and stateid=? and typeid=?");
+            ps = conn.prepareStatement("delete from r_model_repositories_avgenback where eid = ? and rid=? and aid=? and stateid=? and typeid=? and strainid=?");
             ps.setInt(1, getEid());
             ps.setInt(2, getRid());
             ps.setInt(3, getAid());
             ps.setInt(4, getStateid());
             ps.setInt(5, getTypeid());
+            ps.setInt(6, getStrainid());
             
             //ps.execute();
             
@@ -125,6 +130,7 @@ public class AvailabilityBean extends AbstractTgDbBean implements EntityBean, Av
         aid = pk.getAid().intValue();
         stateid = pk.getStateid().intValue();
         typeid = pk.getTypeid().intValue();
+        strainid = pk.getStrainid().intValue();
         dirty = false;
     }
     
@@ -146,12 +152,13 @@ public class AvailabilityBean extends AbstractTgDbBean implements EntityBean, Av
         ResultSet result = null;
         try
         {
-            ps = conn.prepareStatement("select eid from r_model_repositories_avgenback where eid = ? and rid=? and aid=? and stateid=? and typeid=?");
+            ps = conn.prepareStatement("select eid from r_model_repositories_avgenback where eid = ? and rid=? and aid=? and stateid=? and typeid=? and strainid=?");
             ps.setInt(1, pk.getEid().intValue());
             ps.setInt(2, pk.getRid().intValue());
             ps.setInt(3, pk.getAid().intValue());
             ps.setInt(4, pk.getStateid().intValue());
             ps.setInt(5, pk.getTypeid().intValue());
+            ps.setInt(6, pk.getStrainid().intValue());
             
             result = ps.executeQuery();
             
@@ -179,13 +186,14 @@ public class AvailabilityBean extends AbstractTgDbBean implements EntityBean, Av
         ResultSet rs = null;
         try
         {
-            ps = conn.prepareStatement("select rid, aid, stateid, typeid from r_model_repositories_avgenback where eid = ?");
+            ps = conn.prepareStatement("select rid, aid, stateid, typeid, strainid from r_model_repositories_avgenback where eid = ?");
             ps.setInt(1, eid);
             
             int rid = 0;
             int aid = 0;
             int stateid = 0;
             int typeid = 0;
+            int strainid = 0;
             
             AvailabilityPk pk = null;
             
@@ -196,7 +204,8 @@ public class AvailabilityBean extends AbstractTgDbBean implements EntityBean, Av
                 aid = rs.getInt("aid");
                 stateid = rs.getInt("stateid");
                 typeid = rs.getInt("typeid");
-                pk = new AvailabilityPk(eid, rid, aid, stateid, typeid);
+                strainid = rs.getInt("strainid");
+                pk = new AvailabilityPk(eid, rid, aid, stateid, typeid, strainid);
                 arr.add(pk);
             }
         }
@@ -219,13 +228,14 @@ public class AvailabilityBean extends AbstractTgDbBean implements EntityBean, Av
         ResultSet rs = null;
         try
         {
-            ps = conn.prepareStatement("select eid, aid, stateid, typeid from r_model_repositories_avgenback where rid = ?");
+            ps = conn.prepareStatement("select eid, aid, stateid, typeid, strainid from r_model_repositories_avgenback where rid = ?");
             ps.setInt(1, rid);
             
             int eid = 0;
             int aid = 0;
             int stateid = 0;
             int typeid = 0;
+            int strainid = 0;
             
             AvailabilityPk pk = null;
             
@@ -236,7 +246,8 @@ public class AvailabilityBean extends AbstractTgDbBean implements EntityBean, Av
                 aid = rs.getInt("aid");
                 stateid = rs.getInt("stateid");
                 typeid = rs.getInt("typeid");
-                pk = new AvailabilityPk(eid, rid, aid, stateid, typeid);
+                strainid = rs.getInt("strainid");
+                pk = new AvailabilityPk(eid, rid, aid, stateid, typeid, strainid);
                 arr.add(pk);
             }
         }
@@ -299,6 +310,15 @@ public class AvailabilityBean extends AbstractTgDbBean implements EntityBean, Av
         this.typeid = typeid;
         dirty = true;
     }
+
+    public int getStrainid() {
+        return strainid;
+    }
+
+    public void setStrainid(int strainid) {
+        this.strainid = strainid;
+        dirty = true;
+    }
     
     public ExpModelRemote getModel() {
         ExpModelRemote model = null;
@@ -311,6 +331,19 @@ public class AvailabilityBean extends AbstractTgDbBean implements EntityBean, Av
             e.printStackTrace();
         }
         return model;
+    }
+
+    public StrainRemote getStrain() {
+        StrainRemote strain = null;
+        try
+        {
+            strain = strainHome.findByPrimaryKey(new Integer(strainid));
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return strain;
     }
     
     public RepositoriesRemote getRepository() {
@@ -363,6 +396,20 @@ public class AvailabilityBean extends AbstractTgDbBean implements EntityBean, Av
             e.printStackTrace();
         }
         return type;
+    }
+
+    public String getStrainDesignation() {
+        String designation = "";
+        try
+        {
+           StrainRemote strain = strainHome.findByPrimaryKey(new Integer(strainid));
+           designation = strain.getDesignation();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return designation;
     }
     
     public String getRepositoryName() {
@@ -453,7 +500,7 @@ public class AvailabilityBean extends AbstractTgDbBean implements EntityBean, Av
     
     //create+postcreate methods
     //<editor-fold>
-    public AvailabilityPk ejbCreate(org.tgdb.model.expmodel.ExpModelRemote model, org.tgdb.model.repositories.RepositoriesRemote repository, org.tgdb.model.availablegeneticbackgrounds.AvailableGeneticBackgroundRemote avgenback, org.tgdb.model.strain.state.StrainStateRemote state, org.tgdb.model.strain.type.StrainTypeRemote type) throws javax.ejb.CreateException {
+    public AvailabilityPk ejbCreate(org.tgdb.model.expmodel.ExpModelRemote model, org.tgdb.model.repositories.RepositoriesRemote repository, org.tgdb.model.availablegeneticbackgrounds.AvailableGeneticBackgroundRemote avgenback, org.tgdb.model.strain.state.StrainStateRemote state, org.tgdb.model.strain.type.StrainTypeRemote type, StrainRemote strain) throws javax.ejb.CreateException {
         makeConnection();
         PreparedStatement ps = null;
         AvailabilityPk pk = null;
@@ -464,18 +511,18 @@ public class AvailabilityBean extends AbstractTgDbBean implements EntityBean, Av
             setAid(avgenback.getAid());
             setStateid(state.getId());
             setTypeid(type.getId());
+            setStrainid(strain.getStrainid());
             
-            ps = conn.prepareStatement("insert into r_model_repositories_avgenback (eid,rid,aid,stateid,typeid) values (?,?,?,?,?)");
+            ps = conn.prepareStatement("insert into r_model_repositories_avgenback (eid,rid,aid,stateid,typeid,strainid) values (?,?,?,?,?,?)");
             ps.setInt(1, model.getEid());
             ps.setInt(2, repository.getRid());
             ps.setInt(3, avgenback.getAid());
             ps.setInt(4, state.getId());
             ps.setInt(5, type.getId());
+            ps.setInt(6, strain.getStrainid());
             ps.execute();
             
-            pk = new AvailabilityPk(model.getEid(),
-                repository.getRid(),
-                avgenback.getAid(), state.getId(), type.getId());
+            pk = new AvailabilityPk(model.getEid(), repository.getRid(), avgenback.getAid(), state.getId(), type.getId(), strain.getStrainid());
             dirty = false;
         }
         catch (Exception e)
@@ -490,7 +537,7 @@ public class AvailabilityBean extends AbstractTgDbBean implements EntityBean, Av
         return pk;
     }
 
-    public void ejbPostCreate(org.tgdb.model.expmodel.ExpModelRemote model, org.tgdb.model.repositories.RepositoriesRemote repository, org.tgdb.model.availablegeneticbackgrounds.AvailableGeneticBackgroundRemote avgenback, org.tgdb.model.strain.state.StrainStateRemote state, org.tgdb.model.strain.type.StrainTypeRemote type) throws javax.ejb.CreateException {
+    public void ejbPostCreate(org.tgdb.model.expmodel.ExpModelRemote model, org.tgdb.model.repositories.RepositoriesRemote repository, org.tgdb.model.availablegeneticbackgrounds.AvailableGeneticBackgroundRemote avgenback, org.tgdb.model.strain.state.StrainStateRemote state, org.tgdb.model.strain.type.StrainTypeRemote type, StrainRemote strain) throws javax.ejb.CreateException {
         //TODO implement ejbPostCreate
     }
     

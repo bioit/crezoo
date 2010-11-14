@@ -4,8 +4,8 @@ import org.tgdb.model.availability.AvailabilityRemote;
 import java.io.Serializable;
 
 public class AvailabilityDTO implements Serializable {
-    private int eid, rid, aid, stateid, typeid;
-    private String reponame, avbackname, statename, typename;
+    private int eid, rid, aid, stateid, typeid, strainid;
+    private String reponame, avbackname, statename, typename, straindesignation, straindesignation_ss;
     private String stateabbr, typeabbr;
     
     
@@ -23,6 +23,10 @@ public AvailabilityDTO(AvailabilityRemote availability) {
             typename = availability.getTypeName();
             stateabbr = availability.getStateAbbr();
             typeabbr = availability.getTypeAbbr();
+            strainid = availability.getStrainid();
+            straindesignation = availability.getStrainDesignation().replaceAll("<","&lt;").replaceAll(">","&gt;");
+            straindesignation_ss = availability.getStrainDesignation().replaceAll("<","&lt;").replaceAll(">","&gt;");
+            straindesignation_ss = straindesignation_ss.replaceAll("&lt;","<sup>").replaceAll("&gt;","</sup>");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -47,6 +51,10 @@ public AvailabilityDTO(AvailabilityRemote availability) {
     public int getTypeid(){
         return typeid;
     }
+
+    public int getStrainid() {
+        return strainid;
+    }
     
     public java.lang.String getReponame(){
         return reponame;
@@ -70,5 +78,13 @@ public AvailabilityDTO(AvailabilityRemote availability) {
     
     public java.lang.String getTypeabbr(){
         return typeabbr;
+    }
+
+    public String getStraindesignation() {
+        return straindesignation;
+    }
+
+    public String getStraindesignation_ss() {
+        return straindesignation_ss;
     }
 }

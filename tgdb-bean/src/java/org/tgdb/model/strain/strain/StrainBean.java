@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import javax.ejb.*;
+import org.tgdb.model.expmodel.ExpModelRemoteHome;
 import org.tgdb.model.modelmanager.StrainLinkDTO;
 
 public class StrainBean extends AbstractTgDbBean implements EntityBean, StrainRemoteBusiness
@@ -33,6 +34,7 @@ public class StrainBean extends AbstractTgDbBean implements EntityBean, StrainRe
     
     private StrainTypeRemoteHome strainTypeHome;
     private StrainStateRemoteHome strainStateHome;
+    private ExpModelRemoteHome modelHome;
 //    private StrainAlleleRemoteHome strainAlleleHome;
     
     //ejb methods
@@ -41,6 +43,7 @@ public class StrainBean extends AbstractTgDbBean implements EntityBean, StrainRe
         context = aContext;
         strainTypeHome = (StrainTypeRemoteHome)locator.getHome(ServiceLocator.Services.STRAIN_TYPE);
         strainStateHome = (StrainStateRemoteHome)locator.getHome(ServiceLocator.Services.STRAIN_STATE);
+        modelHome = (ExpModelRemoteHome)locator.getHome(ServiceLocator.Services.EXPMODEL);
 //        strainAlleleHome = (StrainAlleleRemoteHome)locator.getHome(ServiceLocator.Services.STRAIN_ALLELE);
     }
     
@@ -213,6 +216,29 @@ public class StrainBean extends AbstractTgDbBean implements EntityBean, StrainRe
         return arr;
     }
 
+    public Collection ejbFindConnectedToModels(TgDbCaller caller) throws javax.ejb.FinderException {
+        makeConnection();
+        this.caller = caller;
+        Collection arr = new ArrayList();
+
+        PreparedStatement ps = null;
+        ResultSet result = null;
+        try {
+
+            ps = conn.prepareStatement("select distinct(strain) as strainid from r_model_strain");
+            result = ps.executeQuery();
+
+            while (result.next()) {
+                arr.add(new Integer(result.getInt("strainid")));
+            }
+        } catch (SQLException se) {
+            throw new FinderException("StrainBean#ejbFindByModel: unable to find strains connected to models \n"+se.getMessage());
+        } finally {
+            releaseConnection();
+        }
+        return arr;
+    }
+
     public Collection ejbFindUnassigned(int model, TgDbCaller caller) throws javax.ejb.FinderException {
         makeConnection();
         this.caller = caller;
@@ -287,6 +313,17 @@ public class StrainBean extends AbstractTgDbBean implements EntityBean, StrainRe
 //        this.mgiid = mgiid;
 //        dirty = true;
 //    }
+
+    public int getModels(){
+        int models = 0;
+        try {
+            models = modelHome.findByStrain(strainid,caller).size();
+        }
+        catch (Exception e) {
+            logger.error(getStackTrace(e));
+        }
+        return models;
+    }
     
     public Collection getTypes(){
         Collection arr = null;

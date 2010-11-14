@@ -145,3 +145,7 @@ tr.alternatingTwo {
 tr.alternatingOne td, tr.alternatingTwo td {
 	padding: 5px;
 }
+
+tr.alternatingOne td hr, tr.alternatingTwo td hr {
+	color: #dddda6; background-color: #dddda6; border: 0; height: 2px; width: 100%
+}

@@ -64,23 +64,36 @@
                                         </m:hide>
                                     </span>
                                     <table class="block_data">
-                                        <tr>
+                                        <!--tr>
                                             <th class="data" width="20%">Repository</th>
-                                            <th class="data" width="30%">Available Genetic Background</th>
+                                            <th class="data" width="20%">Strain Designation</th>
+                                            <th class="data" width="20%">Available Genetic Background</th>
                                             <th class="data" width="20%">Strain State</th>
-                                            <th class="data" width="20%">Strain Type</th>
+                                            <th class="data" width="10%">Strain Type</th>
                                             <th class="data" width="10%">&nbsp;</th>
-                                        </tr>
+                                        </tr-->
                                         <m:iterate-collection collection="availability">
                                             <tr class="#?alt#">
-                                                <td>#:getReponame#</td>
+                                                <!--td>#:getReponame#</td>
+                                                <td>#:getStraindesignation_ss#</td>
                                                 <td>#:getAvbackname#</td>
                                                 <td>#:getStatename#</td>
-                                                <td>#:getTypename#</td>
+                                                <td>#:getTypename#</td-->
+                                                <td width="90%">
+                                                    <i style="margin-left: 20px; font-weight:bold">Repository:</i> #:getReponame#
+                                                    <hr/>
+                                                    <i style="margin-left: 20px; font-weight:bold">Strain Designation:</i> #:getStraindesignation_ss#
+                                                    <hr/>
+                                                    <i style="margin-left: 20px; font-weight:bold">Available Genetic Background:</i> #:getAvbackname#
+                                                    <hr/>
+                                                    <i style="margin-left: 20px; font-weight:bold">Strain State:</i> #:getStatename#
+                                                    <hr/>
+                                                    <i style="margin-left: 20px; font-weight:bold">Strain Type:</i> #:getTypename#
+                                                </td>
                                                 <td>
                                                     <m:hide privilege="MODEL_W" suid="<%=modeldto.getSuid()%>">
                                                         <% if (edithis == 13) {%>
-                                                        <a href="Controller?workflow=UnAssignAvailability&amp;eid=<jsp:getProperty name="modeldto" property="eid"/>&amp;rid=#:getRid#&amp;aid=#:getAid#&amp;stateid=#:getStateid#&amp;typeid=#:getTypeid#" onclick="return confirm('Remove Availability?')" class="navtext">delete</a>
+                                                        <a href="Controller?workflow=UnAssignAvailability&amp;eid=<jsp:getProperty name="modeldto" property="eid"/>&amp;rid=#:getRid#&amp;aid=#:getAid#&amp;stateid=#:getStateid#&amp;typeid=#:getTypeid#&amp;strainid=#:getStrainid#" onclick="return confirm('Remove Availability?')" class="navtext">delete</a>
                                                         <% }%>
                                                     </m:hide>
                                                 </td>
@@ -341,17 +354,33 @@
                                         </m:hide>
                                     </span>
                                     <table class="block_data">
-                                        <tr>
+                                        <!--tr>
                                             <th class="data" width="10%">Anatomy</th>
                                             <th class="data" width="10%">Comment</th>
                                             <th class="data" width="70%">Picture</th>
                                             <th class="data" width="10%">&nbsp;</th>
-                                        </tr>
+                                        </tr-->
                                         <m:iterate-collection collection="expressions">
                                             <tr class="#?alt#">
-                                                <td>#:getExanatomy#</td>
+                                                <!--td>#:getExanatomy#</td>
                                                 <td>#:getExcomm#</td>
-                                                <td>#:getExfiletable#</td>
+                                                <td>#:getExfiletable#
+                                                    <hr/>
+                                                #:getEmap_terms#
+                                                <hr/>
+                                                #:getMa_terms#
+                                                </td-->
+                                                <td width="90%">
+                                                    <i style="margin-left: 20px; font-weight:bold">Anatomy:</i> #:getExanatomy#
+                                                    <hr/>
+                                                    <i style="margin-left: 20px; font-weight:bold">Comment:</i> #:getExcomm#
+                                                    <hr/>
+                                                    <i style="margin-left: 20px; font-weight:bold">Images:</i> #:getExfiletable#
+                                                    <hr/>
+                                                    <i style="margin-left: 20px; font-weight:bold">Site of Expression:</i> #:getMa_terms#
+                                                    <hr/>
+                                                    <i style="margin-left: 20px; font-weight:bold">Developmental Stage:</i> #:getEmap_terms#
+                                                </td>
                                                 <td>
                                                     <m:hide privilege="MODEL_W" suid="<%=modeldto.getSuid()%>">
                                                         <% if (edithis == 13) {%>

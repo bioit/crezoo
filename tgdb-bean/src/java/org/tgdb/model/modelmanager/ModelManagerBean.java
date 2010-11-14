@@ -1709,8 +1709,29 @@ public class ModelManagerBean extends AbstractTgDbBean implements javax.ejb.Sess
             Collection expressions = expressionHome.findByModel(eid);
             Collection dtos = new ArrayList();
             Iterator i = expressions.iterator();
-            while(i.hasNext()) {                
-                dtos.add(new ExpressionModelDTO((ExpressionModelRemote)i.next()));
+            while(i.hasNext()) {
+                ExpressionModelRemote expression = (ExpressionModelRemote)i.next();
+                ExpressionModelDTO expression_dto = new ExpressionModelDTO(expression);
+
+                //get the emaps first
+                String emap_terms = "";
+                Iterator j = expression.getOntologyTerms("EMAP").iterator();
+                while(j.hasNext()) {
+                    OlsDTO tmp = (OlsDTO)j.next();
+                    emap_terms += "[" + tmp.getOid() + "] " + getTermById(tmp.getOid(), tmp.getNamespace()) + " &bull; ";
+                }
+                expression_dto.setEmap_terms(emap_terms);
+
+                //now get the mas
+                String ma_terms = "";
+                Iterator k = expression.getOntologyTerms("MA").iterator();
+                while(k.hasNext()) {
+                    OlsDTO tmp = (OlsDTO)k.next();
+                    ma_terms += "[" + tmp.getOid() + "] " + getTermById(tmp.getOid(), tmp.getNamespace()) + " &bull; ";
+                }
+                expression_dto.setMa_terms(ma_terms);
+
+                dtos.add(expression_dto);
             }
             
             return dtos;
@@ -2343,6 +2364,42 @@ public class ModelManagerBean extends AbstractTgDbBean implements javax.ejb.Sess
             return strainDTOs;
         } catch (Exception e) {
             e.printStackTrace();
+            throw new ApplicationException("Failed to get strains.");
+        }
+    }
+
+    public Collection getStrainsConnectedToModels(TgDbCaller caller) throws ApplicationException{
+        try {
+            Collection strains = strainHome.findConnectedToModels(caller);
+
+
+            Collection strainDTOs = new ArrayList();
+            Iterator i = strains.iterator();
+            while(i.hasNext()) {
+                strainDTOs.add(new StrainDTO((StrainRemote)i.next()));
+            }
+
+            return strainDTOs;
+        } catch (Exception e) {
+//            logger.error(getStackTrace(e));
+            throw new ApplicationException("Failed to get strains.");
+        }
+    }
+
+    public Collection getStrainsConnectedToModel(int eid, TgDbCaller caller) throws ApplicationException{
+        try {
+            Collection strains = strainHome.findByModel(eid, caller);
+
+
+            Collection strainDTOs = new ArrayList();
+            Iterator i = strains.iterator();
+            while(i.hasNext()) {
+                strainDTOs.add(new StrainDTO((StrainRemote)i.next()));
+            }
+
+            return strainDTOs;
+        } catch (Exception e) {
+//            logger.error(getStackTrace(e));
             throw new ApplicationException("Failed to get strains.");
         }
     }
@@ -3180,15 +3237,16 @@ public class ModelManagerBean extends AbstractTgDbBean implements javax.ejb.Sess
         }
     }
     
-    public void addAvailabilityToModel(int eid, int rid, int aid, int stateid, int typeid) throws ApplicationException {
+    public void addAvailabilityToModel(int eid, int rid, int aid, int stateid, int typeid, int strainid) throws ApplicationException {
         try {
             ExpModelRemote model = modelHome.findByPrimaryKey(new Integer(eid));
             RepositoriesRemote repository = repositoriesHome.findByPrimaryKey(new Integer(rid));
             AvailableGeneticBackgroundRemote avgenback = avgenbackHome.findByPrimaryKey(new Integer(aid));
             StrainStateRemote state = strainStateHome.findByPrimaryKey(new Integer(stateid));
             StrainTypeRemote type = strainTypeHome.findByPrimaryKey(new Integer(typeid));
+            StrainRemote strain = strainHome.findByPrimaryKey(new Integer(strainid));
             
-            AvailabilityRemote availability = availabilityHome.create(model, repository, avgenback, state, type);
+            AvailabilityRemote availability = availabilityHome.create(model, repository, avgenback, state, type, strain);
             
         } catch (Exception e) {
             e.printStackTrace();
@@ -3196,10 +3254,10 @@ public class ModelManagerBean extends AbstractTgDbBean implements javax.ejb.Sess
         }        
     }
     
-    public void removeAvailabilityFromModel(int eid, int rid, int aid, int stateid, int typeid, org.tgdb.TgDbCaller caller) throws ApplicationException {
+    public void removeAvailabilityFromModel(int eid, int rid, int aid, int stateid, int typeid, int strainid, org.tgdb.TgDbCaller caller) throws ApplicationException {
         try {
             validate("MODEL_W", caller);
-            AvailabilityRemote availability = availabilityHome.findByPrimaryKey(new AvailabilityPk(eid, rid, aid, stateid, typeid));
+            AvailabilityRemote availability = availabilityHome.findByPrimaryKey(new AvailabilityPk(eid, rid, aid, stateid, typeid, strainid));
             availability.remove();
             
         } catch (Exception e) {
@@ -3977,7 +4035,8 @@ public class ModelManagerBean extends AbstractTgDbBean implements javax.ejb.Sess
                         //start working on the availability of the tg mouse
                         int av_gen_back_id = 57000;
                         if(tg_mouse[2].indexOf(",")==-1 && tg_mouse[3].indexOf(",")==-1){
-                            addAvailabilityToModel(tmp_eid, repo, av_gen_back_id, getStrainStateId(tg_mouse[3].trim(), caller), getStrainTypeId(tg_mouse[2].trim(), caller));
+                            //FIX ME - Find the strain id properly!!!
+                            addAvailabilityToModel(tmp_eid, repo, av_gen_back_id, getStrainStateId(tg_mouse[3].trim(), caller), getStrainTypeId(tg_mouse[2].trim(), caller), 666);
                         }else{
                             String [] tmp_types = null;
                             String [] tmp_states = null;
@@ -3998,7 +4057,8 @@ public class ModelManagerBean extends AbstractTgDbBean implements javax.ejb.Sess
                             
                             if(tmp_types.length == tmp_states.length){
                                 for(int some_i=0; some_i < tmp_states.length; some_i++){
-                                    addAvailabilityToModel(tmp_eid, repo, av_gen_back_id, getStrainStateId(tmp_states[some_i].trim(), caller), getStrainTypeId(tmp_types[some_i].trim(), caller));
+                                    //FIX ME - Find the strain id properly!!!
+                                    addAvailabilityToModel(tmp_eid, repo, av_gen_back_id, getStrainStateId(tmp_states[some_i].trim(), caller), getStrainTypeId(tmp_types[some_i].trim(), caller), 666);
                                 }
                                 
                             }else{
@@ -4006,18 +4066,21 @@ public class ModelManagerBean extends AbstractTgDbBean implements javax.ejb.Sess
                                 int min_tmp = returnMin(tmp_states.length, tmp_types.length);
                                 
                                 for(int some_ii=0; some_ii < min_tmp; some_ii++){
-                                    addAvailabilityToModel(tmp_eid, repo, av_gen_back_id, getStrainStateId(tmp_states[some_ii].trim(), caller), getStrainTypeId(tmp_types[some_ii].trim(), caller));
+                                    //FIX ME - Find the strain id properly!!!
+                                    addAvailabilityToModel(tmp_eid, repo, av_gen_back_id, getStrainStateId(tmp_states[some_ii].trim(), caller), getStrainTypeId(tmp_types[some_ii].trim(), caller), 666);
                                 }
                                 
                                 if(tmp_states.length == max_tmp){
                                     for(int some_iii=min_tmp; some_iii < max_tmp; some_iii++){
-                                        addAvailabilityToModel(tmp_eid, repo, av_gen_back_id, getStrainStateId(tmp_states[some_iii].trim(), caller), getStrainTypeId(tmp_types[min_tmp-1].trim(), caller));
+                                        //FIX ME - Find the strain id properly!!!
+                                        addAvailabilityToModel(tmp_eid, repo, av_gen_back_id, getStrainStateId(tmp_states[some_iii].trim(), caller), getStrainTypeId(tmp_types[min_tmp-1].trim(), caller), 666);
                                     }
                                 }//case states are more than types
                                 
                                 if(tmp_types.length == max_tmp){
                                    for(int some_iiii=min_tmp; some_iiii < max_tmp; some_iiii++){
-                                        addAvailabilityToModel(tmp_eid, repo, av_gen_back_id, getStrainStateId(tmp_states[min_tmp-1].trim(), caller), getStrainTypeId(tmp_types[some_iiii].trim(), caller));
+                                       //FIX ME - Find the strain id properly!!!
+                                        addAvailabilityToModel(tmp_eid, repo, av_gen_back_id, getStrainStateId(tmp_states[min_tmp-1].trim(), caller), getStrainTypeId(tmp_types[some_iiii].trim(), caller), 666);
                                     } 
                                 }//case types are more than states
                             }
@@ -4082,7 +4145,8 @@ public class ModelManagerBean extends AbstractTgDbBean implements javax.ejb.Sess
                         //start working on the availability of the tg mouse
                         int av_gen_back_id = 57000;
                         if(tg_mouse[2].indexOf(",")==-1 && tg_mouse[3].indexOf(",")==-1){
-                            addAvailabilityToModel(tmp_eid, repo, av_gen_back_id, getStrainStateId(tg_mouse[3].trim(), caller), getStrainTypeId(tg_mouse[2].trim(), caller));
+                            //FIX ME - Find the strain id properly!!!
+                            addAvailabilityToModel(tmp_eid, repo, av_gen_back_id, getStrainStateId(tg_mouse[3].trim(), caller), getStrainTypeId(tg_mouse[2].trim(), caller), 666);
                         }else{
                             String [] tmp_types = null;
                             String [] tmp_states = null;
@@ -4103,7 +4167,8 @@ public class ModelManagerBean extends AbstractTgDbBean implements javax.ejb.Sess
                             
                             if(tmp_types.length == tmp_states.length){
                                 for(int some_i=0; some_i < tmp_states.length; some_i++){
-                                    addAvailabilityToModel(tmp_eid, repo, av_gen_back_id, getStrainStateId(tmp_states[some_i].trim(), caller), getStrainTypeId(tmp_types[some_i].trim(), caller));
+                                    //FIX ME - Find the strain id properly!!!
+                                    addAvailabilityToModel(tmp_eid, repo, av_gen_back_id, getStrainStateId(tmp_states[some_i].trim(), caller), getStrainTypeId(tmp_types[some_i].trim(), caller), 666);
                                 }
                                 
                             }else{
@@ -4111,18 +4176,21 @@ public class ModelManagerBean extends AbstractTgDbBean implements javax.ejb.Sess
                                 int min_tmp = returnMin(tmp_states.length, tmp_types.length);
                                 
                                 for(int some_ii=0; some_ii < min_tmp; some_ii++){
-                                    addAvailabilityToModel(tmp_eid, repo, av_gen_back_id, getStrainStateId(tmp_states[some_ii].trim(), caller), getStrainTypeId(tmp_types[some_ii].trim(), caller));
+                                    //FIX ME - Find the strain id properly!!!
+                                    addAvailabilityToModel(tmp_eid, repo, av_gen_back_id, getStrainStateId(tmp_states[some_ii].trim(), caller), getStrainTypeId(tmp_types[some_ii].trim(), caller), 666);
                                 }
                                 
                                 if(tmp_states.length == max_tmp){
                                     for(int some_iii=min_tmp; some_iii < max_tmp; some_iii++){
-                                        addAvailabilityToModel(tmp_eid, repo, av_gen_back_id, getStrainStateId(tmp_states[some_iii].trim(), caller), getStrainTypeId(tmp_types[min_tmp-1].trim(), caller));
+                                        //FIX ME - Find the strain id properly!!!
+                                        addAvailabilityToModel(tmp_eid, repo, av_gen_back_id, getStrainStateId(tmp_states[some_iii].trim(), caller), getStrainTypeId(tmp_types[min_tmp-1].trim(), caller), 666);
                                     }
                                 }//case states are more than types
                                 
                                 if(tmp_types.length == max_tmp){
                                    for(int some_iiii=min_tmp; some_iiii < max_tmp; some_iiii++){
-                                        addAvailabilityToModel(tmp_eid, repo, av_gen_back_id, getStrainStateId(tmp_states[min_tmp-1].trim(), caller), getStrainTypeId(tmp_types[some_iiii].trim(), caller));
+                                       //FIX ME - Find the strain id properly!!!
+                                        addAvailabilityToModel(tmp_eid, repo, av_gen_back_id, getStrainStateId(tmp_states[min_tmp-1].trim(), caller), getStrainTypeId(tmp_types[some_iiii].trim(), caller), 666);
                                     } 
                                 }//case types are more than states
                             }
@@ -4206,7 +4274,8 @@ public class ModelManagerBean extends AbstractTgDbBean implements javax.ejb.Sess
                         //start working on the availability of the tg mouse
                         int av_gen_back_id = 57000;
                         if(tg_mouse[2].indexOf(",")==-1 && tg_mouse[3].indexOf(",")==-1){
-                            addAvailabilityToModel(tmp_eid, repo, av_gen_back_id, getStrainStateId(tg_mouse[3].trim(), caller), getStrainTypeId(tg_mouse[2].trim(), caller));
+                            //FIX ME - Find the strain id properly!!!
+                            addAvailabilityToModel(tmp_eid, repo, av_gen_back_id, getStrainStateId(tg_mouse[3].trim(), caller), getStrainTypeId(tg_mouse[2].trim(), caller), 666);
                         }else{
                             String [] tmp_types = null;
                             String [] tmp_states = null;
@@ -4227,7 +4296,8 @@ public class ModelManagerBean extends AbstractTgDbBean implements javax.ejb.Sess
                             
                             if(tmp_types.length == tmp_states.length){
                                 for(int some_i=0; some_i < tmp_states.length; some_i++){
-                                    addAvailabilityToModel(tmp_eid, repo, av_gen_back_id, getStrainStateId(tmp_states[some_i].trim(), caller), getStrainTypeId(tmp_types[some_i].trim(), caller));
+                                    //FIX ME - Find the strain id properly!!!
+                                    addAvailabilityToModel(tmp_eid, repo, av_gen_back_id, getStrainStateId(tmp_states[some_i].trim(), caller), getStrainTypeId(tmp_types[some_i].trim(), caller), 666);
                                 }
                                 
                             }else{
@@ -4235,18 +4305,21 @@ public class ModelManagerBean extends AbstractTgDbBean implements javax.ejb.Sess
                                 int min_tmp = returnMin(tmp_states.length, tmp_types.length);
                                 
                                 for(int some_ii=0; some_ii < min_tmp; some_ii++){
-                                    addAvailabilityToModel(tmp_eid, repo, av_gen_back_id, getStrainStateId(tmp_states[some_ii].trim(), caller), getStrainTypeId(tmp_types[some_ii].trim(), caller));
+                                    //FIX ME - Find the strain id properly!!!
+                                    addAvailabilityToModel(tmp_eid, repo, av_gen_back_id, getStrainStateId(tmp_states[some_ii].trim(), caller), getStrainTypeId(tmp_types[some_ii].trim(), caller), 666);
                                 }
                                 
                                 if(tmp_states.length == max_tmp){
                                     for(int some_iii=min_tmp; some_iii < max_tmp; some_iii++){
-                                        addAvailabilityToModel(tmp_eid, repo, av_gen_back_id, getStrainStateId(tmp_states[some_iii].trim(), caller), getStrainTypeId(tmp_types[min_tmp-1].trim(), caller));
+                                        //FIX ME - Find the strain id properly!!!
+                                        addAvailabilityToModel(tmp_eid, repo, av_gen_back_id, getStrainStateId(tmp_states[some_iii].trim(), caller), getStrainTypeId(tmp_types[min_tmp-1].trim(), caller), 666);
                                     }
                                 }//case states are more than types
                                 
                                 if(tmp_types.length == max_tmp){
                                    for(int some_iiii=min_tmp; some_iiii < max_tmp; some_iiii++){
-                                        addAvailabilityToModel(tmp_eid, repo, av_gen_back_id, getStrainStateId(tmp_states[min_tmp-1].trim(), caller), getStrainTypeId(tmp_types[some_iiii].trim(), caller));
+                                       //FIX ME - Find the strain id properly!!!
+                                        addAvailabilityToModel(tmp_eid, repo, av_gen_back_id, getStrainStateId(tmp_states[min_tmp-1].trim(), caller), getStrainTypeId(tmp_types[some_iiii].trim(), caller), 666);
                                     } 
                                 }//case types are more than states
                             }

@@ -34,6 +34,14 @@
                     </td>
                 </tr>
                 <tr>
+                    <td><b>Strain</b></td>
+                </tr>
+                <tr>
+                    <td>
+                        <m:checkbox collection="strains" name="strainid" idGetter="getStrainId" textGetter="getDesignation" emptyOption="false"/>
+                    </td>
+                </tr>
+                <tr>
                     <td><b>Strain State</b></td>
                 </tr>
                 <tr>

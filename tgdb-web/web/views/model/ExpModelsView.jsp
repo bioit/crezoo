@@ -29,14 +29,14 @@
             </table>
             <table class="data">
                 <tr>
-                    <th class="data" width="10%"><input type="submit" title="order by ID" name="byID" value="ID" /></th>
-                    <th class="data" width="70%"><input type="submit" title="order by line name" name="byNAME" value="Line Name" /></th>
+                    <!--th class="data" width="10%"><input type="submit" title="order by ID" name="byID" value="ID" /></th-->
+                    <th class="data" width="80%"><input type="submit" title="order by line name" name="byNAME" value="Line Name" /></th>
                     <th class="data"><input type="submit" title="order by last update" name="byDATE" value="Last Update" /></th>
                 </tr>
                 <m:iterate-collection collection="modelsdto">
                     <tr class="#?alt#">
-                        <td width="10%">#:getAccNr#</td>
-                        <td width="70%"><a href="Controller?workflow=ViewModel&amp;eid=#:getEid#" class="indexmain">#:getLineName_ss#</a></td>
+                        <!--td width="10%">#:getAccNr#</td-->
+                        <td width="80%"><a href="Controller?workflow=ViewModel&amp;eid=#:getEid#" class="indexmain">#:getLineName_ss#</a></td>
                         <td>#:getTs#</td>
                     </tr>
                 </m:iterate-collection>
@@ -53,7 +53,9 @@
             <tr valign="bottom">
                 <td>
 				narrow index by <b>transgene:</b> &nbsp;<m:checkbox collection="genes" onChange="this.form.submit()" name="gaid" idGetter="getGaid" textGetter="getName" selected="<%=fdm.getValue("gaid")%>" wildcardOption="true"/>
-                &nbsp;and/or&nbsp;<b>researcher:</b> &nbsp;<m:checkbox collection="researchers" onChange="this.form.submit()" name="participantname" idGetter="toString" textGetter="toString" selected="<%=fdm.getValue("participantname")%>" wildcardOption="true"/></td>
+                &nbsp;and/or&nbsp;<b>researcher:</b> &nbsp;<m:checkbox collection="researchers" onChange="this.form.submit()" name="participantname" idGetter="toString" textGetter="toString" selected="<%=fdm.getValue("participantname")%>" wildcardOption="true"/>
+                &nbsp;and/or&nbsp;<b>strain:</b> &nbsp;<m:checkbox collection="strains" onChange="this.form.submit()" name="strain" idGetter="getStrainId" textGetter="getDesignation" selected="<%=fdm.getValue("strain")%>" wildcardOption="true"/></td>
+                </td>
             </tr>
         </table>
        </form>

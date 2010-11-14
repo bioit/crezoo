@@ -1,27 +1,13 @@
-/*
- * AssignAvailabilityAction.java
- *
- * Created on July 18, 2006, 12:10 PM
- *
- * To change this template, choose Tools | Options and locate the template under
- * the Source Creation and Management node. Right-click the template and choose
- * Open. You can then make changes to the template in the Source Editor.
- */
-
 package org.tgdb.webapp.action.model;
 
-import org.tgdb.frame.advanced.Workflow;
-import org.tgdb.TgDbCaller;
 import org.tgdb.exceptions.ApplicationException;
 import org.tgdb.webapp.action.TgDbAction;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import org.tgdb.TgDbFormDataManagerFactory;
+import org.tgdb.form.FormDataManager;
 
 
-/**
- *
- * @author zouberakis
- */
 public class AssignAvailabilityAction extends TgDbAction {
     
     public String getName() {
@@ -31,16 +17,19 @@ public class AssignAvailabilityAction extends TgDbAction {
     public boolean performAction(HttpServletRequest request, ServletContext context) throws ApplicationException {
         try {
             
-            TgDbCaller caller = (TgDbCaller)request.getSession().getAttribute("caller");
-            Workflow wf = (Workflow)request.getAttribute("workflow");
-            
-            int eid = new Integer(wf.getAttribute("eid")).intValue();
+//            TgDbCaller _caller = (TgDbCaller)request.getSession().getAttribute("caller");
+//            Workflow wf = (Workflow)request.getAttribute("workflow");
+//
+//            int eid = new Integer(wf.getAttribute("eid")).intValue();
+            FormDataManager fdm = getFormDataManager(TgDbFormDataManagerFactory.EXPMODEL, TgDbFormDataManagerFactory.WEB_FORM, request);
+            int eid = new Integer(fdm.getValue("eid")).intValue();
             int rid = new Integer(request.getParameter("repositories")).intValue();
             int aid = new Integer(request.getParameter("avgenbacks")).intValue();
             int stateid = new Integer(request.getParameter("state")).intValue();
             int typeid = new Integer(request.getParameter("type")).intValue();
+            int strainid = new Integer(request.getParameter("strainid")).intValue();
                  
-            modelManager.addAvailabilityToModel(eid, rid, aid, stateid, typeid);
+            modelManager.addAvailabilityToModel(eid, rid, aid, stateid, typeid, strainid);
             
             return true;
         } catch (ApplicationException e) {

@@ -41,7 +41,7 @@
             <tr>
                 <td><select name="hasdb"><option value="0">no</option><option value="1">yes</option></select></td>
             </tr>
-            <tr>
+            <!--tr>
                 <td><b>Mouse URL</b></td>
             </tr>
             <tr>
@@ -52,7 +52,9 @@
             </tr>
             <tr>
                 <td><input type="text" name="repourl" size="35"/></td>
-            </tr>
+            </tr-->
+            <input type="hidden" name="mouseurl" size="35" value=""/>
+            <input type="hidden" name="repourl" size="35" value=""/>
         </table>
         <table>
             <tr>
