@@ -26,6 +26,7 @@
         <form action="Controller" method="post">
             <span class="header_01">Edit Promoter</span>
             <input type="hidden" name="gaid" value="<jsp:getProperty name='gene' property='gaid'/>"/>
+            <input type="hidden" name="mgiid" size="35" value='<jsp:getProperty name="gene" property="mgiid"/>'/>
             <table>
                 <tr>
                     <td><b>Promoter Name</b></td>
@@ -45,12 +46,12 @@
                 <tr>
                     <td><m:checkbox collection="chromosomes" name="chromosome" idGetter="getCid" textGetter="getName" selected='<%=gene.getCid()%>'/></td>
                 </tr>
-                <tr>
+                <!--tr>
                     <td><b>MGI ID</b></td>
                 </tr>
                 <tr>
                     <td><input type="text" name="mgiid" size="35" value='<jsp:getProperty name="gene" property="mgiid"/>'/></td>
-                </tr>
+                </tr-->
                 <tr>
                     <td><b>Driver Note</b></td>
                 </tr>
@@ -64,6 +65,16 @@
                     <td><input type="text" name="common_name" size="35" value='<jsp:getProperty name="gene" property="common_name"/>'/></td>
                 </tr>
             </table>
+                <table>
+            <tr><td colspan="3"><b>External IDs</b> <a href="Controller?workflow=AddPromoterLink" class="navtext">add</a></td></tr>
+            <m:iterate-collection collection="promoter_links">
+                <tr class="#?alt#">
+                    <td>#:getRepository#</td>
+                    <td><a href="#:getStrainurl#" title="#:getExternalid#" target="_blank">#:getExternalid#</a></td>
+                    <td><a href="Controller?workflow=DeletePromoterLink&amp;plid=#:getId#" class="navtext">delete</a></td>
+                </tr>
+            </m:iterate-collection>
+        </table>
         <table>
             <tr>
                 <td>

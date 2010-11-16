@@ -21,7 +21,7 @@
             <tr>
                 <td><b>Promoters</b>&nbsp;<a href="Controller?workflow=CreatePromoter" class="navtext">Add</a></td>
             </tr>
-            <tr><td><m:checkbox collection="promoters" idGetter="getGaid" textGetter="getName" name="promoter"/></td></tr>
+            <tr><td><m:checkbox collection="promoters" idGetter="getGaid" textGetter="getGenesymbol" name="promoter"/></td></tr>
         </table>
         <table>
             <tr>

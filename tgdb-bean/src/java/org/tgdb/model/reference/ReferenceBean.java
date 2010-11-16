@@ -457,6 +457,29 @@ public class ReferenceBean extends AbstractTgDbBean implements javax.ejb.EntityB
         return arr;
     }
 
+    public java.util.Collection ejbFindByExpression(int exid) throws javax.ejb.FinderException {
+        makeConnection();
+
+        Collection arr = new ArrayList();
+
+        PreparedStatement ps = null;
+        ResultSet result = null;
+        try {
+            ps = conn.prepareStatement("select refid from r_ref_exp where exid = ?");
+            ps.setInt(1,exid);
+            result = ps.executeQuery();
+
+            while (result.next()) {
+                arr.add(new Integer(result.getInt("refid")));
+            }
+        } catch (SQLException se) {
+            logger.error(getStackTrace(se));
+        } finally {
+            releaseConnection();
+        }
+        return arr;
+    }
+
     /**
      * Sets the caller
      * @param caller The caller

@@ -11,5 +11,7 @@ public interface ReferenceRemoteHome extends javax.ejb.EJBHome {
     java.util.Collection findByModel(int eid) throws javax.ejb.FinderException, java.rmi.RemoteException;
 
     java.util.Collection findByModelAndPrimary(int eid, boolean primary) throws javax.ejb.FinderException, java.rmi.RemoteException;
+
+    java.util.Collection findByExpression(int exid) throws javax.ejb.FinderException, java.rmi.RemoteException;
     
 }

@@ -348,7 +348,7 @@ public class StrainBean extends AbstractTgDbBean implements EntityBean, StrainRe
     }
 
     public void insertStrain_link(String repository, String externalid, String strainurl) {
-        this.strain_links = new ArrayList();
+//        this.strain_links = new ArrayList();
 
         try {
             makeConnection();
@@ -369,7 +369,7 @@ public class StrainBean extends AbstractTgDbBean implements EntityBean, StrainRe
     }
 
     public void deleteStrain_link(int id) {
-        this.strain_links = new ArrayList();
+//        this.strain_links = new ArrayList();
 
         try {
             makeConnection();

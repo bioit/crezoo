@@ -51,7 +51,7 @@
                             </ul>
                             <div id="fragment-1">
                                 <p>
-			Inducible: <%=modeldto.getInducible()%> / Donating Investigator: <%=modeldto.getDonating_investigator()%> / Former Names: <%=modeldto.getFormer_names()%>
+			Inducible: <%=modeldto.getInducible()%> / Donating Investigator: <%=modeldto.getDonating_investigator()%> / Former Names: <%=modeldto.getFormer_names_ss()%>
                                 </p>
                                 <!--subsection for Availability-->
                                 <div class="subsection">
@@ -227,17 +227,26 @@
 			Promoters
                                     </span>
                                     <table class="block_data">
-                                        <tr>
+                                        <!--tr>
                                             <th class="data" width="40%">Symbol</th>
                                             <th class="data" width="40%">Name</th>
                                             <th class="data" width="10%">Chromosome</th>
                                             <th class="data" width="10%">&nbsp;</th>
-                                        </tr>
+                                        </tr-->
                                         <m:iterate-collection collection="promoters">
                                             <tr class="#?alt#">
-                                                <td><a href="Controller?workflow=ViewPromoter&amp;gid=#:getGaid#" title="View Promoter" class="data_link">#:getGenesymbol_ss#</a></td>
+                                                <!--td><a href="Controller?workflow=ViewPromoter&amp;gid=#:getGaid#" title="View Promoter" class="data_link">#:getGenesymbol_ss#</a></td>
                                                 <td>#:getName_ss#</td>
-                                                <td>#:getChromoName#</td>
+                                                <td>#:getChromoName#</td-->
+                                                <td width="90%">
+                                                    <i style="margin-left: 20px; font-weight:bold">Symbol</i> #:getGenesymbol_ss#
+                                                    <hr/>
+                                                    <i style="margin-left: 20px; font-weight:bold">Name:</i> #:getName_ss#
+                                                    <hr/>
+                                                    <i style="margin-left: 20px; font-weight:bold">Chromosome:</i> #:getChromoName#
+                                                    <hr/>
+                                                    <i style="margin-left: 20px; font-weight:bold">External IDs:</i> #:getPromoter_links_string#
+                                                </td>
                                                 <td>
                                                     <m:hide privilege="MODEL_W" suid="<%=modeldto.getSuid()%>">
                                                         <% if (edithis == 13) {%>
@@ -264,15 +273,15 @@
                                     <table class="block_data">
                                         <tr>
                                             <th class="data" width="40%">Symbol</th>
-                                            <th class="data" width="40%">Name</th>
-                                            <th class="data" width="10%">Chromosome</th>
+                                            <th class="data" width="50%">Name</th>
+                                            <!--th class="data" width="10%">Chromosome</th-->
                                             <th class="data" width="10%">&nbsp;</th>
                                         </tr>
                                         <m:iterate-collection collection="expressed_genes">
                                             <tr class="#?alt#">
                                                 <td><a href="Controller?workflow=ViewExpressedGene&amp;gid=#:getGaid#" title="View Expressed Gene" class="data_link">#:getGenesymbol_ss#</a></td>
                                                 <td>#:getName_ss#</td>
-                                                <td>#:getChromoName#</td>
+                                                <!--td>#:getChromoName#</td-->
                                                 <td>
                                                     <m:hide privilege="MODEL_W" suid="<%=modeldto.getSuid()%>">
                                                         <% if (edithis == 13) {%>
@@ -380,6 +389,8 @@
                                                     <i style="margin-left: 20px; font-weight:bold">Site of Expression:</i> #:getMa_terms#
                                                     <hr/>
                                                     <i style="margin-left: 20px; font-weight:bold">Developmental Stage:</i> #:getEmap_terms#
+                                                    <hr/>
+                                                    <i style="margin-left: 20px; font-weight:bold">References:</i> #:getReferences_line#
                                                 </td>
                                                 <td>
                                                     <m:hide privilege="MODEL_W" suid="<%=modeldto.getSuid()%>">

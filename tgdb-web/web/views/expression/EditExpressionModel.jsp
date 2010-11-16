@@ -14,6 +14,11 @@
     <script type="text/javascript">
 	<!--
         $(document).ready(function() {
+            //References selector
+            $('select').live('change', function(){
+                    //alert(this.value);
+                    $('a#ref_id').replaceWith('<a href="Controller?workflow=AddReferenceToExpressionModelAction&reference='+this.value+'" id="ref_id" class="navtext" >add</a>');
+            });
             //MA: Mouse Adult Gross Anatomy
             var ma = $('input#ma');
 
@@ -157,6 +162,15 @@
             <m:iterate-collection collection="emap_terms">
             <tr class="#?alt#">
                 <td><a href="Controller?workflow=DeleteOntologyFromExpressionModel&emap_id=#:getOid#" class="navtext" onclick="return confirm('Remove EMAP Term?')" >del</a> [#:getOid#] #:getName#</td>
+            </tr>
+            </m:iterate-collection>
+            <!--references-->
+            <tr>
+                <td><b>References</b> <m:checkbox collection="all_references" name="reference" idGetter="getRefid" textGetter="getName" emptyOption="true" /><a href="Controller?workflow=AddReferenceToExpressionModelAction&reference=" id="ref_id" class="navtext" >add</a></td>
+            </tr>
+            <m:iterate-collection collection="references">
+            <tr class="#?alt#">
+                <td><a href="Controller?workflow=DeleteReferenceFromExpressionModelAction&reference=#:getRefid#" class="navtext" onclick="return confirm('Remove Reference?')" >del</a> [PubMed: #:getPubmed#] <a href="#:getResource#" target="_blank">#:getName#</a></td>
             </tr>
             </m:iterate-collection>
         </table>

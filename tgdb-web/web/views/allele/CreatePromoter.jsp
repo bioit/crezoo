@@ -23,6 +23,7 @@
 		<jsp:include page="/PanelRightTop"/>        
         <div id="panel-right-rest">
         <form action="Controller" method="post">
+            <input type="hidden" name="mgiid" size="35" value="0"/>
             <span class="header_01">Create Promoter</span>
             <table>
                 <tr>
@@ -43,12 +44,12 @@
                 <tr>
                     <td><m:checkbox collection="chromosomes" name="chromosome" idGetter="getCid" textGetter="getName" selected="24"/></td>
                 </tr>
-                <tr>
+                <!--tr>
                     <td><b>MGI ID</b></td>
                 </tr>
                 <tr>
                     <td><input type="text" name="mgiid" size="35" value="0"/></td>
-                </tr>
+                </tr-->
                 <tr>
                     <td><b>Driver Note</b></td>
                 </tr>

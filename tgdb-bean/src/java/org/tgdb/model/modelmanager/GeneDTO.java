@@ -6,7 +6,7 @@ import java.io.Serializable;
 import org.tgdb.frame.DTO;
 
 public class GeneDTO extends DTO implements Serializable {
-    private String name, name_ss, comm, ts, userName, userMail, userFullName, mgiid, genesymbol, genesymbol_ss, geneexpress, idgene, idensembl;
+    private String name, name_ss, comm, ts, userName, userMail, userFullName, mgiid, genesymbol, genesymbol_ss, geneexpress, idgene, idensembl, promoter_links_string;
     private String mgiurl, ensemblurl, entrezurl, driver_note, molecular_note, molecular_note_link, common_name, distinguish;
     private int gaid, pid, userId, models_num;
     
@@ -65,6 +65,8 @@ public class GeneDTO extends DTO implements Serializable {
             molecular_note_link = gene.getMolecular_note_link();
             common_name = gene.getCommon_name();
             distinguish = gene.getDistinguish();
+
+            promoter_links_string = gene.getPromoter_links_string();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -221,5 +223,9 @@ public class GeneDTO extends DTO implements Serializable {
     
     public String getGenesymbol_ss() {
         return genesymbol_ss;
+    }
+
+    public String getPromoter_links_string() {
+        return promoter_links_string;
     }
 }

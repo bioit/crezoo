@@ -24,6 +24,8 @@
 		<jsp:include page="/PanelRightTop"/>        
         <div id="panel-right-rest">
         <form action="Controller" method="post">
+            <input type="hidden" name="mgiid" size="35" value="0"/>
+            <input type="hidden" name="chromosome" size="35" value="24"/>
             <span class="header_01">Edit Expressed Gene</span>
             <input type="hidden" name="gaid" value="<jsp:getProperty name='gene' property='gaid'/>"/>
             <table>
@@ -39,7 +41,7 @@
                 <tr>
                     <td><input type="text" name="genesymbol" size="35" value='<jsp:getProperty name="gene" property="genesymbol"/>'/></td>
                 </tr>
-                <tr>
+                <!--tr>
                     <td><b>Chromosome</b></td>
                 </tr>
                 <tr>
@@ -50,7 +52,7 @@
                 </tr>
                 <tr>
                     <td><input type="text" name="mgiid" size="35" value='<jsp:getProperty name="gene" property="mgiid"/>'/></td>
-                </tr>
+                </tr-->
                 <tr>
                     <td><b>Comment</b></td>
                 </tr>

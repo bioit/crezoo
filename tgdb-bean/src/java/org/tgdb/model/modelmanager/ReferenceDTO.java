@@ -70,6 +70,28 @@ public class ReferenceDTO extends DTO implements Serializable {
         }
     }
 
+    @Override
+    public int hashCode() {
+        String txt = new String();
+        txt += refid +" ";
+        return txt.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final ReferenceDTO other = (ReferenceDTO) obj;
+        if (this.refid != other.refid) {
+            return false;
+        }
+        return true;
+    }
+
     public String getPubmed() {
         return pubmed;
     }

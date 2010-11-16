@@ -1,5 +1,6 @@
 package org.tgdb.webapp.action.expression;
 
+import java.util.Collection;
 import org.tgdb.TgDbCaller;
 import org.tgdb.exceptions.ApplicationException;
 import org.tgdb.webapp.action.TgDbAction;
@@ -8,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.tgdb.TgDbFormDataManagerFactory;
 import org.tgdb.form.FormDataManager;
+import org.tgdb.model.modelmanager.ExpressionModelDTO;
 
 public class GetExpressionModelAction extends TgDbAction {
     
@@ -20,6 +22,7 @@ public class GetExpressionModelAction extends TgDbAction {
             HttpSession se = req.getSession();
             TgDbCaller _caller = (TgDbCaller)se.getAttribute("caller");
             FormDataManager fdm = getFormDataManager(TgDbFormDataManagerFactory.EXPRESSION_MODEL, TgDbFormDataManagerFactory.WEB_FORM, req);
+            FormDataManager _fdm = getFormDataManager(TgDbFormDataManagerFactory.EXPMODEL, TgDbFormDataManagerFactory.WEB_FORM, req);
             
             String exid = req.getParameter("exid");
             
@@ -30,8 +33,15 @@ public class GetExpressionModelAction extends TgDbAction {
             else{
                 exid = fdm.getValue("exid");
             }
-            
-            req.setAttribute("expression", modelManager.getExpressionModel(new Integer(exid).intValue(), _caller));
+
+            ExpressionModelDTO expression = modelManager.getExpressionModel(new Integer(exid).intValue(), _caller);
+            req.setAttribute("expression", expression);
+            req.setAttribute("references", expression.getReferences_dtos());
+            //all references connected to a model
+            Collection all_references = modelManager.getReferences(Integer.parseInt(_fdm.getValue("eid")), _caller);
+            //remove assigned references
+            all_references.removeAll(expression.getReferences_dtos());
+            req.setAttribute("all_references", all_references);
             
             req.setAttribute("exfiles", modelManager.getExpressionModelFiles(new Integer(exid).intValue(), _caller));
 

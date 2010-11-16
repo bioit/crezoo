@@ -18,6 +18,7 @@ import javax.ejb.EJBException;
 import javax.ejb.FinderException;
 import javax.ejb.ObjectNotFoundException;
 import org.tgdb.dto.OlsDTO;
+import org.tgdb.model.reference.ReferenceRemoteHome;
 
 public class ExpressionModelBean extends AbstractTgDbBean implements javax.ejb.EntityBean, org.tgdb.expression.expressionmodel.ExpressionModelRemoteBusiness {
     private javax.ejb.EntityContext context;
@@ -32,6 +33,7 @@ public class ExpressionModelBean extends AbstractTgDbBean implements javax.ejb.E
     private ProjectRemoteHome projectHome;
     private ChromosomeRemoteHome chromosomeHome;
     private FileRemoteHome fileHome;
+    private ReferenceRemoteHome referenceHome;
     
     //ejb-methods
     // <editor-fold>
@@ -42,6 +44,7 @@ public class ExpressionModelBean extends AbstractTgDbBean implements javax.ejb.E
         projectHome = (ProjectRemoteHome)locator.getHome(ServiceLocator.Services.PROJECT);
         chromosomeHome = (ChromosomeRemoteHome)locator.getHome(ServiceLocator.Services.CHROMOSOME);
         fileHome = (FileRemoteHome)locator.getHome(ServiceLocator.Services.FILE);
+        referenceHome = (ReferenceRemoteHome)locator.getHome(ServiceLocator.Services.REFERENCE);
     }
     
     public void ejbActivate() {}
@@ -196,6 +199,18 @@ public class ExpressionModelBean extends AbstractTgDbBean implements javax.ejb.E
         }
         return arr;
     }
+
+    public Collection getReferences(){
+        Collection arr = new ArrayList();
+        try {
+            arr = referenceHome.findByExpression(exid);
+        } catch (FinderException fe) {
+            throw new EJBException(fe);
+        } catch (RemoteException re) {
+            throw new EJBException(re);
+        }
+        return arr;
+    }
     
     //</editor-fold>
     
@@ -246,6 +261,41 @@ public class ExpressionModelBean extends AbstractTgDbBean implements javax.ejb.E
         } catch (Exception e) {
             e.printStackTrace();
             throw new ApplicationException("ExpressionModelBean#addFileToExpressionModel: Unable to add file to expression model. \n"+e.getMessage());
+        } finally {
+            releaseConnection();
+        }
+    }
+
+    public void addReference(int refid) throws ApplicationException {
+        makeConnection();
+        try {
+
+            PreparedStatement ps = conn.prepareStatement("insert into r_ref_exp (exid,refid) values (?,?)");
+            ps.setInt(1, exid);
+            ps.setInt(2, refid);
+
+            ps.execute();
+        } catch (Exception e) {
+//            e.printStackTrace();
+//            throw new ApplicationException("Unable to add reference to expression model. \n"+e.getMessage());
+            logger.error(getStackTrace(e));
+        } finally {
+            releaseConnection();
+        }
+    }
+
+    public void deleteReference(int refid) throws ApplicationException {
+        makeConnection();
+        try {
+
+            PreparedStatement ps = conn.prepareStatement("delete from r_ref_exp where exid=? and refid=?");
+            ps.setInt(1, exid);
+            ps.setInt(2, refid);
+
+            ps.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new ApplicationException("Unable to delete reference from expression model. \n"+e.getMessage());
         } finally {
             releaseConnection();
         }

@@ -1377,6 +1377,37 @@ public class ModelManagerBean extends AbstractTgDbBean implements javax.ejb.Sess
         }
     }
 
+    //more promoter stuff
+    public Collection getPromoterLinks(int pid, TgDbCaller caller) throws ApplicationException {
+        try {
+            GeneRemote promoter = geneHome.findByPrimaryKey(new Integer(pid));
+            return promoter.getPromoter_links();
+        }
+        catch (Exception e) {
+            throw new ApplicationException(e.getMessage());
+        }
+    }
+
+    public void createPromoterLink(int pid, String repository, String externalid, String strainurl, TgDbCaller caller) throws ApplicationException {
+        try {
+            GeneRemote gene = geneHome.findByPrimaryKey(new Integer(pid));
+            gene.insertPromoter_link(repository, externalid, strainurl);
+        }
+        catch(Exception e) {
+            throw new ApplicationException(e.getMessage());
+        }
+    }
+
+    public void deletePromoterLink(int pid, int promoter_link_id, TgDbCaller caller) throws ApplicationException {
+        try {
+            GeneRemote promoter = geneHome.findByPrimaryKey(new Integer(pid));
+            promoter.deletePromoter_link(promoter_link_id);
+        }
+        catch(Exception e) {
+            throw new ApplicationException(e.getMessage());
+        }
+    }
+
     public int createExpressedGene(String name, String symbol, int cid, String mgiid, String comm, org.tgdb.TgDbCaller caller) throws ApplicationException {
         try {
             makeConnection();
@@ -1765,6 +1796,24 @@ public class ModelManagerBean extends AbstractTgDbBean implements javax.ejb.Sess
         } catch (Exception e) {
             e.printStackTrace();
             throw new ApplicationException("Could not add file to expression model numer "+exid+" \n"+e.getMessage(),e);            
+        }
+    }
+
+    public void addReferenceToExpressionModel(int exid, int refid, TgDbCaller caller) throws ApplicationException {
+        try {
+            ExpressionModelRemote expression = expressionHome.findByPrimaryKey(new Integer(exid));
+            expression.addReference(refid);
+        } catch (Exception e) {
+            logger.error(getStackTrace(e));
+        }
+    }
+
+    public void deleteReferenceFromExpressionModel(int exid, int refid, TgDbCaller caller) throws ApplicationException {
+        try {
+            ExpressionModelRemote expression = expressionHome.findByPrimaryKey(new Integer(exid));
+            expression.deleteReference(refid);
+        } catch (Exception e) {
+            logger.error(getStackTrace(e));
         }
     }
 

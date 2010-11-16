@@ -77,5 +77,13 @@ public interface GeneRemoteBusiness {
     org.tgdb.species.chromosome.ChromosomeRemote getChromosome() throws java.rmi.RemoteException;
 
     void setChromosome(ChromosomeRemote chromosome) throws java.rmi.RemoteException;
+
+    void insertPromoter_link(String repository, String externalid, String strainurl) throws java.rmi.RemoteException;
+
+    void deletePromoter_link(int id) throws java.rmi.RemoteException;
+
+    Collection getPromoter_links() throws java.rmi.RemoteException;
+
+    String getPromoter_links_string() throws java.rmi.RemoteException;
     
 }

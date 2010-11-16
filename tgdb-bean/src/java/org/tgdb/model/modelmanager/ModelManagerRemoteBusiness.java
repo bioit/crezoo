@@ -85,6 +85,12 @@ public interface ModelManagerRemoteBusiness {
 
     void updatePromoter(int gid, String name, String symbol, String mgiid, int cid, String driver_note, String common_name, TgDbCaller caller) throws ApplicationException, java.rmi.RemoteException;
 
+    Collection getPromoterLinks(int pid, TgDbCaller caller) throws ApplicationException, java.rmi.RemoteException;
+
+    void createPromoterLink(int pid, String repository, String externalid, String strainurl, TgDbCaller caller) throws ApplicationException, java.rmi.RemoteException;
+
+    void deletePromoterLink(int pid, int promoter_link_id, TgDbCaller caller) throws ApplicationException, java.rmi.RemoteException;
+
     int createExpressedGene(String name, String symbol, int cid, String mgiid, String comm, org.tgdb.TgDbCaller caller) throws ApplicationException, java.rmi.RemoteException;
 
     void updateExpressedGene(int gid, String name, String symbol, String mgiid, int cid, String comm, TgDbCaller caller) throws ApplicationException, java.rmi.RemoteException;
@@ -303,6 +309,10 @@ public interface ModelManagerRemoteBusiness {
     int addFile(org.tgdb.frame.io.FileDataObject exfile, java.lang.String exfilecomm, TgDbCaller caller) throws ApplicationException, java.rmi.RemoteException;
 
     void addFileToExpressionModel(int exid, int fileid, org.tgdb.TgDbCaller caller) throws ApplicationException, java.rmi.RemoteException;
+
+    void addReferenceToExpressionModel(int exid, int refid, TgDbCaller caller) throws ApplicationException, java.rmi.RemoteException;
+
+    void deleteReferenceFromExpressionModel(int exid, int refid, TgDbCaller caller) throws ApplicationException, java.rmi.RemoteException;
 
     void addOntologyToExpressionModel(int exid, String oid, String namespace, TgDbCaller caller) throws ApplicationException, java.rmi.RemoteException;
 

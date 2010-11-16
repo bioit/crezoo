@@ -9,7 +9,7 @@ import java.util.Iterator;
 
 public class ExpModelDTO implements Serializable, Comparable {
 
-    private String accNr, lineName, lineName_ss, contactName, background, comm, contactMail, donating_investigator, inducible, former_names;
+    private String accNr, lineName, lineName_ss, contactName, background, comm, contactMail, donating_investigator, inducible, former_names, former_names_ss;
     private int eid, contactId, userId, researchAppId, phenotypes, suid;
     private String user, participant, mutations, groupName;
     private String ts;
@@ -94,7 +94,14 @@ public class ExpModelDTO implements Serializable, Comparable {
 
             this.donating_investigator = model.getDonating_investigator();
             this.inducible = model.getInducible();
-            this.former_names = model.getFormer_names();
+            this.former_names = model.getFormer_names();//.replaceAll("<","&lt;").replaceAll(">","&gt;");
+            if(model.getFormer_names()!=null) {
+                this.former_names_ss = model.getFormer_names().replaceAll("<","&lt;").replaceAll(">","&gt;");
+                this.former_names_ss = this.former_names_ss.replaceAll("&lt;","<sup>").replaceAll("&gt;","</sup>");
+            }
+            else {
+                this.former_names_ss = model.getFormer_names();
+            }
             
         } catch (Exception e) {
             e.printStackTrace();
@@ -494,6 +501,10 @@ public class ExpModelDTO implements Serializable, Comparable {
      */
     public void setFormer_names(String former_names) {
         this.former_names = former_names;
+    }
+
+    public String getFormer_names_ss() {
+        return former_names_ss;
     }
     
 }

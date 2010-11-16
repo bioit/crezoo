@@ -23,6 +23,8 @@
 		<jsp:include page="/PanelRightTop"/>        
         <div id="panel-right-rest">
         <form action="Controller" method="post">
+            <input type="hidden" name="mgiid" size="35" value="0"/>
+            <input type="hidden" name="chromosome" size="35" value="24"/>
             <span class="header_01">Create Expressed Gene</span>
             <table>
                 <tr>
@@ -37,7 +39,7 @@
                 <tr>
                     <td><input type="text" name="genesymbol" size="35"/></td>
                 </tr>
-                <tr>
+                <!--tr>
                     <td><b>Chromosome</b></td>
                 </tr>
                 <tr>
@@ -48,7 +50,7 @@
                 </tr>
                 <tr>
                     <td><input type="text" name="mgiid" size="35" value="0"/></td>
-                </tr>
+                </tr-->
                 <tr>
                     <td><b>Comment</b></td>
                 </tr>

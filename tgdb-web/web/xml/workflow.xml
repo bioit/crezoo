@@ -326,6 +326,14 @@
         <state name="view" preaction="gene.GetGeneSimpleAction" viewURI="views/allele/EditPromoter.jsp" action="gene.SaveGeneAction"/>
         <state workflow="ViewModel"/>
     </workflow>
+    <workflow name="AddPromoterLink">
+        <state name="add" viewURI="views/allele/PromoterLinkCreate.jsp" action="allele.SavePromoterLinkAction"/>
+        <state workflow="EditPromoter"/>
+    </workflow>
+    <workflow name="DeletePromoterLink">
+        <state name="delete" preaction="allele.DeletePromoterLinkAction"/>
+        <state workflow="EditPromoter"/>
+    </workflow>
     <workflow name="RemoveGeneFromAllele">
         <state name="removegenefromallele" preaction="allele.RemoveGeneAction"/>
         <state workflow="EditStrainAllele"/>
@@ -832,6 +840,14 @@
 
     <workflow name="EditExpressionModel">
         <state name="view" preaction="expression.GetExpressionModelAction" viewURI="views/expression/EditExpressionModel.jsp"/>
+    </workflow>
+    <workflow name="AddReferenceToExpressionModelAction">
+        <state name="add" preaction="expression.AddReferenceToExpressionModelAction"/>
+        <state workflow="EditExpressionModel"/>
+    </workflow>
+    <workflow name="DeleteReferenceFromExpressionModelAction">
+        <state name="add" preaction="expression.DeleteReferenceFromExpressionModelAction"/>
+        <state workflow="EditExpressionModel"/>
     </workflow>
     <workflow name="AddOntologyToExpressionModel">
         <state name="add" preaction="expression.AddOntologyToExpressionModelAction"/>

@@ -22,7 +22,7 @@
             </tr>
             <tr>
                 <td>
-                    <m:checkbox collection="genes" name="gene" idGetter="getGaid" textGetter="getName"/>
+                    <m:checkbox collection="genes" name="gene" idGetter="getGaid" textGetter="getGenesymbol"/>
                 </td>
             </tr>
         </table>

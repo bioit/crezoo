@@ -18,7 +18,13 @@ public interface ExpressionModelRemoteBusiness {
 
     java.util.Collection getFiles() throws java.rmi.RemoteException;
 
+    java.util.Collection getReferences() throws java.rmi.RemoteException;
+
     void addFile(int fileid) throws ApplicationException, java.rmi.RemoteException;
+
+    void addReference(int refid) throws ApplicationException, java.rmi.RemoteException;
+
+    void deleteReference(int refid) throws ApplicationException, java.rmi.RemoteException;
 
     void addOntology(String oid, String namespace) throws ApplicationException, java.rmi.RemoteException;
 

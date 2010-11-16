@@ -23,6 +23,7 @@ import javax.ejb.CreateException;
 import javax.ejb.EJBException;
 import javax.ejb.FinderException;
 import javax.ejb.ObjectNotFoundException;
+import org.tgdb.model.modelmanager.PromoterLinkDTO;
 
 public class GeneBean extends AbstractTgDbBean implements javax.ejb.EntityBean, org.tgdb.species.gene.GeneRemoteBusiness {
     private javax.ejb.EntityContext context;
@@ -850,5 +851,85 @@ public class GeneBean extends AbstractTgDbBean implements javax.ejb.EntityBean, 
             releaseConnection();
         }
         return to_return;
+    }
+
+    //methods for promoter links
+    public void insertPromoter_link(String repository, String externalid, String strainurl) {
+        try {
+            makeConnection();
+            int id = getIIdGenerator().getNextId(conn, "promoter_link_seq");
+            PreparedStatement ps = conn.prepareStatement("insert into promoter_links (id, pid,repository,externalid,strainurl) values (?,?,?,?,?) ");
+            ps.setInt(1, id);
+            ps.setInt(2, gaid);
+            ps.setString(3, repository);
+            ps.setString(4, externalid);
+            ps.setString(5, strainurl);
+
+            ps.execute();
+        } catch (Exception se) {
+            logger.error(se.getMessage());
+        } finally {
+            releaseConnection();
+        }
+    }
+
+    public void deletePromoter_link(int id) {
+        try {
+            makeConnection();
+            PreparedStatement ps = conn.prepareStatement("delete from promoter_links where id = ?");
+            ps.setInt(1, id);
+
+            ps.execute();
+        } catch (Exception se) {
+            logger.error(se.getMessage());
+        } finally {
+            releaseConnection();
+        }
+    }
+
+    public Collection getPromoter_links() {
+        Collection promoter_links = new ArrayList();
+
+        try {
+            makeConnection();
+            PreparedStatement ps = conn.prepareStatement("select id, repository,externalid,strainurl from promoter_links where pid = ?");
+            ps.setInt(1,gaid);
+
+            ResultSet result = ps.executeQuery();
+
+            while (result.next()) {
+                promoter_links.add(new PromoterLinkDTO(result.getInt("id"), gaid, result.getString("repository"), result.getString("externalid"), result.getString("strainurl")));
+            }
+        } catch (Exception se) {
+            logger.error(se.getMessage());
+        } finally {
+            releaseConnection();
+        }
+        return promoter_links;
+    }
+
+    public String getPromoter_links_string() {
+        String promoter_link_string = "";
+
+        try {
+            makeConnection();
+            PreparedStatement ps = conn.prepareStatement("select repository,externalid,strainurl from promoter_links where pid = ?");
+            ps.setInt(1,gaid);
+
+            ResultSet result = ps.executeQuery();
+
+            while (result.next()) {
+
+                String strain_url = "#";
+                if(result.getString("strainurl") != null && result.getString("strainurl").trim().length() > 0) strain_url = result.getString("strainurl");
+
+                promoter_link_string += "&nbsp;<a href='" + strain_url +"' title = '" + result.getString("repository") + " ID' target='_blank'>" + result.getString("repository") + " ID: " + result.getString("externalid") + "</a>&nbsp;";
+            }
+        } catch (Exception se) {
+            logger.error(se.getMessage());
+        } finally {
+            releaseConnection();
+        }
+        return promoter_link_string;
     }
 }

@@ -48,6 +48,7 @@ public class TgDbFormDataManagerFactory extends AbstractFormDataManagerFactory {
     public final static int EXPRESSION_MODEL = 35;
     public final static int STRAIN_TYPE = 36;
     public final static int STRAIN_STATE = 37;
+    public final static int GENE = 38;
     
     private TgDbCaller caller;
     
@@ -100,6 +101,7 @@ public class TgDbFormDataManagerFactory extends AbstractFormDataManagerFactory {
         names.add("expression_model");
         names.add("strain_type");
         names.add("strain_state");
+        names.add("gene");
     }    
     
     /**
@@ -430,6 +432,10 @@ public class TgDbFormDataManagerFactory extends AbstractFormDataManagerFactory {
 
         else if (name == STRAIN_STATE) {
             formDataManager.putDefault("ssid", "");
+        }
+
+        else if (name == GENE) {
+            formDataManager.putDefault("gaid", "");
         }
 
         return formDataManager;
