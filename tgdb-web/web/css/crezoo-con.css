@@ -73,20 +73,31 @@ table.data th.data input:hover {
 	cursor: 	pointer;
 }
 
+td.text_cell {
+    text-align:         justify
+}
+
+td.text_cell b {
+    display:            block;
+    width:              100%;
+    border-bottom:      2px solid #33332d;
+    /*margin-bottom:      15px;*/
+}
+
 table.data a, table.data a:visited, a.data_link, a.data_link:visited, td.block a, td.block a:visited , table.block3 a, table.block3 a:visited, tr.alternatingOne a, tr.alternatingOne a:visited, tr.alternatingTwo a, tr.alternatingTwo a:visited{
 	background: 		none;
-	color:				#33332d;
-	font:				14px Georgia,"Times New Roman",Times,serif;
+	color:			#33332d;
+	font:			14px sans-serif;/*Georgia,"Times New Roman",Times,serif;*/
 	font-weight: 		normal;
-	text-decoration: 	none;
+	text-decoration: 	underline;
 }
 
 table.data a:hover, a.data_link:hover, td.block a:hover, table.block3 a:hover ,tr.alternatingOne a:hover, tr.alternatingTwo a:hover {
 	background: 		none;
 	color:				#DB4105;
-	font:				14px Georgia,"Times New Roman",Times,serif;
+	font:				14px sans-serif;/*Georgia,"Times New Roman",Times,serif;*/
 	font-weight: 		normal;
-	text-decoration: 	none;
+	text-decoration: 	underline;
 }
 
 p.navtext {

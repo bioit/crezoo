@@ -64,12 +64,18 @@ public class GetModelsAction extends TgDbAction {
             
             req.setAttribute("rapps", modelManager.getResearchApplications(_caller));
 //            req.setAttribute("genes", modelManager.getGenesByProject(_caller.getPid(), _caller));
-            req.setAttribute("genes", modelManager.getGenesByDistinguish("transgenes", _caller));
+            req.setAttribute("genes", modelManager.getGenesByDistinguish("promoter", _caller));
             //get the distinct strains that are connected to models for filtering
             req.setAttribute("strains", modelManager.getStrainsConnectedToModels(_caller));
             
             req.setAttribute("sortby", modelManager.getOrderByTypes());
             req.setAttribute("disseminationlevels", modelManager.getLevelsForModel());
+            
+            //emaps
+            req.setAttribute("emaps", modelManager.getOntologyTerms("EMAP"));
+            req.setAttribute("mas", modelManager.getOntologyTerms("MA"));
+            
+            req.setAttribute("inducibilities", modelManager.getInducibility());
             
             req.setAttribute("samplingUnit", new Integer(_caller.getSuid()).toString());
             

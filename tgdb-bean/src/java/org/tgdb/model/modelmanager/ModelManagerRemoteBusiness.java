@@ -404,6 +404,10 @@ public interface ModelManagerRemoteBusiness {
 
     java.util.Collection getGenesByPGM(PageManager pageManager) throws ApplicationException, java.rmi.RemoteException;
     
+    Collection getOntologyTerms(String namespace) throws ApplicationException, java.rmi.RemoteException;
+    
+    Collection getInducibility() throws ApplicationException, java.rmi.RemoteException;
+    
     //web services methods
     //<editor-fold defaultstate="collapsed">
 

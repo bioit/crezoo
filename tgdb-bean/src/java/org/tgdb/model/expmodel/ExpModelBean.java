@@ -529,6 +529,21 @@ public class ExpModelBean extends ExpObj implements javax.ejb.EntityBean, org.tg
         if (tmp!=null && !tmp.equals("") && tmp.compareTo("*")!=0)
             strain = new Integer(tmp).intValue();
         
+        String emap ="";
+        tmp = fdm.getValue("emap");
+        if (tmp!=null && !tmp.equals("") && tmp.compareTo("*")!=0)
+            emap = tmp;
+        
+        String ma ="";
+        tmp = fdm.getValue("ma");
+        if (tmp!=null && !tmp.equals("") && tmp.compareTo("*")!=0)
+            ma = tmp;
+        
+        String inducible ="";
+        tmp = fdm.getValue("inducible");
+        if (tmp!=null && !tmp.equals("") && tmp.compareTo("*")!=0)
+            inducible = tmp;
+        
         String orderby ="";
         tmp = fdm.getValue("ordertype");
         if (tmp!=null && !tmp.equals("") && tmp.compareTo("*")!=0)
@@ -549,7 +564,14 @@ public class ExpModelBean extends ExpObj implements javax.ejb.EntityBean, org.tg
             
             if (gaid!=0)
             {
-                sql += " and m.eid in (select eid from r_gene_model where gaid=?) ";
+                /*
+                 * Use this for regular genes...
+                 */
+//                sql += " and m.eid in (select eid from r_gene_model where gaid=?) ";
+                /*
+                 * ...and this for promoters
+                 */
+                sql += " and m.eid in (select distinct(mst.model) as eid from r_model_strain_allele_mutation_type mst join r_strain_allele_gene sg on sg.aid = mst.strain_allele where sg.gid = ?) ";
             }
             
             if (!groupname.equals(""))
@@ -570,6 +592,21 @@ public class ExpModelBean extends ExpObj implements javax.ejb.EntityBean, org.tg
             if (strain!=0)
             {
                 sql += " and m.eid in (select model from r_model_strain where strain=? ) ";
+            }
+            
+            if (!emap.equals(""))
+            {
+                sql += " and m.eid in (select distinct(emr.eid) as eid from expression_model_r  emr join r_expression_ontology reo on emr.exid = reo.exid where reo.oid = ?) ";
+            }
+            
+            if (!ma.equals(""))
+            {
+                sql += " and m.eid in (select distinct(emr.eid) as eid from expression_model_r  emr join r_expression_ontology reo on emr.exid = reo.exid where reo.oid = ?) ";
+            }
+            
+            if (!inducible.equals(""))
+            {
+                sql += " and m.inducible = ? ";
             }
             
             if(!disslevel.equals("")){
@@ -603,6 +640,10 @@ public class ExpModelBean extends ExpObj implements javax.ejb.EntityBean, org.tg
                     sql += " order by e.ts desc";
                 }
                 
+                if(orderby.equals("INDUCIBILITY")){
+                    sql += " order by inducible";
+                }
+                
             }
                     
             ps = conn.prepareStatement(sql);
@@ -622,6 +663,12 @@ public class ExpModelBean extends ExpObj implements javax.ejb.EntityBean, org.tg
                 ps.setInt(i++, mutationtypes);
             if (strain!=0)
                 ps.setInt(i++, strain);
+            if (!emap.equals(""))
+                ps.setString(i++, emap);
+            if (!ma.equals(""))
+                ps.setString(i++, ma);
+            if (!inducible.equals(""))
+                ps.setString(i++, inducible);
             
             result = ps.executeQuery();
             
@@ -722,6 +769,10 @@ public class ExpModelBean extends ExpObj implements javax.ejb.EntityBean, org.tg
                 
                 if(orderby.equals("DATE")){
                     sql += " order by ts";
+                }
+                
+                if(orderby.equals("INDUCIBILITY")){
+                    sql += " order by inducible";
                 }
                 
             }
@@ -1229,6 +1280,24 @@ public class ExpModelBean extends ExpObj implements javax.ejb.EntityBean, org.tg
             throw new EJBException(re);
         }
         return arr;
+    }
+    
+    public String getPromotersString(){
+        String promoters_string = "";
+        try {
+            Collection arr = geneHome.findPromoters(eid);
+            Iterator i = arr.iterator();
+            while(i.hasNext()) {                
+                GeneRemote promoter = (GeneRemote)i.next();
+                promoters_string += promoter.getGenesymbol() + ", ";
+            }
+            
+        } catch(ObjectNotFoundException oe) {          
+        } catch (FinderException fe) {
+        } catch (RemoteException re) {
+            throw new EJBException(re);
+        }
+        return promoters_string;
     }
     
     public void removeReference(ReferenceRemote reference) throws ApplicationException {

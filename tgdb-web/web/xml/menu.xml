@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <menus target="_self">
-    
+    <menu name="Home" priv="MODEL_R" workflow="Home"/>
     <!--admin menu header-->
     <menu name="Admin" admin="true">
         <menu-item name="Projects">
@@ -109,7 +109,7 @@
     
     <!--public user menu-->
 	<menu name="Mice" priv="MODEL_PUB" workflow="ViewModels"/>
-	<menu name="Strains" priv="MODEL_PUB" workflow="ViewStrains"/>
+	<!--menu name="Strains" priv="MODEL_PUB" workflow="ViewStrains"/-->
         <menu name="Alleles" priv="MODEL_PUB" workflow="ViewStrainAlleles"/>
 	<menu name="Transgenes" priv="MODEL_PUB" workflow="ViewGenes" />
     

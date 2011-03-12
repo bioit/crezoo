@@ -1900,6 +1900,31 @@ public class ModelManagerBean extends AbstractTgDbBean implements javax.ejb.Sess
     
     //</editor-fold>
     
+    //stand-alone ontology methods
+    //<editor-fold defaultstate="collapsed">
+    public Collection getOntologyTerms(String namespace) throws ApplicationException {
+        Collection terms = new ArrayList();
+        makeConnection();
+        try {
+            PreparedStatement ps = conn.prepareStatement("select distinct(oid) from r_expression_ontology where namespace = ?");
+            ps.setString(1, namespace);
+            ResultSet result = ps.executeQuery();
+
+            while (result.next()) {
+                OlsDTO tmp = new OlsDTO();
+                tmp.setOid(result.getString("oid"));
+                tmp.setNamespace(namespace);
+                terms.add(tmp);
+            }
+        } catch (Exception e) {
+            logger.error(getStackTrace(e));
+        } finally {
+            releaseConnection();
+        }
+        return terms;
+    }
+    //</editor-fold>
+    
     //strain-allele functions
     //<editor-fold defaultstate="collapsed">
     public Collection getStrainAlleles(TgDbCaller caller) throws ApplicationException {
@@ -3658,6 +3683,29 @@ public class ModelManagerBean extends AbstractTgDbBean implements javax.ejb.Sess
         {
             throw new ApplicationException("Failed to get search caller. Is user public created?");
         }
+    }
+    
+    public Collection getInducibility() throws ApplicationException {
+        makeConnection();
+        Collection inducibility = new ArrayList();
+        PreparedStatement ps = null;
+        ResultSet result = null;
+        try {
+            ps = conn.prepareStatement("select distinct(inducible) from model");
+            result = ps.executeQuery();
+
+            while(result.next()) {
+                    inducibility.add(result.getString("inducible"));
+            }
+            
+        } catch (SQLException se) {
+            logger.error("---------------------------------------->ModelManagerBean#getInducibility: Cannot get inducibility values", se);
+            throw new ApplicationException("Cannot get inducibility \n"+se.getMessage());
+        } finally {
+            releaseConnection();
+        }
+        
+        return inducibility;
     }
     //</editor-fold>
     

@@ -385,6 +385,9 @@ public class TgDbFormDataManagerFactory extends AbstractFormDataManagerFactory {
             formDataManager.putDefault("raid","");
             formDataManager.putDefault("fstid","");
             formDataManager.putDefault("gaid","");
+            formDataManager.putDefault("emap","");
+            formDataManager.putDefault("ma","");
+            formDataManager.putDefault("inducible","");
             formDataManager.putDefault("participantname","");
             formDataManager.putDefault("groupname", "");
             formDataManager.putDefault("mutationtypes","");

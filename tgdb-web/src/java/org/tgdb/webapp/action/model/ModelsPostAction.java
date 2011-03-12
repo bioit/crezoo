@@ -42,6 +42,9 @@ public class ModelsPostAction extends TgDbAction {
                 if(isSubmit(req, "byNAME"))
                     formDataManager.put("ordertype", "LINE NAME");
                 
+                if(isSubmit(req, "byINDUCIBILITY"))
+                    formDataManager.put("ordertype", "INDUCIBILITY");
+                
                 if(isSubmit(req, "byDATE"))
                     formDataManager.put("ordertype", "DATE");
             }

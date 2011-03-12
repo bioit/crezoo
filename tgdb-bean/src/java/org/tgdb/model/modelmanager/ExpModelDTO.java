@@ -29,7 +29,7 @@ public class ExpModelDTO implements Serializable, Comparable {
     private String geneChromosome, geneMgiid, geneSymbol, geneName;
     
     //strings for genetic background information
-    private String backcrossingStrain, backcrossesNumber;
+    private String backcrossingStrain, backcrossesNumber, promoters_string;
     
     //to check if something is a transgene
     private int DistParam=0;
@@ -102,6 +102,9 @@ public class ExpModelDTO implements Serializable, Comparable {
             else {
                 this.former_names_ss = model.getFormer_names();
             }
+            
+            this.promoters_string = model.getPromotersString().replaceAll("<","&lt;").replaceAll(">","&gt;");
+            this.promoters_string = this.promoters_string.replaceAll("&lt;","<sup>").replaceAll("&gt;","</sup>");
             
         } catch (Exception e) {
             e.printStackTrace();
@@ -505,6 +508,10 @@ public class ExpModelDTO implements Serializable, Comparable {
 
     public String getFormer_names_ss() {
         return former_names_ss;
+    }
+    
+    public String getPromoters_string() {
+        return promoters_string;
     }
     
 }

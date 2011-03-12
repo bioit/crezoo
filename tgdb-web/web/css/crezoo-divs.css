@@ -9,7 +9,17 @@ body{text-align:center} /* centre for ie5.+*/
 
 body {
   background: #fff8e3 url(../images/background.gif) repeat-x;
-  font: 11px Arial, sans-serif;
+  font: 12px Arial, sans-serif;
+}
+
+a, a:visited {
+    color:              #33332D;
+    text-decoration:    underline;
+}
+
+a:hover {
+    color:              #DB4105;
+    text-decoration:    underline;
 }
 
 #wrap {
@@ -192,7 +202,7 @@ div#navigation {
   	height: 20px;
 }
 
-#foot p a, a:visited {
+#foot p a, #foot p a:visited {
 	background: none;
 	color: #cf0d0d;
 	font-weight: bold;

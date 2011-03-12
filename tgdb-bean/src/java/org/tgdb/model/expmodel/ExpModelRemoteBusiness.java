@@ -128,4 +128,6 @@ public interface ExpModelRemoteBusiness {
     void addIntegrationCopy(org.tgdb.genome.integrationcopy.IntegrationCopyRemote ic) throws ApplicationException, java.rmi.RemoteException;
 
     java.util.Collection getIntegrationCopies() throws java.rmi.RemoteException;
+    
+    String getPromotersString() throws java.rmi.RemoteException;
 }
