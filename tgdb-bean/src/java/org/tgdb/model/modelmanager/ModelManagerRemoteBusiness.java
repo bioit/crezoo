@@ -5,6 +5,7 @@ import org.tgdb.frame.PageManager;
 import org.tgdb.frame.io.FileDataObject;
 import org.tgdb.TgDbCaller;
 import org.tgdb.exceptions.ApplicationException;
+import org.tgdb.form.FormDataManager;
 
 public interface ModelManagerRemoteBusiness {
     Collection getTermsByOntology(String ontology_name) throws ApplicationException, java.rmi.RemoteException;
@@ -407,6 +408,14 @@ public interface ModelManagerRemoteBusiness {
     Collection getOntologyTerms(String namespace) throws ApplicationException, java.rmi.RemoteException;
     
     Collection getInducibility() throws ApplicationException, java.rmi.RemoteException;
+    
+    Collection getMadeBy() throws ApplicationException, java.rmi.RemoteException;
+    
+    Collection getStrainAllelesByPGMFDM(PageManager pageManager, FormDataManager fdm, TgDbCaller caller) throws ApplicationException, java.rmi.RemoteException;
+    
+    Collection getStrainAllelesByFDM(FormDataManager fdm, TgDbCaller caller) throws ApplicationException, java.rmi.RemoteException;
+    
+    Collection getModelsByStrainAllele(int strain_allele, TgDbCaller caller) throws ApplicationException, java.rmi.RemoteException;
     
     //web services methods
     //<editor-fold defaultstate="collapsed">

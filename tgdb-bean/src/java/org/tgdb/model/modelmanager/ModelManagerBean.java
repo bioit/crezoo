@@ -879,6 +879,28 @@ public class ModelManagerBean extends AbstractTgDbBean implements javax.ejb.Sess
             throw new ApplicationException("Could not add integration copy data set to model number "+eid+" \n"+e.getMessage(),e);            
         }
     }
+    
+    public Collection getModelsByStrainAllele(int strain_allele, TgDbCaller caller) throws ApplicationException{
+        Collection dtos = new ArrayList();
+        try {                                            
+//            GeneRemote gene = geneHome.findByPrimaryKey(new Integer(strain_allele));
+//            gene.setCaller(caller);
+            Collection models = modelHome.findByStrainAllele(strain_allele, caller);
+            
+            Iterator i = models.iterator();
+            while(i.hasNext()) {                
+                dtos.add(new ExpModelDTO((ExpModelRemote)i.next()));
+            }
+            
+//            logger.debug("---------------------------------------->ModelManagerBean#getModelsByGene: Models size = "+models.size());
+            
+        } catch (Exception e) {
+//            e.printStackTrace();
+//            throw new ApplicationException("Failed to get genes affected.", e);
+            logger.error(e);
+        }
+        return dtos;
+    }
     //</editor-fold>
 
     //research application(s) functions
@@ -1758,7 +1780,7 @@ public class ModelManagerBean extends AbstractTgDbBean implements javax.ejb.Sess
                 Iterator k = expression.getOntologyTerms("MA").iterator();
                 while(k.hasNext()) {
                     OlsDTO tmp = (OlsDTO)k.next();
-                    ma_terms += "[" + tmp.getOid() + "] " + getTermById(tmp.getOid(), tmp.getNamespace()) + " &bull; ";
+                    ma_terms += "<a href='http://www.informatics.jax.org/searches/AMA.cgi?id="+tmp.getOid()+"' target='_blank'>[" + tmp.getOid() + "] " + getTermById(tmp.getOid(), tmp.getNamespace()) + "</a> &bull; ";
                 }
                 expression_dto.setMa_terms(ma_terms);
 
@@ -1939,6 +1961,49 @@ public class ModelManagerBean extends AbstractTgDbBean implements javax.ejb.Sess
             logger.error(getStackTrace(e));
         }
         return dtos;
+    }
+    
+    public Collection getStrainAllelesByFDM(FormDataManager fdm, TgDbCaller caller) throws ApplicationException {
+        Collection strain_alleles = new ArrayList();
+        try {
+            Iterator i = strainAlleleHome.findByFDM(fdm, caller).iterator();
+            
+            while (i.hasNext()) {
+                
+                strain_alleles.add(new StrainAlleleDTO((StrainAlleleRemote)i.next()));
+                
+            }
+        } catch (Exception e) {
+            logger.error(getStackTrace(e));
+        }
+        return strain_alleles;
+    }
+    
+    public Collection getStrainAllelesByPGMFDM(PageManager pageManager, FormDataManager fdm, TgDbCaller caller) throws ApplicationException {
+        Collection strain_alleles = new ArrayList();
+        try {
+            Iterator i = strainAlleleHome.findByFDM(fdm, caller).iterator();//this.modelsTMP.iterator();
+            
+            int start = pageManager.getStart();
+            int stop = pageManager.getStop();
+            int index = 0;
+            
+            while (i.hasNext()) {
+                
+                index++;
+                
+                if (index>=start && index<=stop) {
+                    strain_alleles.add(new StrainAlleleDTO((StrainAlleleRemote)i.next()));
+                } else {
+                    if(strain_alleles.size() == pageManager.getDelta())
+                        return strain_alleles;
+                    i.next();
+                }
+            }
+        } catch (Exception e) {
+            logger.error(getStackTrace(e));
+        }
+        return strain_alleles;
     }
 
     public Collection getStrainAllelesByMgiid(String mgiid, org.tgdb.TgDbCaller caller) throws ApplicationException {
@@ -3691,7 +3756,7 @@ public class ModelManagerBean extends AbstractTgDbBean implements javax.ejb.Sess
         PreparedStatement ps = null;
         ResultSet result = null;
         try {
-            ps = conn.prepareStatement("select distinct(inducible) from model");
+            ps = conn.prepareStatement("select distinct(inducible) from model where inducible !=''");
             result = ps.executeQuery();
 
             while(result.next()) {
@@ -3701,6 +3766,29 @@ public class ModelManagerBean extends AbstractTgDbBean implements javax.ejb.Sess
         } catch (SQLException se) {
             logger.error("---------------------------------------->ModelManagerBean#getInducibility: Cannot get inducibility values", se);
             throw new ApplicationException("Cannot get inducibility \n"+se.getMessage());
+        } finally {
+            releaseConnection();
+        }
+        
+        return inducibility;
+    }
+    
+    public Collection getMadeBy() throws ApplicationException {
+        makeConnection();
+        Collection inducibility = new ArrayList();
+        PreparedStatement ps = null;
+        ResultSet result = null;
+        try {
+            ps = conn.prepareStatement("select distinct(made_by) from strain_allele where made_by != ''");
+            result = ps.executeQuery();
+
+            while(result.next()) {
+                    inducibility.add(result.getString("made_by"));
+            }
+            
+        } catch (SQLException se) {
+            logger.error(se);
+//            throw new ApplicationException("Cannot get inducibility \n"+se.getMessage());
         } finally {
             releaseConnection();
         }

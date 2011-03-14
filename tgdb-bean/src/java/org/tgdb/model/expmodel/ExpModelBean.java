@@ -315,6 +315,30 @@ public class ExpModelBean extends ExpObj implements javax.ejb.EntityBean, org.tg
         
         return models;
     }
+    
+    public java.util.Collection ejbFindByStrainAllele(int strain_allele, TgDbCaller caller) throws javax.ejb.FinderException {
+        makeConnection();
+        Collection models = new ArrayList();
+        PreparedStatement ps = null;
+        ResultSet result = null;
+
+        try {
+//            String levelString = getModelLevelSql(caller);
+            ps = conn.prepareStatement("select distinct(model) as eid from r_model_strain_allele_mutation_type where strain_allele = ?");
+            ps.setInt(1, strain_allele);
+            result = ps.executeQuery();
+
+            while(result.next()) {
+                models.add(new Integer(result.getInt("eid")));
+            }
+        } catch (SQLException se) {
+            throw new FinderException("ExpModelBean#ejbFindByStrainAllele: Cannot find models by strain allele " + strain_allele + " \n"+se.getMessage());
+        } finally {
+            releaseConnection();
+        }
+
+        return models;
+    }
 
     public java.util.Collection ejbFindByStrain(int strain, TgDbCaller caller) throws javax.ejb.FinderException {
         makeConnection();
@@ -644,6 +668,10 @@ public class ExpModelBean extends ExpObj implements javax.ejb.EntityBean, org.tg
                     sql += " order by inducible";
                 }
                 
+            }
+            else {
+                //default by date
+                sql += " order by e.ts desc";
             }
                     
             ps = conn.prepareStatement(sql);

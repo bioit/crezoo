@@ -9,7 +9,7 @@ public class StrainAlleleDTO {
     
 //    private int IsStrainAlleleTransgenic;
     
-    private String mutations, mutationabbrs, mgilink;
+    private String mutations, mutationabbrs, mgilink, transgene_molecular, transgene_expression, transgene_chromosome;
    
     public StrainAlleleDTO(StrainAlleleRemote sa) {
         try
@@ -33,6 +33,9 @@ public class StrainAlleleDTO {
             origin_strain = sa.getOrigin_strain();
             mgi_url = sa.getMgi_url();
             
+            transgene_expression = sa.getTransgeneExpression();
+            transgene_molecular = sa.getTransgeneMolecular();
+            transgene_chromosome = sa.getTransgeneChromosome();
                   
         }
         catch (Exception e) {
@@ -136,5 +139,17 @@ public class StrainAlleleDTO {
 
     public String getOrigin_strain() {
         return origin_strain;
+    }
+    
+    public String getTransgene_expression() {
+        return transgene_expression;
+    }
+    
+    public String getTransgene_molecular() {
+        return transgene_molecular;
+    }
+    
+    public String getTransgene_chromosome() {
+        return transgene_chromosome;
     }
  }

@@ -22,8 +22,13 @@ public class Navigator {
     
     public void debug() {}
     
-    public PageManager getPageManager() {
+    public PageManager getPageManager()
+    {
         return pageManager;
+    }
+    
+    public void setPagemanager(PageManager pageManager){
+        this.pageManager = pageManager;
     }
     
     public void setNavigator(HttpServletRequest request)
@@ -45,11 +50,22 @@ public class Navigator {
         {
             pageManager.setLast();
         }
-        else if (request.getParameter("last") == null && request.getParameter("first") == null && request.getParameter("prev") == null && request.getParameter("next") == null){
-            pageManager.setFirst();
+        else if (request.getParameter("page")!=null)
+        {
+            pageManager.setCurrentPage(new Integer(request.getParameter("page")).intValue());
         }
-        
+        /*else if (request.getParameter("last") == null && request.getParameter("first") == null && request.getParameter("prev") == null && request.getParameter("next") == null){
+            pageManager.setFirst();
+        }*/
+//        else if (request.getParameter("back")!=null)
+//        {
+//
+//            back = true;
+//        }
+        // Set start if parameter tells so??
+
         request.getSession().setAttribute("navigator", this);
+        
     }
 
     public String getCurrentWorkflow() {
@@ -60,9 +76,11 @@ public class Navigator {
     {
         if (this.currentWorkflow==null || !this.currentWorkflow.equals(currentWorkflow))
         {
-            this.prevWorkflow = this.currentWorkflow;
+            prevWorkflow = this.currentWorkflow;
             this.currentWorkflow = currentWorkflow;
         }
+//        else
+//            System.out.println("Equals: CurrentWorkflow="+currentWorkflow+"\nLastWorkflow="+prevWorkflow);
         
     }
 

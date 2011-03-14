@@ -1,16 +1,21 @@
 package org.tgdb.tags;
 
+import org.apache.log4j.Logger;
 import org.tgdb.frame.Navigator;
 import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 
 public class NavigationTag extends BodyTagSupport {
+    
+    private static Logger logger = Logger.getLogger(NavigationTag.class);
+    
     private String workflow;
     private Navigator navigator;
     private boolean showText;
     private int viewed;
     private int max;
+    private int threshold = 5;
+    private int item_multiplier = 10;
     
     public NavigationTag() {
         showText = false;
@@ -35,15 +40,27 @@ public class NavigationTag extends BodyTagSupport {
             boolean isLast = false;
             boolean isFirst = false;
             boolean onePage = false;
+            
+            
             navigator = (Navigator)pageContext.getSession().getAttribute("navigator");
+            
             int currentStart = 0;
             int currentStop = 0;
+            int currentPage = 0;
+            int pagenumbers = 0;
+            int delta = 0;
             if(navigator != null) {
                 max = navigator.getPageManager().getMax();
                 
                 currentStart = navigator.getPageManager().getStart();
                 
                 viewed = navigator.getPageManager().getViewed();
+                
+                delta = navigator.getPageManager().getDelta();
+                
+                pagenumbers = navigator.getPageManager().getPages();
+                
+                currentPage = (currentStart + delta - 1)/delta;
                 
                 if(max == 0)
                     currentStart = 0;
@@ -91,10 +108,65 @@ public class NavigationTag extends BodyTagSupport {
 //                data += "<img src=\"images/icons/navigate_end_disabled.png\" border=\"none\">\n";                
             }
             
+            if (showText) {
+                
+                data += "&nbsp;items&nbsp;<select name=\"delta\" style=\"\" onchange=\"this.form.submit()\">";
+                for(int j = 1; j < 11; j++) {
+                   if(j*item_multiplier == delta) {
+                       data += "<option value=\""+(j*item_multiplier)+"\" selected=\"selected\">"+(j*item_multiplier)+"</option>";
+                   }
+                   else {
+                       data += "<option value=\""+(j*item_multiplier)+"\">"+(j*item_multiplier)+"</option>";
+                   }
+                }
+                data += "</select>";
+                
             
-            // If the text should be shown
-            if (showText)
-            {    
+                if(pagenumbers > 0 && pagenumbers > 11 && currentPage > threshold){
+    //                data += "|";
+                    data += "&nbsp;page&nbsp;<select name=\"page\" style=\"\" onchange=\"this.form.submit()\">";
+                    if((currentPage+threshold) < pagenumbers+1){
+                        for(int i=currentPage-threshold; i < currentPage+threshold+1; i++){
+                            if(i==currentPage){
+    //                            data +="<b>"+i+"</b>|\n";
+                                data += "<option value=\""+i+"\" selected=\"selected\">"+i+"</option>";
+                            } else{
+    //                            data +="<a class=\"menu\" href=\"Controller?workflow="+workflow+"&page="+i+"\" title=\"go to page "+i+"\">"+i+"</a>|\n";
+                                data += "<option value=\""+i+"\">"+i+"</option>";
+                            }
+                        }
+                    } else {
+                        //for(int i=1; i < 11+1; i++){
+                        for(int i=pagenumbers+1-11; i < pagenumbers+1; i++){
+                            if(i==currentPage){
+    //                            data +="<b>"+i+"</b>|\n";
+                                data += "<option value=\""+i+"\" selected=\"selected\">"+i+"</option>";
+                            } else{
+    //                            data +="<a class=\"menu\" href=\"Controller?workflow="+workflow+"&page="+i+"\" title=\"go to page "+i+"\">"+i+"</a>|\n";
+                                data += "<option value=\""+i+"\">"+i+"</option>";
+                            }
+                        }
+                    }
+                    data += "</select>";
+                } else {
+    //                data += "|";
+                    data += "&nbsp;page&nbsp;<select name=\"page\" style=\"\" onchange=\"this.form.submit()\">";
+                    if(pagenumbers > 11 && currentPage <= threshold){
+                        pagenumbers = 11;
+                    }
+
+                    for(int i=1; i < pagenumbers+1; i++){
+                        if(i==currentPage){
+    //                        data +="<b>"+i+"</b>|\n";
+                            data += "<option value=\""+i+"\" selected=\"selected\">"+i+"</option>";
+                        } else{
+    //                        data +="<a class=\"menu\" href=\"Controller?workflow="+workflow+"&page="+i+"\" title=\"go to page "+i+"\">"+i+"</a>|\n";
+                            data += "<option value=\""+i+"\">"+i+"</option>";
+                        }
+                    }
+                    data += "</select>";
+                }
+            
                 data += "&nbsp;";
                 // If only one page will be displayed, show a simpler version
                 if (onePage)    
@@ -109,7 +181,8 @@ public class NavigationTag extends BodyTagSupport {
             pageContext.getOut().print(data);
             
         } catch (Exception e) {
-            throw new JspTagException(e.getMessage());
+            //throw new JspTagException(e.getMessage());
+            logger.error(e);
         }
         
         return SKIP_BODY;

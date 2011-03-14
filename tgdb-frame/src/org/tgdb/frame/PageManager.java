@@ -1,35 +1,21 @@
-/*
- * PageManager.java
- *
- * Created on July 27, 2005, 1:03 PM
- *
- * To change this template, choose Tools | Options and locate the template under
- * the Source Creation and Management node. Right-click the template and choose
- * Open. You can then make changes to the template in the Source Editor.
- */
-
 package org.tgdb.frame;
 import java.io.Serializable;
 
-/**
- * Class for handling display and navigation for pages of data
- * @author heto
- */
 public class PageManager implements Serializable {
    
     private int start;
     private int delta;
     private int max;
     private int viewed;
+    private int page = 1;
     
     private boolean last;
     
     
     /** Creates a new instance of PageManager */
-    public PageManager() 
-    {
-        start=1;
-        delta=20;
+    public PageManager() {
+        start = 1;
+        delta = 60;
         max = -1;
     }
 
@@ -38,10 +24,25 @@ public class PageManager implements Serializable {
      * @return The start number
      */
     public int getStart() {
+        start = (page - 1)*delta + 1;
         if(start > max) {
             setFirst();
         }
         return start;
+    }
+    
+    /**
+     * Sets the number of what to display
+     * @return The start number
+     */
+    public void setStart(int start) {
+        this.start = start;
+        
+        if(start + delta - 1 < max) {
+            last = false;
+        } else {
+            last = true;
+        }
     }
 
     /**
@@ -75,14 +76,12 @@ public class PageManager implements Serializable {
     public void setMax(int max) {
         this.max = max;
         
-        if (last)
-        {
+        if (last) {
             int from = max % delta;
             //start = max - from + 1;
-            if(from != 0){
+            if(from != 0) {
                 start = max - from + 1;
-            }
-            else{
+            } else {
                 start = max - delta + 1;
             }
         }
@@ -99,11 +98,11 @@ public class PageManager implements Serializable {
     /**
      * Sets the next interval to display
      */
-    public void setNext()
-    {
-        if(start + delta < max) {
+    public void setNext() {
+        if(start + delta - 1 < max) {
             start += delta;
-            if(start + delta < max) {
+            page++;
+            if(start + delta - 1 < max) {
                 last = false;
             } else {
                 last = true;
@@ -111,13 +110,22 @@ public class PageManager implements Serializable {
         }
     }
     
+    public void setCurrentPage(int pagenum){
+        this.page = pagenum;
+        start = (pagenum - 1)*delta + 1;
+        if(start + delta - 1 < max) {
+            last = false;
+        } else {
+            last = true;
+        }
+    }
+    
     /**
      * Sets the previous interval to display
      */
-    public void setPrev()
-    {
-        if (start-delta>0)
-        {
+    public void setPrev() {
+        if (start-delta>0) {
+            page--;
             start -= delta;
             last = false;
         }
@@ -126,27 +134,29 @@ public class PageManager implements Serializable {
     /**
      * Sets the first interval to display
      */
-    public void setFirst()
-    {
+    public void setFirst() {
         start = 1;
+        page = 1;
         last = false;
     }
     
     /**
      * Sets the last interval to display
      */
-    public void setLast()
-    {
+    public void setLast() {
         /*
         if (max==-1)
             throw new ApplicationException("Last button unsupported if setMax is not called. ");
-          */  
+          */
+        //page = max/delta;
         int from = max % delta;
         if(from != 0){
             start = max - from + 1;
+            page = (max/delta)+1;
         }
         else{
             start = max - delta + 1;
+            page = max/delta;
         }
         
         last = true;
@@ -157,13 +167,11 @@ public class PageManager implements Serializable {
      * Returns if the current interval is the last to display
      * @return If the interval is the last to display
      */
-    public boolean isLast()
-    {
+    public boolean isLast() {
         return last;
     }
     
-    public int getViewed()
-    {
+    public int getViewed() {
         if (last){
            return max-start+1;
         }else{
@@ -173,5 +181,13 @@ public class PageManager implements Serializable {
                 return delta; 
             }
         }
+    }
+    
+    public int getPages(){
+        int numpages = max/delta;
+        if(max-(delta*numpages)>0) {
+            numpages += 1;
+        }
+        return numpages;
     }
 }

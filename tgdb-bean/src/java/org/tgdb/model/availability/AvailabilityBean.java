@@ -412,6 +412,20 @@ public class AvailabilityBean extends AbstractTgDbBean implements EntityBean, Av
         return designation;
     }
     
+    public String getStrainLinks() {
+        String links = "";
+        try
+        {
+           StrainRemote strain = strainHome.findByPrimaryKey(new Integer(strainid));
+           links = strain.getStrain_links_string();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return links;
+    }
+    
     public String getRepositoryName() {
         String reponame = "";
         try

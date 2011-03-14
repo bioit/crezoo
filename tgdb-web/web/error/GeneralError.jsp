@@ -5,20 +5,20 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" type="text/css" href="test.css" />
-        <title>TgDb Error</title>
+        <!--link rel="stylesheet" type="text/css" href="test.css" /-->
+        <title>CreZOO Error</title>
     </head>
     <body>
     <form action="Controller?workflow=reboot" method="post" target="_top">
         <table>
             <tr valign="bottom">
-                <td class="head">TgDb Error</td>
+                <td class="head">CreZOO Error</td>
             </tr>
         </table>
         <hr id="ruler">
         <table>
             <tr>
-                <td>&nbsp;Please <input id="buttonclean" type="submit" name="back" value="restart TgDb" title="Restart TgDb"> or try again later.</td>
+                <td>&nbsp;Please <input id="buttonclean" type="submit" name="back" value="restart CreZOO" title="Restart CreZOO"> or try again later.</td>
             </tr>
         </table>
     </form>

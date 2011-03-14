@@ -60,12 +60,12 @@
             <name>navigator</name>
             <required>false</required>
             <rtexprvalue>true</rtexprvalue>
-        </attribute>      
+        </attribute>
         <attribute>
             <name>showText</name>
             <required>false</required>
             <rtexprvalue>true</rtexprvalue>
-        </attribute>                     
+        </attribute> 
     </tag>
     <tag>
         <name>type</name>

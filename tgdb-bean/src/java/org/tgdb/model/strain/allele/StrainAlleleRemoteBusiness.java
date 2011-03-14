@@ -54,4 +54,10 @@ public interface StrainAlleleRemoteBusiness {
     void setMgi_url(String mgi_url) throws ApplicationException, java.rmi.RemoteException;
 
     String getMgi_url() throws ApplicationException, java.rmi.RemoteException;
+    
+    String getTransgeneExpression() throws ApplicationException, java.rmi.RemoteException;
+    
+    String getTransgeneMolecular() throws ApplicationException, java.rmi.RemoteException;
+    
+    String getTransgeneChromosome() throws ApplicationException, java.rmi.RemoteException;
 }

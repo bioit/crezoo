@@ -149,7 +149,7 @@
                 <td><input type="text" name="exfilecomm" size="55" maxlength="500"/></td>
             </tr>
             <tr>
-                <td><b>Site of Expression</b> <input id="ma" type="text" size="55" maxlength="500"/><a href="Controller?workflow=AddOntologyToExpressionModel&ma_id=" id="ma_id" class="navtext" >add</a></td>
+                <td><b>Site of Expression</b> <input id="ma" type="text" size="55" maxlength="500"/><a href="Controller?workflow=AddOntologyToExpressionModel&ma_id=" id="ma_id" class="navtext" >add</a> <a href="http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=MA" target="_blank">MA@OLS</a></td>
             </tr>
             <m:iterate-collection collection="ma_terms">
             <tr class="#?alt#">
@@ -157,7 +157,7 @@
             </tr>
             </m:iterate-collection>
             <tr>
-                <td><b>Developmental Stage</b> <input id="emap" type="text" size="55" maxlength="500"/><a href="Controller?workflow=AddOntologyToExpressionModel&emap_id=" id="emap_id" class="navtext" >add</a></td>
+                <td><b>Developmental Stage</b> <input id="emap" type="text" size="55" maxlength="500"/><a href="Controller?workflow=AddOntologyToExpressionModel&emap_id=" id="emap_id" class="navtext" >add</a> <a href="http://www.ebi.ac.uk/ontology-lookup/browse.do?ontName=EMAP" target="_blank">EMAP@OLS</a></td>
             </tr>
             <m:iterate-collection collection="emap_terms">
             <tr class="#?alt#">

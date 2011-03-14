@@ -31,7 +31,7 @@
                 </tr>
                 <m:iterate-collection collection="genes">
                     <tr class="#?alt#">
-                        <td width="70%"><a href="Controller?workflow=ViewGene&amp;gaid=#:getGaid#" title="View Transgene">#:getName# / #:getGenesymbol#</a></td>
+                        <td width="70%"><a href="Controller?workflow=ViewGene&amp;gaid=#:getGaid#" title="View Transgene">#:getName_ss# / #:getGenesymbol_ss#</a></td>
                         <td width="15%"><a href="Controller?workflow=ViewModels&amp;_gaid=#:getGaid#">#:getModels_num#</a></td>
                         <td>#:getTs#</td>
                     </tr>

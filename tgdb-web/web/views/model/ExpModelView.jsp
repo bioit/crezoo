@@ -50,9 +50,14 @@
                                 <li><a href="#fragment-3"><span>Documents</span></a></li>
                             </ul>
                             <div id="fragment-1">
-                                <p>
-			Inducible: <%=modeldto.getInducible()%> / Donating Investigator: <%=modeldto.getDonating_investigator()%> / Former Names: <%=modeldto.getFormer_names_ss()%>
-                                </p>
+                            	<div class="subsection">
+                                	<span>Inducible</span>
+                                	<table class="block_data">
+                                        <tr class="alternatingOne">
+                                        	<td><%=modeldto.getInducible()%></td>
+                                        </tr>
+                                    </table>
+                                </div>
                                 <!--subsection for Availability-->
                                 <div class="subsection">
                                     <span>
@@ -80,15 +85,17 @@
                                                 <td>#:getStatename#</td>
                                                 <td>#:getTypename#</td-->
                                                 <td width="90%">
-                                                    <i style="margin-left: 20px; font-weight:bold">Repository:</i> #:getReponame#
+                                                    <b style="margin-left: 20px; font-weight:bold">Repository:</b> #:getReponame#
                                                     <hr/>
-                                                    <i style="margin-left: 20px; font-weight:bold">Strain Designation:</i> #:getStraindesignation_ss#
+                                                    <b style="margin-left: 20px; font-weight:bold">Strain Designation:</b> #:getStraindesignation_ss#
                                                     <hr/>
-                                                    <i style="margin-left: 20px; font-weight:bold">Available Genetic Background:</i> #:getAvbackname#
+                                                    <b style="margin-left: 20px; font-weight:bold">Available Genetic Background:</b> #:getAvbackname#
                                                     <hr/>
-                                                    <i style="margin-left: 20px; font-weight:bold">Strain State:</i> #:getStatename#
+                                                    <b style="margin-left: 20px; font-weight:bold">Strain State:</b> #:getStatename#
                                                     <hr/>
-                                                    <i style="margin-left: 20px; font-weight:bold">Strain Type:</i> #:getTypename#
+                                                    <b style="margin-left: 20px; font-weight:bold">Strain Type:</b> #:getTypename#
+                                                    <hr/>
+                                                    <b style="margin-left: 20px; font-weight:bold">Housing Repository IDs:</b> #:getStrain_links#
                                                 </td>
                                                 <td>
                                                     <m:hide privilege="MODEL_W" suid="<%=modeldto.getSuid()%>">
@@ -149,7 +156,7 @@
                                     <table class="block_data">
                                         <tr>
                                             <th class="data" width="45%">Strain Name</th>
-                                            <th class="data" width="45%">ID</th>
+                                            <th class="data" width="45%">Repository</th>
                                             <th class="data" width="10%">&nbsp;</th>
                                         </tr>
                                         <m:iterate-collection collection="strains">
@@ -167,6 +174,22 @@
                                                 </td>
                                             </tr>
                                         </m:iterate-collection>
+                                    </table>
+                                </div>
+                                <div class="subsection">
+                                	<span>Donating Investigator</span>
+                                	<table class="block_data">
+                                        <tr class="alternatingOne">
+                                        	<td><%=modeldto.getDonating_investigator()%></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="subsection">
+                                	<span>Former Names</span>
+                                	<table class="block_data">
+                                        <tr class="alternatingOne">
+                                        	<td><%=modeldto.getFormer_names_ss()%></td>
+                                        </tr>
                                     </table>
                                 </div>
                                 <!--subsection for Additional Comments-->
@@ -239,13 +262,13 @@
                                                 <td>#:getName_ss#</td>
                                                 <td>#:getChromoName#</td-->
                                                 <td width="90%">
-                                                    <i style="margin-left: 20px; font-weight:bold">Symbol</i> #:getGenesymbol_ss#
+                                                    <b style="margin-left: 20px; font-weight:bold">Symbol:</b> #:getGenesymbol_ss#
                                                     <hr/>
-                                                    <i style="margin-left: 20px; font-weight:bold">Name:</i> #:getName_ss#
+                                                    <b style="margin-left: 20px; font-weight:bold">Name:</b> #:getName_ss#
                                                     <hr/>
-                                                    <i style="margin-left: 20px; font-weight:bold">Chromosome:</i> #:getChromoName#
+                                                    <b style="margin-left: 20px; font-weight:bold">Chromosome:</b> #:getChromoName#
                                                     <hr/>
-                                                    <i style="margin-left: 20px; font-weight:bold">External IDs:</i> #:getPromoter_links_string#
+                                                    <b style="margin-left: 20px; font-weight:bold">External IDs:</b> #:getPromoter_links_string#
                                                 </td>
                                                 <td>
                                                     <m:hide privilege="MODEL_W" suid="<%=modeldto.getSuid()%>">
@@ -308,17 +331,17 @@
                                         </m:hide>
                                     </span>
                                     <table class="block_data">
-                                        <tr>
+                                        <!--tr>
                                             <th class="data" width="10%">Allele Symbol</th>
                                             <th class="data" width="30%">Allele Name</th>
                                             <th class="data" width="15%">MGI ID</th>
                                             <th class="data" width="25%">Allele Type</th>
                                             <th class="data" width="10%">Attributes</th>
                                             <th class="data" width="10%">&nbsp;</th>
-                                        </tr>
+                                        </tr-->
                                         <m:iterate-collection collection="strainalleles">
                                             <tr class="#?alt#">
-                                                <td>#:getSymbol_ss#</td>
+                                                <!--td>#:getSymbol_ss#</td>
                                                 <td>#:getName_ss#</td>
                                                 <td><a href="#:getMgi_url#" target="_blank">#:getMgi_id#</a></td>
                                                 <td>#:getMutations#</td>
@@ -329,6 +352,32 @@
                                                         <a href="Controller?workflow=EditStrainAllele&amp;strainalleleid=#:getId#&amp;transgc=<%=modeldto.getDistParam()%>&amp;eid=<jsp:getProperty name="modeldto" property="eid"/>" class="navtext">edit</a>
                                                         <br/>
                                                         <a href="Controller?workflow=RemoveStrainAllele&amp;strainalleleid=#:getId#&amp;transgc=<%=modeldto.getDistParam()%>&amp;eid=<jsp:getProperty name="modeldto" property="eid"/>" onclick="return confirm('Remove Allele?')" class="navtext">delete</a>
+                                                        <% }%>
+                                                    </m:hide>
+                                                </td-->
+                                                <td width="90%">
+                                                    <b style="margin-left: 20px; font-weight:bold">Symbol:</b> #:getSymbol_ss#
+                                                    <hr/>
+                                                    <b style="margin-left: 20px; font-weight:bold">Name:</b> #:getName_ss#
+                                                    <hr/>
+                                                    <b style="margin-left: 20px; font-weight:bold">MGI ID:</b> <a href="#:getMgi_url#" target="_blank">#:getMgi_id#</a>
+                                                    <hr/>
+                                                    <b style="margin-left: 20px; font-weight:bold">Type:</b> #:getMutations#
+                                                    <hr/>
+                                                    <b style="margin-left: 20px; font-weight:bold">Attributes:</b> #:getAttributes#
+                                                    <hr/>
+                                                    <b style="margin-left: 20px; font-weight:bold">Expression:</b> #:getTransgene_expression#
+                                                    <hr/>
+                                                    <b style="margin-left: 20px; font-weight:bold">Molecular Note:</b> #:getTransgene_molecular#
+                                                    <hr/>
+                                                    <b style="margin-left: 20px; font-weight:bold">Chromosome:</b> #:getTransgene_chromosome#
+                                                </td>
+                                                <td>
+                                                    <m:hide privilege="MODEL_W" suid="<%=modeldto.getSuid()%>">
+                                                        <% if (edithis == 13) {%>
+                                                        <a href="Controller?workflow=EditStrainAllele&amp;strainalleleid=#:getId#&amp;transgc=<%=modeldto.getDistParam()%>&amp;eid=<jsp:getProperty name="modeldto" property="eid"/>" class="navtext">edit</a>
+                                                        <br/>
+                                                        <a href="Controller?workflow=RemoveStrainAllele&amp;strainalleleid=#:getId#&amp;transgc=<%=modeldto.getDistParam()%>&amp;eid=<jsp:getProperty name="modeldto" property="eid"/>" onclick="return confirm('Unassign Allele?')" class="navtext">unassign</a>
                                                         <% }%>
                                                     </m:hide>
                                                 </td>
@@ -384,8 +433,10 @@
                                                     <hr/>
                                                     <i style="margin-left: 20px; font-weight:bold">Comment:</i> #:getExcomm#
                                                     <hr/>
+                                                    <!--
                                                     <i style="margin-left: 20px; font-weight:bold">Images:</i> #:getExfiletable#
                                                     <hr/>
+                                                    -->
                                                     <i style="margin-left: 20px; font-weight:bold">Site of Expression:</i> #:getMa_terms#
                                                     <hr/>
                                                     <i style="margin-left: 20px; font-weight:bold">Developmental Stage:</i> #:getEmap_terms#
@@ -541,7 +592,7 @@
                         </div>
                         <!--some extra info-->
                         <p class="navtext">
-                            <b>corresponding researcher: </b><a href="Controller?workflow=ViewUser&amp;id=<jsp:getProperty name="modeldto" property="contactId"/>" title="Contact Researcher"><jsp:getProperty name="modeldto" property="contactName"/></a>&nbsp;
+                        	<b>corresponding researcher: </b><!--<a href="Controller?workflow=ViewUser&amp;id=<jsp:getProperty name="modeldto" property="contactId"/>" title="Contact Researcher">--><jsp:getProperty name="modeldto" property="contactName"/><!--</a>-->&nbsp;
                             <b>updated: </b><jsp:getProperty name="modeldto" property="ts"/>
                             <m:hide privilege="MODEL_ADM" suid="<%=modeldto.getSuid()%>">
                                 &nbsp;<b>dissemination level: </b><jsp:getProperty name="modeldto" property="level"/>

@@ -425,7 +425,7 @@ public class GeneBean extends AbstractTgDbBean implements javax.ejb.EntityBean, 
             else {
                 distinguish = "";
             }
-            PreparedStatement ps = conn.prepareStatement("(select g.gaid from gene g where g.pid=? "+distinguish+") except (select g.gaid from gene g, r_gene_model r where r.eid=? and g.gaid=r.gaid)");
+            PreparedStatement ps = conn.prepareStatement("(select g.gaid from gene g where g.pid=? "+distinguish+" order by g.name) except (select g.gaid from gene g, r_gene_model r where r.eid=? and g.gaid=r.gaid order by g.name)");
             ps.setInt(1,pid);
             ps.setInt(2,eid);
             ResultSet result = ps.executeQuery();

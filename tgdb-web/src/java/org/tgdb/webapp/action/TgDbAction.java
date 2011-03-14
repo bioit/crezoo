@@ -110,6 +110,14 @@ public abstract class TgDbAction extends Action {
             return false;
     }
     
+    public boolean exists_without_value(String value) {
+        
+        if(value != null)
+            return true;
+        else
+            return false;
+    }
+    
     public boolean isSubmit(HttpServletRequest req, String name) {
         
         if (req.getParameter(name)!=null)

@@ -111,7 +111,7 @@
 	<menu name="Mice" priv="MODEL_PUB" workflow="ViewModels"/>
 	<!--menu name="Strains" priv="MODEL_PUB" workflow="ViewStrains"/-->
         <menu name="Alleles" priv="MODEL_PUB" workflow="ViewStrainAlleles"/>
-	<menu name="Transgenes" priv="MODEL_PUB" workflow="ViewGenes" />
+	<!--menu name="Transgenes" priv="MODEL_PUB" workflow="ViewGenes" /-->
     
     <!--search header-->
     <!--menu name="Search" priv="DEV">

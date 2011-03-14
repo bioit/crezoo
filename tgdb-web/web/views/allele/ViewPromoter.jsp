@@ -19,24 +19,18 @@
             <span class="header_01">View Promoter</span>
             <table>
                 <tr>
-                    <td><b>Promoter Name</b></td>
+                    <td><b>Promoter Name:</b> <jsp:getProperty name="gene" property="name_ss"/></td>
                 </tr>
                 <tr>
-                    <td><jsp:getProperty name="gene" property="name_ss"/></td>
+                    <td><b>Promoter Symbol:</b> <jsp:getProperty name="gene" property="genesymbol_ss"/></td>
                 </tr>
                 <tr>
-                    <td><b>Promoter Symbol</b></td>
+                    <td><b>Chromosome: </b> <jsp:getProperty name="gene" property="chromoName"/></td>
                 </tr>
                 <tr>
-                    <td><jsp:getProperty name="gene" property="genesymbol_ss"/></td>
+                    <td><b>External IDs: </b> <jsp:getProperty name="gene" property="promoter_links_string"/></td>
                 </tr>
-                <tr>
-                    <td><b>Chromosome</b></td>
-                </tr>
-                <tr>
-                    <td><jsp:getProperty name="gene" property="chromoName"/></td>
-                </tr>
-                <tr>
+                <!--tr>
                     <td><b>MGI ID</b></td>
                 </tr>
                 <tr>
@@ -53,7 +47,7 @@
                 </tr>
                 <tr>
                     <td><jsp:getProperty name="gene" property="common_name"/></td>
-                </tr>
+                </tr-->
             </table>
         <table>
             <tr>

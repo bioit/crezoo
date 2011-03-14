@@ -40,11 +40,11 @@
                 <td><b>Allele Symbol:</b>&nbsp;<%=strainallele.getSymbol_ss() %></td>
             </tr>
             <tr>
-                <td><b>Allele MGI ID:</b>&nbsp;<%=strainallele.getMgi_id() %></td>
+                <td><b>Allele MGI ID:</b>&nbsp;<a href="<%=strainallele.getMgi_url() %>" target="_blank"><%=strainallele.getMgi_id() %></a></td>
             </tr>
-            <tr>
+            <!--tr>
                 <td><b>Allele MGI URl:</b>&nbsp;<%=strainallele.getMgi_url() %></td>
-            </tr>
+            </tr-->
             <tr>
                 <td><b>Mutation Made by</b>&nbsp;<%=strainallele.getMade_by() %></td>
             </tr>
@@ -55,11 +55,18 @@
         <br/>
         <table class="block3" width="100%">
             <tr>
+                <th class="block">Related Mice</th>
+            </tr>
+            <m:iterate-collection collection="models">
+            <tr class="#?alt#">
+                <td><a href="Controller?workflow=ViewModel&amp;eid=#:getEid#" title="View Mouse">#:getLineName_ss#</a></td>
+            </tr>
+            </m:iterate-collection><tr>
                 <th class="block">Promoters</th>
             </tr>
             <m:iterate-collection collection="promoters">
             <tr class="#?alt#">
-                <td>#:getName#</td>
+                <td><a href="Controller?workflow=ViewPromoter&amp;gid=#:getGaid#" title="View Promoter" class="data_link">#:getGenesymbol_ss#</a></td>
             </tr>
             </m:iterate-collection>
         </table>

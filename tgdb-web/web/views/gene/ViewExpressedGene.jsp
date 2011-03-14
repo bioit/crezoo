@@ -30,7 +30,7 @@
                 <tr>
                     <td><jsp:getProperty name="gene" property="genesymbol_ss"/></td>
                 </tr>
-                <tr>
+                <!--tr>
                     <td><b>Chromosome</b></td>
                 </tr>
                 <tr>
@@ -41,7 +41,7 @@
                 </tr>
                 <tr>
                     <td><jsp:getProperty name="gene" property="mgiurl"/></td>
-                </tr>
+                </tr-->
                 <tr>
                     <td><b>Comment</b></td>
                 </tr>

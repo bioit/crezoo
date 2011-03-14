@@ -40,7 +40,7 @@
                     <td><b>Select Allele</b> <a class="navtext" href="Controller?workflow=CreateStrainAllele">add</a></td>
                 </tr>
                 <tr>
-                    <td><m:checkbox collection="alleles_unassigned" idGetter="getId" textGetter="getName" name="allele_id"/></td>
+                    <td><m:checkbox collection="alleles_unassigned" idGetter="getId" textGetter="getSymbol_ss" name="allele_id"/></td>
                 </tr>
                 <tr>
                     <td><b>Allele Type</b></td>

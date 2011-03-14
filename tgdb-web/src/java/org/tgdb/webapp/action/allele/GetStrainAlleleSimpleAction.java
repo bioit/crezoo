@@ -32,6 +32,7 @@ public class GetStrainAlleleSimpleAction extends TgDbAction {
            
             req.setAttribute("strainallele", modelManager.getStrainAllele(0,strain_allele_id, true,_caller));
             req.setAttribute("promoters", modelManager.getGenesByAllele(strain_allele_id, _caller));
+            req.setAttribute("models", modelManager.getModelsByStrainAllele(strain_allele_id, _caller));
             
         } catch (Exception e) {
             logger.error(getStackTrace(e));

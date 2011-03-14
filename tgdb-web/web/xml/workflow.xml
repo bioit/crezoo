@@ -291,6 +291,8 @@
 
     <workflow name="ViewStrainAlleles">
         <state name="viewStrainAlleles" preaction="allele.GetStrainAllelesAction" viewURI="views/allele/ViewStrainAlleles.jsp"/>
+        <state name="post" action="allele.GetStrainAllelesPostAction"/>
+        <state workflow="ViewStrainAlleles"/>
     </workflow>
     <workflow name="ViewStrainAllele">
         <state name="viewStrainAllele" preaction="allele.GetStrainAlleleSimpleAction" viewURI="views/allele/ViewStrainAllele.jsp"/>

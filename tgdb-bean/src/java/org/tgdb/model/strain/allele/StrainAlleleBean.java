@@ -11,7 +11,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import javax.ejb.*;
+import org.tgdb.form.FormDataManager;
+import org.tgdb.model.expmodel.ExpModelRemote;
+import org.tgdb.model.expmodel.ExpModelRemoteHome;
+import org.tgdb.species.gene.GeneRemote;
+import org.tgdb.species.gene.GeneRemoteHome;
 
 public class StrainAlleleBean extends AbstractTgDbBean implements EntityBean, StrainAlleleRemoteBusiness
 {
@@ -23,7 +29,8 @@ public class StrainAlleleBean extends AbstractTgDbBean implements EntityBean, St
     private boolean dirty;
     
     private MutationTypeRemoteHome mutationTypeHome;
-//    private GeneRemoteHome geneHome;
+    private ExpModelRemoteHome modelHome;
+    private GeneRemoteHome geneHome;
     
     //ejb methods
     // <editor-fold defaultstate="collapsed">
@@ -31,7 +38,8 @@ public class StrainAlleleBean extends AbstractTgDbBean implements EntityBean, St
     public void setEntityContext(EntityContext aContext){
         context = aContext;
         mutationTypeHome = (MutationTypeRemoteHome)locator.getHome(ServiceLocator.Services.MUTATION_TYPE);
-//        geneHome = (GeneRemoteHome)locator.getHome(ServiceLocator.Services.GENE);
+        modelHome = (ExpModelRemoteHome)locator.getHome(ServiceLocator.Services.EXPMODEL); 
+        geneHome = (GeneRemoteHome)locator.getHome(ServiceLocator.Services.GENE);
     }
     
     public void ejbActivate(){}
@@ -356,6 +364,97 @@ public class StrainAlleleBean extends AbstractTgDbBean implements EntityBean, St
         return arr;
     }
     
+    public java.util.Collection ejbFindByFDM(FormDataManager fdm, org.tgdb.TgDbCaller caller) throws javax.ejb.FinderException {
+        makeConnection();
+        
+        //sets the _caller
+        setCaller(caller);
+        
+        Collection strain_alleles = new ArrayList();
+        PreparedStatement ps = null;
+        ResultSet result = null;
+        
+        int promoter = 0;
+        String tmp = fdm.getValue("promoter");
+        if (tmp!=null && !tmp.equals("") && !tmp.equals("*"))
+            promoter = new Integer(tmp).intValue();
+        
+        String made_by ="";
+        tmp = fdm.getValue("made_by");
+        if (tmp!=null && !tmp.equals("") && tmp.compareTo("*")!=0)
+            made_by = tmp;
+        
+        String inducible ="";
+        tmp = fdm.getValue("inducible");
+        if (tmp!=null && !tmp.equals("") && tmp.compareTo("*")!=0)
+            inducible = tmp;
+        
+        String orderby ="";
+        tmp = fdm.getValue("ordertype");
+        if (tmp!=null && !tmp.equals("") && tmp.compareTo("*")!=0)
+            orderby = tmp;
+        
+        String sql = "";
+        
+        try {
+            sql = "select sa.id from strain_allele sa where sa.id > 0 ";
+            
+            if (promoter!=0) {
+                sql += " and sa.id in (select aid from r_strain_allele_gene where gid = ?) ";
+            }
+            
+            if (!made_by.equals("")) {
+                sql += " and sa.made_by = ? ";
+            }
+            
+            if (!inducible.equals("")) {
+                sql += " and sa.id in (select distinct(rms.strain_allele) as said from model m join r_model_strain_allele_mutation_type rms on m.eid = rms.model where m.inducible = ?) ";
+            }
+            
+            if (!orderby.equals("")) {
+                if(orderby.equals("NAME")){
+                    sql += " order by sa.name";
+                }
+                
+                if(orderby.equals("SYMBOL")){
+                    sql += " order by sa.symbol";
+                }
+                
+                if(orderby.equals("ID")){
+                    sql += " order by sa.id";
+                }
+                
+            }
+            else {
+                //default by symbol
+                sql += " order by sa.symbol";
+            }
+                    
+            ps = conn.prepareStatement(sql);
+            
+            int i = 1;
+            
+            if (promoter!=0)
+                ps.setInt(i++, promoter);
+            if (!made_by.equals(""))
+                ps.setString(i++, made_by);
+            if (!inducible.equals(""))
+                ps.setString(i++, inducible);
+            
+            result = ps.executeQuery();
+            
+            while(result.next()) {
+                strain_alleles.add(new Integer(result.getInt("id")));
+            }
+        } catch (SQLException se) {
+            logger.error(getStackTrace(se));
+        } finally {
+            releaseConnection();
+        }
+        
+        return strain_alleles;
+    }
+    
     //</editor-fold>
     
     //setter+getter methods
@@ -603,6 +702,77 @@ public class StrainAlleleBean extends AbstractTgDbBean implements EntityBean, St
         } finally {
             releaseConnection();
         }
+    }
+    
+    /*
+     * FIXME!!! - Following methods are supposed to merge strain allele and transgene information. Really crappy way to do it! Biologists are obviously bad analysts!!!
+     */
+    public String getTransgeneExpression() {
+        String transgene_expression = "";
+        
+        try {
+            Collection models = modelHome.findByStrainAllele(id, null);
+            Iterator models_it = models.iterator();
+            while(models_it.hasNext()) {
+                ExpModelRemote model_tmp = (ExpModelRemote)models_it.next();
+                Collection transgenes = geneHome.findByModelAndDistinguish(model_tmp.getEid(), "transgene");
+                Iterator transgenes_it = transgenes.iterator();
+                while(transgenes_it.hasNext()) {
+                    GeneRemote transgene_tmp = (GeneRemote)transgenes_it.next();
+                    transgene_expression += transgene_tmp.getGeneexpress() + " / ";
+                }
+            }
+        }
+        catch(Exception e) {
+            logger.error(e);
+        }
+        return transgene_expression;
+    }
+    
+    public String getTransgeneMolecular() {
+        String transgene_molecular = "";
+        
+        try {
+            Collection models = modelHome.findByStrainAllele(id, null);
+            Iterator models_it = models.iterator();
+            while(models_it.hasNext()) {
+                ExpModelRemote model_tmp = (ExpModelRemote)models_it.next();
+                Collection transgenes = geneHome.findByModelAndDistinguish(model_tmp.getEid(), "transgene");
+                Iterator transgenes_it = transgenes.iterator();
+                while(transgenes_it.hasNext()) {
+                    GeneRemote transgene_tmp = (GeneRemote)transgenes_it.next();
+                    
+                    transgene_molecular += "<a href=\"" + transgene_tmp.getMolecular_note_link() + "\" target=\"_blank\">"+ transgene_tmp.getMolecular_note() + "</a> / ";
+                }
+            }
+        }
+        catch(Exception e) {
+            logger.error(e);
+        }
+        return transgene_molecular;
+    }
+    
+    public String getTransgeneChromosome() {
+        String transgene_chromosome = "";
+        
+        try {
+            Collection models = modelHome.findByStrainAllele(id, null);
+            Iterator models_it = models.iterator();
+            while(models_it.hasNext()) {
+                ExpModelRemote model_tmp = (ExpModelRemote)models_it.next();
+                Collection transgenes = geneHome.findByModelAndDistinguish(model_tmp.getEid(), "transgene");
+                Iterator transgenes_it = transgenes.iterator();
+                while(transgenes_it.hasNext()) {
+                    GeneRemote transgene_tmp = (GeneRemote)transgenes_it.next();
+                    
+                    transgene_chromosome += transgene_tmp.getChromosome().getName();
+                }
+            }
+        }
+        catch(Exception e) {
+            logger.error(e);
+        }
+        return transgene_chromosome;
     }
     
     //</editor-fold>

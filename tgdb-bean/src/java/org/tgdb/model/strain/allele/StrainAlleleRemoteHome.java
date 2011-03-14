@@ -5,6 +5,7 @@ import java.rmi.RemoteException;
 import java.util.Collection;
 import javax.ejb.EJBHome;
 import javax.ejb.FinderException;
+import org.tgdb.form.FormDataManager;
 
 public interface StrainAlleleRemoteHome extends EJBHome {
     
@@ -25,6 +26,8 @@ public interface StrainAlleleRemoteHome extends EJBHome {
     Collection findUnassignedAlleles(int model, TgDbCaller caller) throws javax.ejb.FinderException, java.rmi.RemoteException;
 
     Collection findAll(TgDbCaller caller) throws javax.ejb.FinderException, java.rmi.RemoteException;
+    
+    Collection findByFDM(FormDataManager fdm, org.tgdb.TgDbCaller caller) throws javax.ejb.FinderException, java.rmi.RemoteException;
 
     StrainAlleleRemote create(int id, String symbol, String name, TgDbCaller caller) throws javax.ejb.CreateException, java.rmi.RemoteException;
         

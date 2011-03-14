@@ -29,6 +29,8 @@ public interface AvailabilityRemoteBusiness {
     org.tgdb.model.availablegeneticbackgrounds.AvailableGeneticBackgroundRemote getAvailableGeneticBackground() throws java.rmi.RemoteException;
 
     String getStrainDesignation() throws java.rmi.RemoteException;
+    
+    String getStrainLinks() throws java.rmi.RemoteException;
 
     java.lang.String getRepositoryName() throws java.rmi.RemoteException;
 

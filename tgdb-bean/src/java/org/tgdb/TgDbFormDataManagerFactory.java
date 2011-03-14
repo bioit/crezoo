@@ -49,6 +49,7 @@ public class TgDbFormDataManagerFactory extends AbstractFormDataManagerFactory {
     public final static int STRAIN_TYPE = 36;
     public final static int STRAIN_STATE = 37;
     public final static int GENE = 38;
+    public final static int STRAIN_ALLELES = 39;
     
     private TgDbCaller caller;
     
@@ -102,6 +103,7 @@ public class TgDbFormDataManagerFactory extends AbstractFormDataManagerFactory {
         names.add("strain_type");
         names.add("strain_state");
         names.add("gene");
+        names.add("strain_alleles");
     }    
     
     /**
@@ -394,6 +396,8 @@ public class TgDbFormDataManagerFactory extends AbstractFormDataManagerFactory {
             formDataManager.putDefault("ordertype","");
             formDataManager.putDefault("disslevel","");
             formDataManager.putDefault("strain","");
+            formDataManager.putDefault("delta","20");
+            formDataManager.putDefault("page","1");
         }
         
         else if (name == PHENOTREE) {
@@ -439,6 +443,15 @@ public class TgDbFormDataManagerFactory extends AbstractFormDataManagerFactory {
 
         else if (name == GENE) {
             formDataManager.putDefault("gaid", "");
+        }
+        
+        else if (name == STRAIN_ALLELES) {
+            formDataManager.putDefault("delta","20");
+            formDataManager.putDefault("promoter","");
+            formDataManager.putDefault("inducible","");
+            formDataManager.putDefault("made_by","");
+            formDataManager.putDefault("ordertype","");
+            formDataManager.putDefault("page","1");
         }
 
         return formDataManager;

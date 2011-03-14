@@ -5,7 +5,7 @@ import java.io.Serializable;
 
 public class AvailabilityDTO implements Serializable {
     private int eid, rid, aid, stateid, typeid, strainid;
-    private String reponame, avbackname, statename, typename, straindesignation, straindesignation_ss;
+    private String reponame, avbackname, statename, typename, straindesignation, straindesignation_ss, strain_links;
     private String stateabbr, typeabbr;
     
     
@@ -27,6 +27,7 @@ public AvailabilityDTO(AvailabilityRemote availability) {
             straindesignation = availability.getStrainDesignation().replaceAll("<","&lt;").replaceAll(">","&gt;");
             straindesignation_ss = availability.getStrainDesignation().replaceAll("<","&lt;").replaceAll(">","&gt;");
             straindesignation_ss = straindesignation_ss.replaceAll("&lt;","<sup>").replaceAll("&gt;","</sup>");
+            strain_links = availability.getStrainLinks();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -86,5 +87,9 @@ public AvailabilityDTO(AvailabilityRemote availability) {
 
     public String getStraindesignation_ss() {
         return straindesignation_ss;
+    }
+    
+    public String getStrain_links() {
+        return strain_links;
     }
 }

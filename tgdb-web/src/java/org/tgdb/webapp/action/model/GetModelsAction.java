@@ -53,6 +53,12 @@ public class GetModelsAction extends TgDbAction {
             
             nav.getPageManager().setMax(modelManager.getExperimentalModelsByForm(formDataManager, _caller));
             
+            nav.getPageManager().setDelta(new Integer(formDataManager.getValue("delta")).intValue());
+            
+            if(!exists_without_value(req.getParameter("next")) && !exists_without_value(req.getParameter("last")) && !exists_without_value(req.getParameter("prev")) && !exists_without_value(req.getParameter("first"))) {
+                nav.getPageManager().setCurrentPage(new Integer(formDataManager.getValue("page")).intValue());
+            }
+            
             Collection models = modelManager.getExperimentalModelsByPGM(nav.getPageManager());
             
             req.setAttribute("samplingunits", samplingUnitManager.getSamplingUnits(_caller.getPid(), _caller));

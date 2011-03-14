@@ -42,4 +42,6 @@ public interface ExpModelRemoteHome extends javax.ejb.EJBHome {
     
     java.util.Collection findByWebServiceKeywordRequest(String keyword) throws javax.ejb.FinderException, java.rmi.RemoteException;
     
+    Collection findByStrainAllele(int strain_allele, TgDbCaller caller) throws javax.ejb.FinderException, java.rmi.RemoteException;
+    
 }

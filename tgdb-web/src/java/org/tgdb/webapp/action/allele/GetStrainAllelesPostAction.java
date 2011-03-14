@@ -1,7 +1,6 @@
-package org.tgdb.webapp.action.model;
+package org.tgdb.webapp.action.allele;
 
 import org.tgdb.form.FormDataManager;
-import org.tgdb.TgDbCaller;
 import org.tgdb.TgDbFormDataManagerFactory;
 import org.tgdb.exceptions.ApplicationException;
 import org.tgdb.webapp.action.TgDbAction;
@@ -10,48 +9,40 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.tgdb.frame.Navigator;
 
-public class ModelsPostAction extends TgDbAction {
+public class GetStrainAllelesPostAction extends TgDbAction {
     
-    public ModelsPostAction() {}
+    public GetStrainAllelesPostAction() {}
 
     public String getName() {
-        return "ModelsPostAction";
+        return "GetStrainAllelesPostAction";
     }
     
     public boolean performAction(HttpServletRequest req, ServletContext context) throws ApplicationException {
         try {
             HttpSession se = req.getSession();
-            TgDbCaller _caller = (TgDbCaller)se.getAttribute("caller");
+//            TgDbCaller _caller = (TgDbCaller)se.getAttribute("caller");
             String suid = req.getParameter("suid");
-            if(exists(suid))
-                _caller.setSuid(Integer.parseInt(suid));
             
             if(isSubmit(req, "reset")) {                
-                resetFormData(TgDbFormDataManagerFactory.EXPMODELS, req);
+                resetFormData(TgDbFormDataManagerFactory.STRAIN_ALLELES, req);
             }
             else{
-                collectFormData(TgDbFormDataManagerFactory.EXPMODELS, TgDbFormDataManagerFactory.WEB_FORM, req);
+                collectFormData(TgDbFormDataManagerFactory.STRAIN_ALLELES, TgDbFormDataManagerFactory.WEB_FORM, req);
                 //once all data is collected get the FDM again
-                FormDataManager formDataManager = getFormDataManager(
-                    TgDbFormDataManagerFactory.EXPMODELS, 
-                    TgDbFormDataManagerFactory.WEB_FORM, 
-                    req);
+                FormDataManager fdm = getFormDataManager(TgDbFormDataManagerFactory.STRAIN_ALLELES, TgDbFormDataManagerFactory.WEB_FORM, req);
                 
                 if(isSubmit(req, "byID"))
-                    formDataManager.put("ordertype", "MMMDb ID");
+                    fdm.put("ordertype", "ID");
                 
                 if(isSubmit(req, "byNAME"))
-                    formDataManager.put("ordertype", "LINE NAME");
+                    fdm.put("ordertype", "LINE NAME");
                 
-                if(isSubmit(req, "byINDUCIBILITY"))
-                    formDataManager.put("ordertype", "INDUCIBILITY");
-                
-                if(isSubmit(req, "byDATE"))
-                    formDataManager.put("ordertype", "DATE");
+                if(isSubmit(req, "bySYMBOL"))
+                    fdm.put("ordertype", "SYMBOL");
                 
                 if(isSubmit(req, "page")) {
                     Navigator nav = (Navigator)se.getAttribute("navigator");
-                    nav.getPageManager().setCurrentPage(new Integer(formDataManager.getValue("page")).intValue());
+                    nav.getPageManager().setCurrentPage(new Integer(fdm.getValue("page")).intValue());
                 }
             }
                 
