@@ -46,7 +46,7 @@ public class ExpressionModelDTO implements Serializable {
             while(j.hasNext()) {
                 ReferenceRemote ref = (ReferenceRemote)j.next();
                 references_dtos.add(new ReferenceDTO(ref));
-                references_line += "[" + ref.getPubmed() + "] ";
+                references_line += "[PMID:" + ref.getPubmed() + "] ";
                 if(ref.getLink() != null) {
                     references_line += "<a href='" + ref.getLink().getUrl() +"' target='_blank' class='data_link'>" + ref.getName() + "</a>";
                 }

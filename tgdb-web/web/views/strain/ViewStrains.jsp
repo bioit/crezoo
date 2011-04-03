@@ -15,7 +15,13 @@
                 <jsp:include page="/PanelRightTop"/>
                 <div id="panel-right-rest">
                     <form action="Controller" method="post">
-                        <span class="header_01">Strain Index</span>
+                        <span class="header_01">Strain Index</span><table>
+                <tr>
+                    <td>
+                      <m:navigation-buttons workflow="ViewStrains" showText='true'/>
+                    </td>
+                </tr>
+            </table>
                         <table class="data">
                             <tr>
                                 <th class="data" width="20%"><span>ID</span></th>
@@ -29,7 +35,13 @@
                                     <td width="20%"><a href="Controller?workflow=ViewModels&amp;_strain=#:getStrainId#" title="View related mice">#:getModels#</a></td>
                                 </tr>
                             </m:iterate-collection>
-                        </table>
+                        </table><table>
+                <tr>
+                    <td>
+                      <m:navigation-buttons workflow="ViewStrains"/>
+                    </td>
+                </tr>
+            </table>
                     </form>
                 </div>
             </div>

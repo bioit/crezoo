@@ -1317,7 +1317,8 @@ public class ExpModelBean extends ExpObj implements javax.ejb.EntityBean, org.tg
             Iterator i = arr.iterator();
             while(i.hasNext()) {                
                 GeneRemote promoter = (GeneRemote)i.next();
-                promoters_string += promoter.getGenesymbol() + ", ";
+                promoters_string += promoter.getGenesymbol();// + ", ";
+                if(i.hasNext()) promoters_string += ", ";
             }
             
         } catch(ObjectNotFoundException oe) {          

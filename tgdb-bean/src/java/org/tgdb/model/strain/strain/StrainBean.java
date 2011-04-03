@@ -422,7 +422,7 @@ public class StrainBean extends AbstractTgDbBean implements EntityBean, StrainRe
                 String strain_url = "#";
                 if(result.getString("strainurl") != null && result.getString("strainurl").trim().length() > 0) strain_url = result.getString("strainurl");
 
-                strain_link_string += "&nbsp;<a href='" + strain_url +"' title = '" + result.getString("repository") + " ID' target='_blank'>" + result.getString("repository") + " ID: " + result.getString("externalid") + "</a>&nbsp;";
+                strain_link_string += "&nbsp;<a href='" + strain_url +"' title = '" + result.getString("repository") + "' target='_blank'>" + result.getString("repository") + ": " + result.getString("externalid") + "</a>&nbsp;";
             }
         } catch (Exception se) {
             logger.error(se.getMessage());

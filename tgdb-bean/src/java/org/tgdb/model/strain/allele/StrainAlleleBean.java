@@ -326,7 +326,7 @@ public class StrainAlleleBean extends AbstractTgDbBean implements EntityBean, St
         PreparedStatement ps = null;
         ResultSet result = null;
         try {
-            ps = conn.prepareStatement("select id from strain_allele where id not in (select strain_allele from r_model_strain_allele_mutation_type where model = ?)");
+            ps = conn.prepareStatement("select id from strain_allele where id not in (select strain_allele from r_model_strain_allele_mutation_type where model = ?) order by symbol");
             ps.setInt(1, model);
             result = ps.executeQuery();
 
@@ -719,7 +719,9 @@ public class StrainAlleleBean extends AbstractTgDbBean implements EntityBean, St
                 Iterator transgenes_it = transgenes.iterator();
                 while(transgenes_it.hasNext()) {
                     GeneRemote transgene_tmp = (GeneRemote)transgenes_it.next();
-                    transgene_expression += transgene_tmp.getGeneexpress() + " / ";
+                    transgene_expression += transgene_tmp.getGeneexpress(); //+ " / ";
+                    
+                    if(transgenes_it.hasNext()) transgene_expression += " / ";
                 }
             }
         }
@@ -742,7 +744,9 @@ public class StrainAlleleBean extends AbstractTgDbBean implements EntityBean, St
                 while(transgenes_it.hasNext()) {
                     GeneRemote transgene_tmp = (GeneRemote)transgenes_it.next();
                     
-                    transgene_molecular += "<a href=\"" + transgene_tmp.getMolecular_note_link() + "\" target=\"_blank\">"+ transgene_tmp.getMolecular_note() + "</a> / ";
+                    transgene_molecular += "<a href=\"" + transgene_tmp.getMolecular_note_link() + "\" target=\"_blank\">"+ transgene_tmp.getMolecular_note() + "</a>";
+                    
+                    if(transgenes_it.hasNext()) transgene_molecular += " / ";
                 }
             }
         }

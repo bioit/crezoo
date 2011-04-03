@@ -37,15 +37,15 @@
                 <br/><br/>
                 <b>CreZOO Scientific Director</b>
                 <br/>
-                Dr. Aidinis Vassilis
+                <a href="mailto:aidinis@fleming.gr">Dr. Aidinis Vassilis</a>
                 <br/><br/>
                 <b>CreZOO curator</b>
                 <br/>
-                Dr. Christina Chandras
+                <a href="mailto:chandras@fleming.gr">Dr. Christina Chandras</a>
                 <br/><br/>
                 <b>CreZOO database developer</b>
                 <br/>
-                Michalis Zouberakis
+                <a href="mailto:zouberakis@fleming.gr">Michalis Zouberakis</a>
             </td>
         </tr>
     </table>

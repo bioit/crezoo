@@ -923,7 +923,7 @@ public class GeneBean extends AbstractTgDbBean implements javax.ejb.EntityBean, 
                 String strain_url = "#";
                 if(result.getString("strainurl") != null && result.getString("strainurl").trim().length() > 0) strain_url = result.getString("strainurl");
 
-                promoter_link_string += "&nbsp;<a href='" + strain_url +"' title = '" + result.getString("repository") + " ID' target='_blank'>" + result.getString("repository") + " ID: " + result.getString("externalid") + "</a>&nbsp;";
+                promoter_link_string += "&nbsp;<a href='" + strain_url +"' title = '" + result.getString("repository") + "' target='_blank'>" + result.getString("repository") + ": " + result.getString("externalid") + "</a>&nbsp;";
             }
         } catch (Exception se) {
             logger.error(se.getMessage());

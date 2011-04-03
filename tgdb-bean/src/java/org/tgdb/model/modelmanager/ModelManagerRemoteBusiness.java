@@ -115,6 +115,8 @@ public interface ModelManagerRemoteBusiness {
     Collection getExperimentalModelsByForm(org.tgdb.form.FormDataManager fdm, org.tgdb.TgDbCaller caller, org.tgdb.frame.PageManager pageManager) throws ApplicationException, java.rmi.RemoteException;
 
     java.util.Collection getStrains(TgDbCaller caller) throws ApplicationException, java.rmi.RemoteException;
+    
+    java.util.Collection getStrainsPGM(TgDbCaller caller, PageManager page_manager) throws ApplicationException, java.rmi.RemoteException;
 
     java.util.Collection getStrainsConnectedToModels(TgDbCaller caller) throws ApplicationException, java.rmi.RemoteException;
 

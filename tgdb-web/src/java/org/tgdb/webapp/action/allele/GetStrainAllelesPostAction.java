@@ -21,7 +21,7 @@ public class GetStrainAllelesPostAction extends TgDbAction {
         try {
             HttpSession se = req.getSession();
 //            TgDbCaller _caller = (TgDbCaller)se.getAttribute("caller");
-            String suid = req.getParameter("suid");
+//            String suid = req.getParameter("suid");
             
             if(isSubmit(req, "reset")) {                
                 resetFormData(TgDbFormDataManagerFactory.STRAIN_ALLELES, req);
@@ -35,7 +35,7 @@ public class GetStrainAllelesPostAction extends TgDbAction {
                     fdm.put("ordertype", "ID");
                 
                 if(isSubmit(req, "byNAME"))
-                    fdm.put("ordertype", "LINE NAME");
+                    fdm.put("ordertype", "NAME");
                 
                 if(isSubmit(req, "bySYMBOL"))
                     fdm.put("ordertype", "SYMBOL");

@@ -26,7 +26,19 @@
                       <m:navigation-buttons workflow="ViewModels" showText='true'/>
                     </td>
                 </tr>
-            </table>
+            </table><%--narrow selection menu--%>
+            <table>
+            <tr valign="bottom">
+                <td>
+                <b>promoter:</b>&nbsp;<m:checkbox collection="genes" onChange="this.form.submit()" name="gaid" idGetter="getGaid" textGetter="getGenesymbol_ss" selected="<%=fdm.getValue("gaid")%>" wildcardOption="true"/>
+                &nbsp;<b>inducibility:</b>&nbsp;<m:checkbox collection="inducibilities" onChange="this.form.submit()" name="inducible" idGetter="toString" textGetter="toString" selected="<%=fdm.getValue("inducible")%>" wildcardOption="true"/>
+                &nbsp;<b>expression:</b>&nbsp;<m:checkbox collection="mas" onChange="this.form.submit()" name="ma" idGetter="getOid" textGetter="getOid" selected="<%=fdm.getValue("ma")%>" wildcardOption="true"/>
+                &nbsp;<b>developmental stage:</b>&nbsp;<m:checkbox collection="emaps" onChange="this.form.submit()" name="emap" idGetter="getOid" textGetter="getOid" selected="<%=fdm.getValue("emap")%>" wildcardOption="true"/>
+                &nbsp;<b>researcher:</b>&nbsp;<m:checkbox collection="researchers" onChange="this.form.submit()" name="participantname" idGetter="toString" textGetter="toString" selected="<%=fdm.getValue("participantname")%>" wildcardOption="true"/>
+                <!--&nbsp;and/or&nbsp;<b>strain:</b> &nbsp;<m:checkbox collection="strains" onChange="this.form.submit()" name="strain" idGetter="getStrainId" textGetter="getDesignation" selected="<%=fdm.getValue("strain")%>" wildcardOption="true"/>-->
+                </td>
+            </tr>
+        </table>
             <table class="data">
                 <tr>
                     <!--th class="data" width="10%"><input type="submit" title="order by ID" name="byID" value="ID" /></th-->
@@ -48,23 +60,10 @@
             <table>
                 <tr>
                     <td>
-                      <m:navigation-buttons workflow="ViewModels"/>
+                      <m:navigation-buttons workflow="ViewModels" />
                     </td>
                 </tr>
             </table>
-            <%--narrow selection menu--%>
-            <table>
-            <tr valign="bottom">
-                <td>
-                <b>promoter:</b>&nbsp;<m:checkbox collection="genes" onChange="this.form.submit()" name="gaid" idGetter="getGaid" textGetter="getGenesymbol_ss" selected="<%=fdm.getValue("gaid")%>" wildcardOption="true"/>
-                &nbsp;<b>inducibility:</b>&nbsp;<m:checkbox collection="inducibilities" onChange="this.form.submit()" name="inducible" idGetter="toString" textGetter="toString" selected="<%=fdm.getValue("inducible")%>" wildcardOption="true"/>
-                &nbsp;<b>expression:</b>&nbsp;<m:checkbox collection="mas" onChange="this.form.submit()" name="ma" idGetter="getOid" textGetter="getOid" selected="<%=fdm.getValue("ma")%>" wildcardOption="true"/>
-                &nbsp;<b>developmental stage:</b>&nbsp;<m:checkbox collection="emaps" onChange="this.form.submit()" name="emap" idGetter="getOid" textGetter="getOid" selected="<%=fdm.getValue("emap")%>" wildcardOption="true"/>
-                &nbsp;<b>researcher:</b>&nbsp;<m:checkbox collection="researchers" onChange="this.form.submit()" name="participantname" idGetter="toString" textGetter="toString" selected="<%=fdm.getValue("participantname")%>" wildcardOption="true"/>
-                <!--&nbsp;and/or&nbsp;<b>strain:</b> &nbsp;<m:checkbox collection="strains" onChange="this.form.submit()" name="strain" idGetter="getStrainId" textGetter="getDesignation" selected="<%=fdm.getValue("strain")%>" wildcardOption="true"/>-->
-                </td>
-            </tr>
-        </table>
        </form>
         </div>
 </div>

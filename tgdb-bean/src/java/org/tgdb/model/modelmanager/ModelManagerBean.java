@@ -2506,6 +2506,33 @@ public class ModelManagerBean extends AbstractTgDbBean implements javax.ejb.Sess
             throw new ApplicationException("Failed to get strains.");
         }
     }
+    
+    public Collection getStrainsPGM(TgDbCaller caller, PageManager page_manager) throws ApplicationException {
+        Collection strain_dtos = new ArrayList();
+        try {
+            Iterator i = strainHome.findByProject(caller.getPid(), caller).iterator();
+            
+            int start = page_manager.getStart();
+            int stop = page_manager.getStop();
+            int index = 0;
+            
+            while(i.hasNext()) {
+                index++;
+                
+                if (index>=start && index<=stop) {
+                    strain_dtos.add(new StrainDTO((StrainRemote)i.next()));
+                } else {
+                    if(strain_dtos.size() == page_manager.getDelta()) return strain_dtos;
+                    i.next();
+                }
+                
+            }//while
+            
+        } catch (Exception e) {
+            logger.error(e);
+        }
+        return strain_dtos;
+    }
 
     public Collection getStrainsConnectedToModels(TgDbCaller caller) throws ApplicationException{
         try {

@@ -115,7 +115,7 @@ public class ResourceSimpleListTag extends BodyTagSupport {
                     String target = "_blank";
                     if(type.equalsIgnoreCase("File"))
                         target = "_blank";
-                    data += "<td width=\"90%\"><a href=\""+resource.getResourceLink()+"\" title=\""+resource.getResourceComment()+"\" target=\""+target+"\" class=\"data_link\">"+resource.getResourceName()+"</a></td>";
+                    data += "<td width=\"90%\"><a href=\""+resource.getResourceLink()+"\" title=\""+resource.getResourceComment()+"\" target=\""+target+"\" class=\"data_link\">"+resource.getResourceName()+"</a> <i>" + resource.getResourceComment() +"</i></td>";
 //                    data += "<td width=\"10%\">"+resource.getResourceType()+"</td>";
                     if(caller.hasPrivilege("MODEL_W") || caller.isAdmin()) {
 //                    data += "<td width=\"20%\"><a href=\"Controller?workflow=ViewUser&id="+resource.getUserId()+"\">"+resource.getUser()+"</a></td>";

@@ -10,6 +10,9 @@
     <workflow name="About">
         <state name="about" viewURI="views/misc/About.jsp"/>
     </workflow>
+    <workflow name="Help">
+        <state name="help" viewURI="views/misc/Help.jsp"/>
+    </workflow>
     <workflow name="ViewModels">
         <state name="viewModelsPre" preaction="model.GetModelsAction"/>
         <state name="view" viewURI="views/model/ExpModelsView.jsp"/>
@@ -200,6 +203,8 @@
 
     <workflow name="ViewStrains">
         <state name="view" preaction="model.GetStrainsAction" viewURI="views/strain/ViewStrains.jsp"/>
+        <state name="post" action="model.GetStrainsPostAction"/>
+        <state workflow="ViewStrains"/>
     </workflow>
     <workflow name="ViewStrain">
         <state name="view" preaction="model.GetStrainAction" viewURI="views/strain/ViewStrain.jsp"/>
@@ -750,6 +755,7 @@
     <!-- Genes -->
     <workflow name="ViewGenes">
         <state name="view" preaction="gene.GetGenesAction" viewURI="views/gene/ViewGenes.jsp"/>
+        <state name="post" action="gene.GetGenesPostAction"/>
         <state workflow="ViewGenes"/>
     </workflow>
     <workflow name="ViewGene">

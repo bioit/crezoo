@@ -50,6 +50,8 @@ public class TgDbFormDataManagerFactory extends AbstractFormDataManagerFactory {
     public final static int STRAIN_STATE = 37;
     public final static int GENE = 38;
     public final static int STRAIN_ALLELES = 39;
+    public final static int GENES = 40;
+    public final static int STRAINS = 41;
     
     private TgDbCaller caller;
     
@@ -104,6 +106,8 @@ public class TgDbFormDataManagerFactory extends AbstractFormDataManagerFactory {
         names.add("strain_state");
         names.add("gene");
         names.add("strain_alleles");
+        names.add("genes");
+        names.add("strains");
     }    
     
     /**
@@ -451,6 +455,16 @@ public class TgDbFormDataManagerFactory extends AbstractFormDataManagerFactory {
             formDataManager.putDefault("inducible","");
             formDataManager.putDefault("made_by","");
             formDataManager.putDefault("ordertype","");
+            formDataManager.putDefault("page","1");
+        }
+        
+        else if (name == GENES) {
+            formDataManager.putDefault("delta","20");
+            formDataManager.putDefault("page","1");
+        }
+        
+        else if (name == STRAINS) {
+            formDataManager.putDefault("delta","20");
             formDataManager.putDefault("page","1");
         }
 

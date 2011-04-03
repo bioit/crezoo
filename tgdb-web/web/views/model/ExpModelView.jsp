@@ -95,7 +95,7 @@
                                                     <hr/>
                                                     <b style="margin-left: 20px; font-weight:bold">Strain Type:</b> #:getTypename#
                                                     <hr/>
-                                                    <b style="margin-left: 20px; font-weight:bold">Housing Repository IDs:</b> #:getStrain_links#
+                                                    <b style="margin-left: 20px; font-weight:bold">Repository IDs:</b> #:getStrain_links#
                                                 </td>
                                                 <td>
                                                     <m:hide privilege="MODEL_W" suid="<%=modeldto.getSuid()%>">
@@ -144,7 +144,7 @@
                                     </table>
                                 </div>
                                 <!--subsection for Strain Information-->
-                                <div class="subsection">
+                                <!-- div class="subsection">
                                     <span>
 			Strain Information
                                         <m:hide privilege="MODEL_W" suid="<%=modeldto.getSuid()%>">
@@ -175,7 +175,7 @@
                                             </tr>
                                         </m:iterate-collection>
                                     </table>
-                                </div>
+                                </div -->
                                 <div class="subsection">
                                 	<span>Donating Investigator</span>
                                 	<table class="block_data">
@@ -212,7 +212,7 @@
                             <div id="fragment-2">
                                 <p></p>
                                 <!--subsection for Transgene Information-->
-                                <div class="subsection">
+                                <!--div class="subsection">
                                     <span>
 			Transgene Information
                                         <m:hide privilege="MODEL_W" suid="<%=modeldto.getSuid()%>">
@@ -243,7 +243,7 @@
                                             </tr>
                                         </m:iterate-collection>
                                     </table>
-                                </div>
+                                </div-->
                                 <!--subsection for Promoters-->
                                 <div class="subsection">
                                     <span>

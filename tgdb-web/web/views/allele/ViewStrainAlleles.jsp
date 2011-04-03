@@ -26,7 +26,15 @@
                       <m:navigation-buttons workflow="ViewStrainAlleles" showText='true'/>
                     </td>
                 </tr>
-            </table>
+            </table><table>
+            <tr valign="bottom">
+                <td>
+                <b>promoter:</b>&nbsp;<m:checkbox collection="promoters" onChange="this.form.submit()" name="promoter" idGetter="getGaid" textGetter="getGenesymbol_ss" selected="<%=fdm.getValue("promoter")%>" wildcardOption="true"/>
+                &nbsp;<b>made by:</b>&nbsp;<m:checkbox collection="madebys" onChange="this.form.submit()" name="made_by" idGetter="toString" textGetter="toString" selected="<%=fdm.getValue("made_by")%>" wildcardOption="true"/>
+                &nbsp;<b>inducibility:</b>&nbsp;<m:checkbox collection="inducibilities" onChange="this.form.submit()" name="inducible" idGetter="toString" textGetter="toString" selected="<%=fdm.getValue("inducible")%>" wildcardOption="true"/>
+                </td>
+            </tr>
+        	</table>
             <table class="data">
                 <tr>
                     <th class="data" width="10%"><input type="submit" title="order by id" name="byID" value="ID" /></th>
@@ -42,16 +50,13 @@
                         <td width="10%"><a href="#:getMgi_url#" target="_blank">#:getMgi_id#</a></td>
                     </tr>
                 </m:iterate-collection>
+            </table><table>
+                <tr>
+                    <td>
+                      <m:navigation-buttons workflow="ViewStrainAlleles"/>
+                    </td>
+                </tr>
             </table>
-            <table>
-            <tr valign="bottom">
-                <td>
-                <b>promoter:</b>&nbsp;<m:checkbox collection="promoters" onChange="this.form.submit()" name="promoter" idGetter="getGaid" textGetter="getGenesymbol_ss" selected="<%=fdm.getValue("promoter")%>" wildcardOption="true"/>
-                &nbsp;<b>made by:</b>&nbsp;<m:checkbox collection="madebys" onChange="this.form.submit()" name="made_by" idGetter="toString" textGetter="toString" selected="<%=fdm.getValue("made_by")%>" wildcardOption="true"/>
-                &nbsp;<b>inducibility:</b>&nbsp;<m:checkbox collection="inducibilities" onChange="this.form.submit()" name="inducible" idGetter="toString" textGetter="toString" selected="<%=fdm.getValue("inducible")%>" wildcardOption="true"/>
-                </td>
-            </tr>
-        	</table>
        </form>
         </div>
 </div>
