@@ -6,6 +6,7 @@ import java.util.Collection;
 import javax.ejb.EJBHome;
 import javax.ejb.FinderException;
 import org.tgdb.form.FormDataManager;
+import org.tgdb.search.Keyword;
 
 public interface StrainAlleleRemoteHome extends EJBHome {
     
@@ -28,6 +29,8 @@ public interface StrainAlleleRemoteHome extends EJBHome {
     Collection findAll(TgDbCaller caller) throws javax.ejb.FinderException, java.rmi.RemoteException;
     
     Collection findByFDM(FormDataManager fdm, org.tgdb.TgDbCaller caller) throws javax.ejb.FinderException, java.rmi.RemoteException;
+    
+    Collection findByKeyword(Keyword keyword) throws javax.ejb.FinderException, java.rmi.RemoteException;
 
     StrainAlleleRemote create(int id, String symbol, String name, TgDbCaller caller) throws javax.ejb.CreateException, java.rmi.RemoteException;
         

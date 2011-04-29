@@ -356,9 +356,9 @@
                                                     </m:hide>
                                                 </td-->
                                                 <td width="90%">
-                                                    <b style="margin-left: 20px; font-weight:bold">Symbol:</b> #:getSymbol_ss#
+                                                    <b style="margin-left: 20px; font-weight:bold">Symbol:</b> <a href="Controller?workflow=ViewStrainAllele&amp;strainalleleid=#:getId#">#:getSymbol_ss#</a>
                                                     <hr/>
-                                                    <b style="margin-left: 20px; font-weight:bold">Name:</b> #:getName_ss#
+                                                    <b style="margin-left: 20px; font-weight:bold">Name:</b> <a href="Controller?workflow=ViewStrainAllele&amp;strainalleleid=#:getId#">#:getName_ss#</a>
                                                     <hr/>
                                                     <b style="margin-left: 20px; font-weight:bold">MGI ID:</b> <a href="#:getMgi_url#" target="_blank">#:getMgi_id#</a>
                                                     <hr/>
@@ -429,19 +429,19 @@
                                                 #:getMa_terms#
                                                 </td-->
                                                 <td width="90%">
-                                                    <i style="margin-left: 20px; font-weight:bold">Anatomy:</i> #:getExanatomy#
+                                                    <b style="margin-left: 20px; font-weight:bold">Anatomy:</b> #:getExanatomy#
                                                     <hr/>
-                                                    <i style="margin-left: 20px; font-weight:bold">Comment:</i> #:getExcomm#
+                                                    <b style="margin-left: 20px; font-weight:bold">Comment:</b> #:getExcomm#
                                                     <hr/>
                                                     <!--
                                                     <i style="margin-left: 20px; font-weight:bold">Images:</i> #:getExfiletable#
                                                     <hr/>
                                                     -->
-                                                    <i style="margin-left: 20px; font-weight:bold">Site of Expression:</i> #:getMa_terms#
+                                                    <b style="margin-left: 20px; font-weight:bold">Site of Expression:</b> #:getMa_terms#
                                                     <hr/>
-                                                    <i style="margin-left: 20px; font-weight:bold">Developmental Stage:</i> #:getEmap_terms#
+                                                    <b style="margin-left: 20px; font-weight:bold">Developmental Stage:</b> #:getEmap_terms#
                                                     <hr/>
-                                                    <i style="margin-left: 20px; font-weight:bold">References:</i> #:getReferences_line#
+                                                    <b style="margin-left: 20px; font-weight:bold">References:</b> #:getReferences_line#
                                                 </td>
                                                 <td>
                                                     <m:hide privilege="MODEL_W" suid="<%=modeldto.getSuid()%>">

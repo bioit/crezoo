@@ -21,9 +21,9 @@ public class SearchKeywordFastAction extends TgDbAction {
     
     public boolean performAction(HttpServletRequest request, ServletContext context) throws ApplicationException {
         try {
-            TgDbCaller caller = (TgDbCaller)request.getSession().getAttribute("caller");
-            ServiceLocator locator = ServiceLocator.getInstance();
-            ModelManagerRemote modelManager = (ModelManagerRemote)locator.getManager(ServiceLocator.Services.MODELMANAGER);
+            TgDbCaller _caller = (TgDbCaller)request.getSession().getAttribute("caller");
+            ServiceLocator _locator = ServiceLocator.getInstance();
+            ModelManagerRemote _modelManager = (ModelManagerRemote)_locator.getManager(ServiceLocator.Services.MODELMANAGER);
             
             collectFormData(TgDbFormDataManagerFactory.FAST_SEARCH, TgDbFormDataManagerFactory.WEB_FORM, request);
             
@@ -31,7 +31,7 @@ public class SearchKeywordFastAction extends TgDbAction {
             
             String tmp = formDataManager.getValue("fast_search_key");
             
-            Collection results = modelManager.searchByKeyword(tmp, caller);
+            Collection results = _modelManager.searchByKeyword(tmp, _caller);
             request.setAttribute("results", results);
             request.setAttribute("hits", new Integer(results.size()).toString());
             

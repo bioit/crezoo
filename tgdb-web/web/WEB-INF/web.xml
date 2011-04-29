@@ -243,7 +243,7 @@
         <ejb-ref-name>ejb/CreZOOModelManagerBean</ejb-ref-name>
         <ejb-ref-type>Session</ejb-ref-type>
         <home>org.tgdb.model.modelmanager.ModelManagerRemoteHome</home>
-        <remote>org.tgdb.model.modelmanager.ModelManagerRemote</remote>
+        <remote>org.tgdb.model.modelmanager._modelManager</remote>
         <ejb-link>tgdb-bean.jar#TgDbModelManagerBean</ejb-link>
     </ejb-ref>
 </web-app>

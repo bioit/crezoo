@@ -86,6 +86,7 @@ import java.util.Map;
 import org.tgdb.dto.OlsDTO;
 
 import org.tgdb.dtos.*;
+import org.tgdb.search.StrainAlleleSearchResult;
 import uk.ac.ebi.ook.web.services.Query;
 import uk.ac.ebi.ook.web.services.QueryService;
 import uk.ac.ebi.ook.web.services.QueryServiceLocator;
@@ -1577,7 +1578,8 @@ public class ModelManagerBean extends AbstractTgDbBean implements javax.ejb.Sess
             while (i.hasNext())
             {
                 GeneRemote gene = (GeneRemote)i.next();
-                arr.add(new GeneSearchResult(gene,"Controller?workflow=ViewGene&amp;gaid="+gene.getGaid()));
+                //exclude transgenes from search results
+                if(!gene.getDistinguish().equalsIgnoreCase("transgene")) arr.add(new GeneSearchResult(gene,"Controller?workflow=ViewGene&amp;gaid="+gene.getGaid()));
             }            
         }
         catch (FinderException fe)
@@ -2052,6 +2054,30 @@ public class ModelManagerBean extends AbstractTgDbBean implements javax.ejb.Sess
             e.printStackTrace();
             throw new ApplicationException("Failed to get strain alleles by symbol.", e);
         }
+    }
+    
+    public Collection searchStrainAlleleByKeyword(Keyword keyword, TgDbCaller caller) throws ApplicationException{
+        Collection arr = new TreeSet();
+        try
+        {
+            Collection strain_alleles = strainAlleleHome.findByKeyword(keyword);
+            Iterator i = strain_alleles.iterator();
+            while (i.hasNext())
+            {
+                StrainAlleleRemote strain_allele = (StrainAlleleRemote)i.next();
+                arr.add(new StrainAlleleSearchResult(strain_allele,"Controller?workflow=ViewStrainAllele&amp;strainalleleid="+strain_allele.getId()));
+            }            
+        }
+        catch (FinderException fe)
+        {
+            fe.printStackTrace();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            throw new ApplicationException("failed to search keyword",e);
+        }
+        return arr;
     }
 
     public Collection getUnassignedAlleles(int model, org.tgdb.TgDbCaller caller) throws ApplicationException {
@@ -3747,7 +3773,8 @@ public class ModelManagerBean extends AbstractTgDbBean implements javax.ejb.Sess
             TgDbCaller searchCaller = caller;
             Keyword key = new Keyword(keyword);
             arr.addAll(searchModelByKeyword(key, searchCaller));
-            arr.addAll(searchGeneByKeyword(key, searchCaller)); 
+            arr.addAll(searchGeneByKeyword(key, searchCaller));
+            arr.addAll(searchStrainAlleleByKeyword(key, searchCaller));
             
         }
         catch (Exception e)

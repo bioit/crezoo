@@ -23,7 +23,7 @@
             <tr>
                 <td>
                     <p class="navtext">
-                        <input type="submit" name="back" value="Back" title="Back"/>
+                        <!--input type="submit" name="back" value="Back" title="Back"/--><a href="Controller?workflow=ViewStrainAlleles">Back</a>&nbsp;
                         <m:hide privilege="MODEL_W" pid="<%=caller.getPid()%>">
                                 <a href="Controller?workflow=_EditStrainAllele&amp;strainalleleid=<%=strainallele.getId() %>">Edit</a>&nbsp;
                                 <a href="Controller?workflow=DeleteStrainAllele&amp;strainalleleid=<%=strainallele.getId() %>" title="Delete" onClick="return confirm('Delete Allele? ')">Delete</a>

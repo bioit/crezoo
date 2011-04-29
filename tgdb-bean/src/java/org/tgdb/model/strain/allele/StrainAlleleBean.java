@@ -16,6 +16,7 @@ import javax.ejb.*;
 import org.tgdb.form.FormDataManager;
 import org.tgdb.model.expmodel.ExpModelRemote;
 import org.tgdb.model.expmodel.ExpModelRemoteHome;
+import org.tgdb.search.Keyword;
 import org.tgdb.species.gene.GeneRemote;
 import org.tgdb.species.gene.GeneRemoteHome;
 
@@ -453,6 +454,36 @@ public class StrainAlleleBean extends AbstractTgDbBean implements EntityBean, St
         }
         
         return strain_alleles;
+    }
+    
+    public java.util.Collection ejbFindByKeyword(Keyword keyword) throws javax.ejb.FinderException {
+        makeConnection();
+        PreparedStatement ps = null;
+        ResultSet result = null;
+        int key = 0;
+        Collection arr = new ArrayList();
+        try {
+            
+            ps = conn.prepareStatement("select id from strain_allele where lower(name) like ? or lower(symbol) like ? or lower(mgiid) like ? or lower(made_by) like ?");
+            
+            String search = "%"+keyword.getKeyword()+"%";
+            
+            ps.setString(1, search);
+            ps.setString(2, search);
+            ps.setString(3, search);
+            ps.setString(4, search);
+            result = ps.executeQuery();
+            
+            while (result.next())
+            {
+                arr.add(new Integer(result.getInt("id")));
+            }
+        } catch (SQLException se) {
+            logger.error(getStackTrace(se));
+        } finally {
+            releaseConnection();
+        }
+        return arr;
     }
     
     //</editor-fold>
